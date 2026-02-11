@@ -12,7 +12,7 @@ config_version=5
 
 config/name="UI Project"
 config/version="1.0"
-config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="uid://b7vwhkkimxmsl"
 
 [display]
@@ -33,7 +33,7 @@ folder_colors={
 "res://Assets/": "red",
 "res://Documentation/": "gray",
 "res://Scenes/": "purple",
-"res://Scripts/": "yellow"
+"res://Scripts/": "blue"
 }
 
 [rendering]
