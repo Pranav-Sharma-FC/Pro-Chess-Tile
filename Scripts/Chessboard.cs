@@ -9,6 +9,6 @@ public partial class Chessboard : TileMapLayer
 		mapCords /= new Vector2(10000, 10000);
 		mapCords += new Vector2(1, 1);
 		mapCords = new Vector2(Mathf.Round(mapCords.X), Mathf.Round((mapCords.X)));
-		GD.Print(mapCords);
+		//GD.Print(mapCords);
 	}
 }
