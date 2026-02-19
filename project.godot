@@ -10,8 +10,9 @@ config_version=5
 
 [application]
 
-config/name="UI Project"
+config/name="Pro-Chess-Tile"
 config/version="1.0"
+run/main_scene="uid://0w6b41qrkpnt"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="uid://b7vwhkkimxmsl"
 
