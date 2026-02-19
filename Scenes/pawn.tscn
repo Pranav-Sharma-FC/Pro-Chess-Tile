@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdmpfay0tveub"]
+
+[ext_resource type="Script" uid="uid://r2ut03sw2a5g" path="res://Scripts/Pawn.cs" id="1_eu7ni"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
+
+[node name="Pawn" type="CharacterBody2D"]
+script = ExtResource("1_eu7ni")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eu7ni")
