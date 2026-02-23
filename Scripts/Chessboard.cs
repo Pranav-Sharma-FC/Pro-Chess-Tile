@@ -3,14 +3,17 @@ using System;
 
 public partial class Chessboard : TileMapLayer
 {
-	private Pawn _selectedPiece;
+	//Why do we live just to suffer
+	private Piece _selectedPiece;
+	private Piece _selectedTile;
 	private bool _isSelected;
+	private bool _isWhiteTurn;
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 mapCords = Cordinates(); 
 		GD.Print(mapCords);
 
-		if (_isSelected)
+		if (_isSelected && (_selectedPiece.IsWhite == _isWhiteTurn))
 		{
 			
 		}
@@ -18,11 +21,11 @@ public partial class Chessboard : TileMapLayer
 
 	private Vector2 Cordinates()
 	{
-		Vector2 mapCords = MapToLocal((Vector2I)GetGlobalMousePosition());
-		mapCords /= new Vector2(10000, 10000);
-		mapCords += new Vector2(1, 1);
-		mapCords = new Vector2(Mathf.Round(mapCords.X), Mathf.Round((mapCords.X)));
-		return mapCords;
+		//Improved by Chatgpt
+		Vector2 mouseWorldPos = GetGlobalMousePosition();
+		Vector2I cell = LocalToMap(ToLocal(mouseWorldPos));
+		//Hi
+		return cell;
 	}
 	
 	

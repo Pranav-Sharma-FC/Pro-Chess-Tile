@@ -1,8 +1,20 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Godot.Collections;
 
-public partial class Piece : CharacterBody2D
+public abstract partial class Piece : CharacterBody2D
 {
-	[Export] private PackedScene pieceScene;
-	[Export] private Vector2 pieceCord;
+	[Export] protected Chessboard Chessboard;
+	[Export] protected PackedScene PieceScene;
+	[Export] protected Vector2[] Points;
+	protected Vector2 CurrentPosition;
+	public bool IsWhite;
+	
+	public override void _PhysicsProcess(double delta)
+	{
+		
+	}
+
+	protected abstract void SetPoints();
 }

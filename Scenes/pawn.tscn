@@ -1,11 +1,73 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdmpfay0tveub"]
+[gd_scene load_steps=11 format=3 uid="uid://bdmpfay0tveub"]
 
 [ext_resource type="Script" uid="uid://r2ut03sw2a5g" path="res://Scripts/Pawn.cs" id="1_eu7ni"]
+[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_3865y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_culnp"]
+atlas = ExtResource("2_3865y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_018tw"]
+atlas = ExtResource("2_3865y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ab40"]
+atlas = ExtResource("2_3865y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr4cw"]
+atlas = ExtResource("2_3865y")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1whw"]
+atlas = ExtResource("2_3865y")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq3kh"]
+atlas = ExtResource("2_3865y")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_byrkh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_culnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_018tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ab40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr4cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1whw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq3kh")
+}],
+"loop": true,
+"name": &"Pieces",
+"speed": 5.0
+}]
+
 [node name="Pawn" type="CharacterBody2D"]
+scale = Vector2(4.5, 4.5)
 script = ExtResource("1_eu7ni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eu7ni")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_byrkh")
+animation = &"Pieces"
+
+[node name="Button" type="Button" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
