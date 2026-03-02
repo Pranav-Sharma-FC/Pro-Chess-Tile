@@ -1,15 +1,22 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using Godot.Collections;
 
 public abstract partial class Piece : CharacterBody2D
 {
-	[Export] protected Chessboard Chessboard;
+	public Chessboard ChessBoard;
 	[Export] protected PackedScene PieceScene;
 	[Export] protected Vector2[] Points;
 	protected Vector2 CurrentPosition;
-	public bool IsWhite;
+	protected enum PieceType
+	{
+		Nothing,
+		White,
+		Black
+	}
+	private PieceType pieceType = PieceType.Nothing;
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -17,4 +24,6 @@ public abstract partial class Piece : CharacterBody2D
 	}
 
 	protected abstract void SetPoints();
+	public abstract bool Move(Piece tile);
+	public abstract void GivePiece();
 }

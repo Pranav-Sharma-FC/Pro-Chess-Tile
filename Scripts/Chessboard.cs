@@ -5,17 +5,35 @@ public partial class Chessboard : TileMapLayer
 {
 	//Why do we live just to suffer
 	private Piece _selectedPiece;
-	private Piece _selectedTile;
 	private bool _isSelected;
-	private bool _isWhiteTurn;
+	//private bool _isWhiteTurn;
+	public override void _Ready()
+	{
+		foreach (Node child in GetChildren())
+		{
+			if (child is Piece tile)
+			{
+				tile.ChessBoard = this;
+			}
+		}
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 mapCords = Cordinates(); 
 		GD.Print(mapCords);
+	}
 
-		if (_isSelected && (_selectedPiece.IsWhite == _isWhiteTurn))
+	public void SetSelectedPiece(Piece piece)
+	{
+		_selectedPiece = piece;
+	}
+
+	public void SetSelectedTile(Piece tile)
+	{
+		if (_selectedPiece.Move(tile))
 		{
-			
+			Vector2I cellCord = LocalToMap(tile.Position);
+			SetCell(cellCord, 1);
 		}
 	}
 

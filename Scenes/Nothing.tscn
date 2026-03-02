@@ -1,32 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdmpfay0tveub"]
+[gd_scene load_steps=11 format=3 uid="uid://mmukrr2dagn"]
 
-[ext_resource type="Script" uid="uid://r2ut03sw2a5g" path="res://Scripts/Pawn.cs" id="1_eu7ni"]
-[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_3865y"]
+[ext_resource type="Script" uid="uid://bhyjubhxtmo6b" path="res://Scripts/Nothing.cs" id="1_h8kvd"]
+[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_sopfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_culnp"]
-atlas = ExtResource("2_3865y")
+atlas = ExtResource("2_sopfk")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_018tw"]
-atlas = ExtResource("2_3865y")
+atlas = ExtResource("2_sopfk")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ab40"]
-atlas = ExtResource("2_3865y")
+atlas = ExtResource("2_sopfk")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cr4cw"]
-atlas = ExtResource("2_3865y")
+atlas = ExtResource("2_sopfk")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1whw"]
-atlas = ExtResource("2_3865y")
+atlas = ExtResource("2_sopfk")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq3kh"]
-atlas = ExtResource("2_3865y")
+atlas = ExtResource("2_sopfk")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_byrkh"]
@@ -55,14 +55,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Pawn" type="CharacterBody2D"]
+[node name="Nothing" type="CharacterBody2D"]
 scale = Vector2(4.5, 4.5)
-script = ExtResource("1_eu7ni")
+script = ExtResource("1_h8kvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eu7ni")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_byrkh")
 animation = &"Pieces"
 
