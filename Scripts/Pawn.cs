@@ -4,10 +4,6 @@ using System;
 public partial class Pawn : Piece
 {
 	[Export] private bool a;
-	public override void _Ready()
-	{
-		PieceType e = PieceType.White;
-	}
 	protected override void SetPoints()
 	{
 		if (CurrentPosition == Points[0])

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using Godot.Collections;
 
-public abstract partial class Piece : CharacterBody2D
+public abstract partial class Piece : Resource
 {
 	public Chessboard ChessBoard;
 	[Export] protected PackedScene PieceScene;
@@ -18,10 +18,6 @@ public abstract partial class Piece : CharacterBody2D
 	}
 	private PieceType pieceType = PieceType.Nothing;
 	
-	public override void _PhysicsProcess(double delta)
-	{
-		
-	}
 
 	protected abstract void SetPoints();
 	public abstract bool Move(Piece tile);
