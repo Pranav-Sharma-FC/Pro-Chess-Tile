@@ -8,6 +8,8 @@ public partial class Chessboard : Node2D
 	private Piece _selectedPiece;
 	private bool _isSelected;
 	private Tile[,] grid;
+	
+	[Export] private PackedScene pScene;
 
 	[Export] private int width = 8;
 	[Export] private int height = 8;
@@ -26,8 +28,8 @@ public partial class Chessboard : Node2D
 				Vector2I pos = tile.getPosition();
 				grid[pos.X-1, pos.Y-1] = tile;
 				GD.Print(tile.getPosition());
+				tile.Position *= new Vector2(50, 50);
 			}
-			SetPieces();
 		}
 	}
 
@@ -35,12 +37,13 @@ public partial class Chessboard : Node2D
 	{
 		GD.Print(pos);
 		pos -= new Vector2I(-1, -1);
-		
+		Tile tile = GetTile(pos.X, pos.Y);
+		SetPieces(tile);
 	}
 
-	private void SetPieces()
+	private void SetPieces(Tile tile)
 	{
-		
+		tile.setPiece(pScene);
 	}
 
 	public Tile GetTile(int x, int y)

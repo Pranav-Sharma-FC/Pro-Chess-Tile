@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using Godot.Collections;
 
-public abstract partial class Piece : Resource
+public abstract partial class Piece : CharacterBody2D
 {
 	public Chessboard ChessBoard;
 	[Export] protected PackedScene PieceScene;
