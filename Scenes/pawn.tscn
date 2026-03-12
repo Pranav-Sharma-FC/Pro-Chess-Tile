@@ -59,7 +59,7 @@ animations = [{
 scale = Vector2(4.5, 4.5)
 script = ExtResource("1_eu7ni")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1317663311]
 shape = SubResource("RectangleShape2D_eu7ni")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
