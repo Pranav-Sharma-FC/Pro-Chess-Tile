@@ -59,17 +59,9 @@ animations = [{
 scale = Vector2(4.5, 4.5)
 script = ExtResource("1_eu7ni")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1317663311]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eu7ni")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_byrkh")
 animation = &"Pieces"
-
-[node name="Button" type="Button" parent="."]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-
-[connection signal="pressed" from="Button" to="." method="GivePiece"]
