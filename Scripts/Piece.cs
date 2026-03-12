@@ -1,7 +1,27 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Xml;
+using Godot.Collections;
 
-public partial class Piece : CharacterBody2D
+public abstract partial class Piece : CharacterBody2D
 {
-	[Export] private PackedScene pieceScene;
+	public Chessboard ChessBoard;
+	[Export] protected PackedScene PieceScene;
+	[Export] protected Vector2[] Points;
+	protected Vector2I CrrentPosition;
+	
+	protected enum PieceType
+	{
+		Nothing,
+		White,
+		Black
+	}
+	private PieceType pieceType = PieceType.Nothing;
+	
+
+	protected abstract void SetPoints();
+	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
+	public abstract void GivePiece();
+	
 }
