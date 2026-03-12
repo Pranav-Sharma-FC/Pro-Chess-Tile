@@ -69,7 +69,8 @@ public partial class Chessboard : Node2D
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
 		GD.Print("Placing");
-		if (tile.getPosition() != _selectedPiece.getPosition())//(_selectedPiece.canMove(tile.getPosition(), _selectedPiece.getPosition()))
+		//Function Fix BUG
+		if (_selectedPiece.canMove(tile.getPosition(), _selectedPiece.getPosition()))
 		{
 			SetPieces(tile, pScene);
 			_selectedPiece.ClearPiece();
@@ -110,24 +111,6 @@ public partial class Chessboard : Node2D
 		return grid[x, y];
 	}
 
-	/*private Vector2 Cordinates()
-	{
-		//Improved by Chatgpt
-		Vector2 mouseWorldPos = GetGlobalMousePosition();
-		Vector2I cell = LocalToMap(ToLocal(mouseWorldPos));
-		//Hi
-		return cell;
-	}
-	public void SetSelectedTile(Piece tile)
-	{
-		if (_selectedPiece.Move(tile))
-		{
-			Vector2I cellCord = LocalToMap(tile.Position);
-			SetCell(cellCord, 1);
-		}
-	}
-	
-	*/
 
 
 	
