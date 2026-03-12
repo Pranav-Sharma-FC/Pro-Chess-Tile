@@ -4,12 +4,10 @@ using System;
 public partial class Nothing : Piece
 {
 	[Export] private bool a;
+
 	protected override void SetPoints()
 	{
-		if (CurrentPosition == Points[0])
-		{
-			
-		}
+		
 	}
 
 	public override void GivePiece()
@@ -18,7 +16,7 @@ public partial class Nothing : Piece
 		//ChessBoard.SetSelectedTile(this);
 	}
 
-	public override bool Move(Piece tile)
+	public override bool Move(Vector2I tile, Vector2I currentPosition)
 	{
 		return true;
 	}

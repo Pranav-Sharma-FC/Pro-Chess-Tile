@@ -6,29 +6,22 @@ public partial class Pawn : Piece
 	[Export] Texture2D whitePawn;
 	protected override void SetPoints()
 	{
-		if (CurrentPosition == Points[0])
-		{
-			
-		}
+		
 	}
 
 	public override void GivePiece()
 	{
-		GD.Print("Giving piece");
-		if (ChessBoard == null)
-		{
-			GD.Print("No chess board");
-		}
-		ChessBoard.SetSelectedPiece(this);
+		
 	}
 
 	//Logic to make sure piece can move there
-	public override bool Move(Vector2 NextPosition)
+	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		bool moveFlag = True;
+		bool moveFlag = true;
 		if(CurrentPosition.X == NextPosition.X)
 		{
-			if(CurrentPosition.Y < NextPosition.Y <= (CurrentPosition.Y + 2))
+			GD.Print("X is Chill");
+			if(CurrentPosition.Y < NextPosition.Y && NextPosition.Y <= (CurrentPosition.Y + 2))
 			{
 				return true;
 			}

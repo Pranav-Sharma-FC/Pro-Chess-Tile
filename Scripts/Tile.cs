@@ -18,9 +18,14 @@ public partial class Tile : Node2D
 		instiantatePiece();
 	}
 
-	public bool canMove(NextPosition)
+	public bool canMove(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		selectedPiece.Move(pos, NextPosition)
+		if(selectedPiece is not null)
+			return selectedPiece.Move(NextPosition, CurrentPosition);
+		else
+		{
+			return false;
+		}
 	}
 
 	private void instiantatePiece()
@@ -31,6 +36,24 @@ public partial class Tile : Node2D
 			Node fry = pieceScene.Instantiate();
 			AddChild(fry);
 			selectedPiece = fry as Piece;
+		}
+	}
+	
+	public void ClearPiece()
+	{
+		selectedPiece.QueueFree();
+		selectedPiece = null;
+	}
+
+	public bool hasPiece()
+	{
+		if (selectedPiece is null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 }

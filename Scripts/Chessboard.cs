@@ -7,7 +7,7 @@ public partial class Chessboard : Node2D
 	//Update: everything that I made doesnt bloody work because tilemaplayers scene collections are **********
 	//Update: On track to complete first sprint by second sprint, cant do anything about tilemaplayers but oh well
 
-	private Piece _selectedPiece;
+	private Tile _selectedPiece;
 	private bool _isSelected;
 	private Tile[,] grid;
 	
@@ -23,7 +23,7 @@ public partial class Chessboard : Node2D
 		Place,
 		Change
 	}
-	private Turn turn  = Turn.WhiteSelect;
+	private Turn turn  = Turn.Select;
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
@@ -56,19 +56,41 @@ public partial class Chessboard : Node2D
 		switch(turn)
 		{
 			case Turn.Select:
-				Select();
+				Select(pos);
+				break;
+			case Turn.Place:
+				Place(pos);
 				break;
 
 		}
 	}
 
-	private void Select()
+	private void Place(Vector2I pos)
 	{
-		GD.Print(pos);
-		//pos -= new Vector2I(-1, -1);
 		Tile tile = GetTile(pos.X, pos.Y);
-		if(tile.canMove())
-			SetPieces(tile);
+		GD.Print("Placing");
+		if (tile.getPosition() != _selectedPiece.getPosition())//(_selectedPiece.canMove(tile.getPosition(), _selectedPiece.getPosition()))
+		{
+			SetPieces(tile, pScene);
+			_selectedPiece.ClearPiece();
+			_selectedPiece = null;
+			turn = Turn.Select;
+			GD.Print("Placed");
+
+		}
+	}
+
+	private void Select(Vector2I pos)
+	{
+		GD.Print("Selecting");
+		GD.Print(pos);
+		Tile tile = GetTile(pos.X, pos.Y);
+		if (tile.hasPiece())
+		{
+			_selectedPiece = tile;
+			turn = Turn.Place;
+			GD.Print("Selected");
+		}
 	}
 
 	private void SetPieces(Tile tile, PackedScene PieceScene)
@@ -106,10 +128,6 @@ public partial class Chessboard : Node2D
 	}
 	
 	*/
-	public void SetSelectedPiece(Piece piece)
-	{
-		_selectedPiece = piece;
-	}
 
 
 	
