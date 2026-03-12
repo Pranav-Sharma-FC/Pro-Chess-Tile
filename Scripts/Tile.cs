@@ -18,9 +18,9 @@ public partial class Tile : Node2D
 		instiantatePiece();
 	}
 
-	public bool canMove()
+	public bool canMove(NextPosition)
 	{
-		selectedPiece.Move(pos, )
+		selectedPiece.Move(pos, NextPosition)
 	}
 
 	private void instiantatePiece()

@@ -16,10 +16,18 @@ public partial class Chessboard : Node2D
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
-	
+
+	private enum Turn
+	{
+		Select,
+		Place,
+		Change
+	}
+	private Turn turn  = Turn.WhiteSelect;
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
+		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
 		GD.Print("Sup");
@@ -30,6 +38,10 @@ public partial class Chessboard : Node2D
 			{
 				i++;
 				GD.Print("I: " + i);
+				if(i%8==0)
+				{
+					tile.setPiece(pScene);
+				}
 				Vector2I pos = tile.getPosition();
 				grid[pos.X-1, pos.Y-1] = tile;
 				GD.Print(tile.getPosition());
@@ -40,6 +52,17 @@ public partial class Chessboard : Node2D
 	}
 
 	private void OnTileClicked(Vector2I pos)
+	{
+		switch(turn)
+		{
+			case Turn.Select:
+				Select();
+				break;
+
+		}
+	}
+
+	private void Select()
 	{
 		GD.Print(pos);
 		//pos -= new Vector2I(-1, -1);

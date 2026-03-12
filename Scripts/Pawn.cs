@@ -26,6 +26,13 @@ public partial class Pawn : Piece
 	public override bool Move(Vector2 NextPosition)
 	{
 		bool moveFlag = True;
-		if(CurrentPosition.X )
+		if(CurrentPosition.X == NextPosition.X)
+		{
+			if(CurrentPosition.Y < NextPosition.Y <= (CurrentPosition.Y + 2))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }
