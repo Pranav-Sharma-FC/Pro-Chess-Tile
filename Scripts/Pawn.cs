@@ -3,7 +3,7 @@ using System;
 
 public partial class Pawn : Piece
 {
-	[Export] private bool a;
+	[Export] Texture2D whitePawn;
 	protected override void SetPoints()
 	{
 		if (CurrentPosition == Points[0])
@@ -22,8 +22,10 @@ public partial class Pawn : Piece
 		ChessBoard.SetSelectedPiece(this);
 	}
 
-	public override bool Move(Piece tile)
+	//Logic to make sure piece can move there
+	public override bool Move(Vector2 NextPosition)
 	{
-		return true;
+		bool moveFlag = True;
+		if(CurrentPosition.X )
 	}
 }

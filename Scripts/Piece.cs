@@ -9,7 +9,7 @@ public abstract partial class Piece : CharacterBody2D
 	public Chessboard ChessBoard;
 	[Export] protected PackedScene PieceScene;
 	[Export] protected Vector2[] Points;
-	protected Vector2 CurrentPosition;
+	protected Vector2I CurrentPosition;
 	protected enum PieceType
 	{
 		Nothing,
@@ -20,6 +20,6 @@ public abstract partial class Piece : CharacterBody2D
 	
 
 	protected abstract void SetPoints();
-	public abstract bool Move(Piece tile);
+	public abstract bool Move(Vector2I NextPosition);
 	public abstract void GivePiece();
 }

@@ -14,14 +14,23 @@ public partial class Tile : Node2D
 
 	public void setPiece(PackedScene pScene)
 	{
-		selectedPiece = null;
 		pieceScene = pScene;
 		instiantatePiece();
 	}
 
+	public bool canMove()
+	{
+		selectedPiece.Move(pos, )
+	}
+
 	private void instiantatePiece()
 	{
-		Node fry = pieceScene.Instantiate();
-		AddChild(fry);
+		if(selectedPiece is null)
+		{
+			selectedPiece = null;
+			Node fry = pieceScene.Instantiate();
+			AddChild(fry);
+			selectedPiece = fry as Piece;
+		}
 	}
 }
