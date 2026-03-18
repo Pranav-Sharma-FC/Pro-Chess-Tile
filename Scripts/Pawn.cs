@@ -21,7 +21,7 @@ public partial class Pawn : Piece
 		if(CurrentPosition.X == NextPosition.X)
 		{
 			GD.Print("X is Chill");
-			if(CurrentPosition.Y < NextPosition.Y && NextPosition.Y <= (CurrentPosition.Y + 2))
+			if ((CurrentPosition.Y < NextPosition.Y) && (NextPosition.Y <= (CurrentPosition.Y + 1)))
 			{
 				return true;
 			}

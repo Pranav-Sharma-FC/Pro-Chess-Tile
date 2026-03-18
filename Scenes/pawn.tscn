@@ -56,12 +56,13 @@ animations = [{
 }]
 
 [node name="Pawn" type="CharacterBody2D"]
-scale = Vector2(4.5, 4.5)
 script = ExtResource("1_eu7ni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4.5, 4.5)
 shape = SubResource("RectangleShape2D_eu7ni")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_byrkh")
 animation = &"Pieces"
