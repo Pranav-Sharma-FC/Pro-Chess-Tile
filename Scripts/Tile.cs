@@ -18,10 +18,11 @@ public partial class Tile : Node2D
 		instiantatePiece();
 	}
 
-	public bool canMove(Vector2I NextPosition, Vector2I CurrentPosition)
+	public bool canMove(Vector2I NextPosition)
 	{
-		if(selectedPiece is not null)
-			return selectedPiece.Move(NextPosition, CurrentPosition);
+		GD.Print("Hiiiiiiiiiiiii");
+		if((selectedPiece is not null) && (NextPosition != position))
+			return selectedPiece.Move(NextPosition, position);
 		else
 		{
 			return false;
@@ -36,6 +37,7 @@ public partial class Tile : Node2D
 			Node fry = pieceScene.Instantiate();
 			AddChild(fry);
 			selectedPiece = fry as Piece;
+			GD.Print(selectedPiece);
 		}
 	}
 	
@@ -49,6 +51,7 @@ public partial class Tile : Node2D
 	{
 		if (selectedPiece is null)
 		{
+			GD.Print("Oh No");
 			return false;
 		}
 		else
