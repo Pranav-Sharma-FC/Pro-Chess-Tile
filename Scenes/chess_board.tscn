@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://0w6b41qrkpnt"]
+[gd_scene load_steps=7 format=4 uid="uid://0w6b41qrkpnt"]
 
 [ext_resource type="Texture2D" uid="uid://dvn28mcyeigfo" path="res://Assets/pixil-frame-0.png" id="1_f817v"]
 [ext_resource type="Script" uid="uid://dgpbi4xuycn45" path="res://Scripts/Chessboard.cs" id="2_ewtbj"]
@@ -25,7 +25,6 @@ script = ExtResource("2_j8xde")
 
 [node name="Chess Board2" type="Node2D" parent="." node_paths=PackedStringArray("boardArt")]
 script = ExtResource("2_ewtbj")
-pScene = ExtResource("4_8egpy")
 boardArt = NodePath("../Chess Board")
 
 [node name="Tile" type="Node2D" parent="Chess Board2"]
