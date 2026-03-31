@@ -47,16 +47,31 @@ public partial class Tile : Node2D
 		selectedPiece = null;
 	}
 
-	public bool hasPiece()
+	public Piece.PieceType getSelectedPiece()
+	{
+		return selectedPiece.returnType();
+	}
+
+	public bool hasPiece(Piece.PieceType pieceType)
 	{
 		if (selectedPiece is null)
 		{
 			GD.Print("Oh No");
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			Piece.PieceType current = getSelectedPiece();
+			if (pieceType == current)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 	}
+	
+	
 }

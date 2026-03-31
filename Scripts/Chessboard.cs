@@ -69,14 +69,13 @@ public partial class Chessboard : Node2D
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
 		GD.Print("Placing");
-		if (_selectedTile.canMove(tile.getPosition()))
+		if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPiece(_selectedTile.getSelectedPiece()))
 		{
 			SetPieces(tile, pScene);
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
 			turn = Turn.Select;
 			GD.Print("Placed");
-
 		}
 	}
 
@@ -85,12 +84,10 @@ public partial class Chessboard : Node2D
 		GD.Print("Selecting");
 		GD.Print(pos);
 		Tile tile = GetTile(pos.X, pos.Y);
-		if (tile.hasPiece())
-		{
-			_selectedTile = tile;
-			turn = Turn.Place;
-			GD.Print("Selected");
-		}
+		_selectedTile = tile;
+		turn = Turn.Place;
+		GD.Print("Selected");
+	
 	}
 
 	private void SetPieces(Tile tile, PackedScene PieceScene)

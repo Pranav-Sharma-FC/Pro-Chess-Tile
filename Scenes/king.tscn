@@ -66,4 +66,4 @@ shape = SubResource("RectangleShape2D_eu7ni")
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_byrkh")
 animation = &"Pieces"
-frame = 2
+frame = 4

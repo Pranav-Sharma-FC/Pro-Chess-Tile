@@ -12,14 +12,18 @@ public abstract partial class Piece : CharacterBody2D
 	protected Vector2I CrrentPosition;
 	[Export] Texture2D whitePawn;
 	
-	protected enum PieceType
+	public enum PieceType
 	{
 		Nothing,
 		White,
 		Black
 	}
-	private PieceType pieceType = PieceType.Nothing;
-	
+	private PieceType pieceType = PieceType.White;
+
+	public PieceType returnType()
+	{
+		return pieceType;
+	}
 
 	protected abstract void SetPoints();
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
