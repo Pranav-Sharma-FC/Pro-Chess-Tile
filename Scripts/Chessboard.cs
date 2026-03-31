@@ -7,7 +7,7 @@ public partial class Chessboard : Node2D
 	//Update: everything that I made doesnt bloody work because tilemaplayers scene collections are **********
 	//Update: On track to complete first sprint by second sprint, cant do anything about tilemaplayers but oh well
 
-	private Tile _selectedTile;
+	private Tile _selectedPiece;
 	private bool _isSelected;
 	private Tile[,] grid;
 	
@@ -38,7 +38,7 @@ public partial class Chessboard : Node2D
 			{
 				i++;
 				GD.Print("I: " + i);
-				if(i<=8)
+				if(i%8==0)
 				{
 					tile.setPiece(pScene);
 				}
@@ -69,11 +69,11 @@ public partial class Chessboard : Node2D
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
 		GD.Print("Placing");
-		if (_selectedTile.canMove(tile.getPosition()))
+		if (tile.getPosition() != _selectedPiece.getPosition())//(_selectedPiece.canMove(tile.getPosition(), _selectedPiece.getPosition()))
 		{
 			SetPieces(tile, pScene);
-			_selectedTile.ClearPiece();
-			_selectedTile = null;
+			_selectedPiece.ClearPiece();
+			_selectedPiece = null;
 			turn = Turn.Select;
 			GD.Print("Placed");
 
@@ -87,7 +87,7 @@ public partial class Chessboard : Node2D
 		Tile tile = GetTile(pos.X, pos.Y);
 		if (tile.hasPiece())
 		{
-			_selectedTile = tile;
+			_selectedPiece = tile;
 			turn = Turn.Place;
 			GD.Print("Selected");
 		}
@@ -120,7 +120,7 @@ public partial class Chessboard : Node2D
 	}
 	public void SetSelectedTile(Piece tile)
 	{
-		if (_selectedTile.Move(tile))
+		if (_selectedPiece.Move(tile))
 		{
 			Vector2I cellCord = LocalToMap(tile.Position);
 			SetCell(cellCord, 1);

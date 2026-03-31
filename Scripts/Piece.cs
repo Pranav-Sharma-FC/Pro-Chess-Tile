@@ -10,7 +10,6 @@ public abstract partial class Piece : CharacterBody2D
 	[Export] protected PackedScene PieceScene;
 	[Export] protected Vector2[] Points;
 	protected Vector2I CrrentPosition;
-	[Export] Texture2D whitePawn;
 	
 	protected enum PieceType
 	{
