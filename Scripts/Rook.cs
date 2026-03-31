@@ -18,15 +18,11 @@ public partial class Rook : Piece
 	{
 		GD.Print("Hi");
 		bool moveFlag = true;
-		if(!(NextPosition.X == (CurrentPosition.X)))
+		if(!((NextPosition.X == CurrentPosition.X) || (NextPosition.Y == CurrentPosition.Y)))
 		{
 			moveFlag = false;
 		}
-		if (!(NextPosition.Y == (CurrentPosition.Y)))
-		{
-			moveFlag = false;
-		}
-		
+
 		GD.Print(moveFlag);
 		return moveFlag;
 	}
