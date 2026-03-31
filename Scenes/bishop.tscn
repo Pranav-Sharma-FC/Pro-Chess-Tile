@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://mx5be2qvqnwk"]
+
+[ext_resource type="Script" uid="uid://bw6mdxs0ffg35" path="res://Scripts/Bishop.cs" id="1_boa6r"]
+[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_uqrk8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_culnp"]
+atlas = ExtResource("2_uqrk8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_018tw"]
+atlas = ExtResource("2_uqrk8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ab40"]
+atlas = ExtResource("2_uqrk8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr4cw"]
+atlas = ExtResource("2_uqrk8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1whw"]
+atlas = ExtResource("2_uqrk8")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq3kh"]
+atlas = ExtResource("2_uqrk8")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_byrkh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_culnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_018tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ab40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr4cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1whw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq3kh")
+}],
+"loop": true,
+"name": &"Pieces",
+"speed": 5.0
+}]
+
+[node name="Bishop" type="CharacterBody2D"]
+script = ExtResource("1_boa6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4.5, 4.5)
+shape = SubResource("RectangleShape2D_eu7ni")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4.5, 4.5)
+sprite_frames = SubResource("SpriteFrames_byrkh")
+animation = &"Pieces"
+frame = 3
