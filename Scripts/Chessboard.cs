@@ -11,8 +11,10 @@ public partial class Chessboard : Node2D
 	private bool _isSelected;
 	private Tile[,] grid;
 	
+	
 	[Export] private PackedScene pScene;
-
+	[Export] private PackedScene circleScene;
+	[Export] private Node2D circles;
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
@@ -76,6 +78,10 @@ public partial class Chessboard : Node2D
 			_selectedTile = null;
 			turn = Turn.Select;
 			GD.Print("Placed");
+			foreach (Node2D anim in circles.GetChildren())
+			{
+				anim.QueueFree();
+			}
 		}
 	}
 
@@ -87,7 +93,23 @@ public partial class Chessboard : Node2D
 		_selectedTile = tile;
 		turn = Turn.Place;
 		GD.Print("Selected");
-	
+
+		for (int i = 0; i < 8; i++)
+		{
+
+			for(int j = 0; j < 8; j++)
+			{	
+				Tile e = GetTile(i, j);
+				GD.Print("Placing");
+				GD.Print(e);
+				if ((_selectedTile.canMove(e.getPosition())) && e.hasPiece(_selectedTile.getSelectedPiece()))
+				{
+					Node2D fry = circleScene.Instantiate() as Node2D;
+					circles.AddChild(fry);
+					fry.Position = (e.getPosition()*100);
+				}
+			}
+		}
 	}
 
 	private void SetPieces(Tile tile, PackedScene PieceScene)
