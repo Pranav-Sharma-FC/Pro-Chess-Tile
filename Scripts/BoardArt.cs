@@ -3,6 +3,7 @@ using System;
 
 public partial class BoardArt : TileMapLayer
 {
+	[Export] public TimerManager timerManager;
 	[Signal]
 	public delegate void OnBoardArrivedEventHandler(Vector2I Position);
 	public void Pressed()
@@ -12,5 +13,6 @@ public partial class BoardArt : TileMapLayer
 			EmitSignalOnBoardArrived(cell);
 			GD.Print("BoardArrived");
 			//}
+			timerManager.EndTurn();
 	}
 }

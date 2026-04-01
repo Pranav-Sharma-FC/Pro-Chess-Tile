@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://0w6b41qrkpnt"]
+[gd_scene load_steps=8 format=4 uid="uid://0w6b41qrkpnt"]
 
 [ext_resource type="Texture2D" uid="uid://dvn28mcyeigfo" path="res://Assets/pixil-frame-0.png" id="1_f817v"]
 [ext_resource type="Script" uid="uid://dgpbi4xuycn45" path="res://Scripts/Chessboard.cs" id="2_ewtbj"]
 [ext_resource type="Script" uid="uid://dhn7b7vwqi0t1" path="res://Scripts/BoardArt.cs" id="2_j8xde"]
 [ext_resource type="Script" uid="uid://42yb4slgjvoq" path="res://Scripts/Tile.cs" id="4_j8xde"]
+[ext_resource type="Script" uid="uid://7jbfp4ku67xe" path="res://Scenes/TimerManager.cs" id="5_8egpy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8xde"]
 texture = ExtResource("1_f817v")
@@ -17,269 +18,206 @@ sources/1 = SubResource("TileSetAtlasSource_j8xde")
 
 [node name="Entire" type="Node2D"]
 
-[node name="Chess Board" type="TileMapLayer" parent="."]
+[node name="Chess Board" type="TileMapLayer" parent="." node_paths=PackedStringArray("timerManager")]
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAEAAQABAAAAAAACAAIAAQABAAAAAAADAAMAAQABAAAAAAAEAAQAAQABAAAAAAAFAAUAAQABAAAAAAAGAAYAAQABAAAAAAAHAAcAAQABAAAAAAABAAAAAQAAAAAAAAACAAEAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAUAAQABAAAAAAAGAAQAAQABAAAAAAAFAAMAAQABAAAAAAAEAAIAAQABAAAAAAADAAEAAQABAAAAAAACAAAAAQABAAAAAAAHAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQABAAAAAAAFAAEAAQABAAAAAAAGAAIAAQABAAAAAAAHAAMAAQABAAAAAAAHAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQABAAAAAAAGAAAAAQABAAAAAAAGAAcAAQAAAAAAAAAFAAYAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAQAAQAAAAAAAAACAAMAAQAAAAAAAAABAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAFAAcAAQABAAAAAAAEAAYAAQABAAAAAAADAAUAAQABAAAAAAACAAQAAQABAAAAAAABAAMAAQABAAAAAAAAAAIAAQABAAAAAAAEAAcAAQAAAAAAAAADAAYAAQAAAAAAAAACAAUAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAADAAcAAQABAAAAAAACAAYAAQABAAAAAAABAAUAAQABAAAAAAAAAAQAAQABAAAAAAACAAcAAQAAAAAAAAABAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAABAAcAAQABAAAAAAAAAAYAAQABAAAAAAAAAAcAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_f817v")
 script = ExtResource("2_j8xde")
+timerManager = NodePath("../TimerManager")
 
 [node name="Chess Board2" type="Node2D" parent="." node_paths=PackedStringArray("boardArt")]
 script = ExtResource("2_ewtbj")
 boardArt = NodePath("../Chess Board")
 
 [node name="Tile" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile2" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile3" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile4" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile5" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile6" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile7" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile8" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 1)
 script = ExtResource("4_j8xde")
 
 [node name="Tile9" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile10" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile11" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile12" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile13" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile14" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile15" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile16" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 2)
 script = ExtResource("4_j8xde")
 
 [node name="Tile17" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile18" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile19" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile20" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile21" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile22" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile23" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile24" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 3)
 script = ExtResource("4_j8xde")
 
 [node name="Tile25" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile26" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile27" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile28" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile29" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile30" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile31" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile32" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 4)
 script = ExtResource("4_j8xde")
 
 [node name="Tile33" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile34" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile35" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile36" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile37" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile38" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile39" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile40" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 5)
 script = ExtResource("4_j8xde")
 
 [node name="Tile41" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile42" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile43" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile44" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile45" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile46" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile47" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile48" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 6)
 script = ExtResource("4_j8xde")
 
 [node name="Tile49" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile50" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile51" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile52" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile53" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile54" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile55" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile56" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 7)
 script = ExtResource("4_j8xde")
 
 [node name="Tile57" type="Node2D" parent="Chess Board2"]
-position = Vector2(1, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile58" type="Node2D" parent="Chess Board2"]
-position = Vector2(2, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile59" type="Node2D" parent="Chess Board2"]
-position = Vector2(3, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile60" type="Node2D" parent="Chess Board2"]
-position = Vector2(4, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile61" type="Node2D" parent="Chess Board2"]
-position = Vector2(5, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile62" type="Node2D" parent="Chess Board2"]
-position = Vector2(6, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile63" type="Node2D" parent="Chess Board2"]
-position = Vector2(7, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Tile64" type="Node2D" parent="Chess Board2"]
-position = Vector2(8, 8)
 script = ExtResource("4_j8xde")
 
 [node name="Button" type="Button" parent="."]
@@ -289,7 +227,51 @@ offset_right = 794.0
 offset_bottom = 794.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-532, -112)
 anchor_mode = 0
 zoom = Vector2(0.5, 0.5)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WhiteTimerLabel1" type="Label" parent="UI"]
+offset_left = -96.0
+offset_top = -3.0
+offset_right = -15.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 30
+text = "white"
+
+[node name="BlackTimerLabel1" type="Label" parent="UI"]
+offset_left = 802.0
+offset_top = 1.0
+offset_right = 878.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 30
+text = "black"
+horizontal_alignment = 2
+
+[node name="WhiteManaLabel1" type="Label" parent="UI"]
+offset_left = -186.0
+offset_top = 42.0
+offset_right = -12.0
+offset_bottom = 129.0
+theme_override_font_sizes/font_size = 30
+text = "White Mana
+"
+
+[node name="BlackManaLabel1" type="Label" parent="UI"]
+anchors_preset = -1
+anchor_bottom = 0.056
+offset_left = 804.0
+offset_top = 38.0
+offset_right = 979.0
+offset_bottom = 49.76
+theme_override_font_sizes/font_size = 30
+text = "Black Mana "
+
+[node name="TimerManager" type="Node" parent="." node_paths=PackedStringArray("WhiteLabel", "BlackLabel")]
+script = ExtResource("5_8egpy")
+WhiteLabel = NodePath("../UI/WhiteTimerLabel1")
+BlackLabel = NodePath("../UI/BlackTimerLabel1")
 
 [connection signal="pressed" from="Button" to="Chess Board" method="Pressed"]
