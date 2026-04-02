@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cd3r6dd7m2h73"]
+
+[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="1_3fhhr"]
+
+[resource]
+script = ExtResource("1_3fhhr")
+xmov = 0
+ymov = 0
+closest = Vector2i(0, 0)

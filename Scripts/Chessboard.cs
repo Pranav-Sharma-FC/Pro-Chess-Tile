@@ -71,7 +71,7 @@ public partial class Chessboard : Node2D
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
 		GD.Print("Placing");
-		if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPiece(_selectedTile.getSelectedPiece()))
+		if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
 			SetPieces(tile, pScene);
 			_selectedTile.ClearPiece();
@@ -102,7 +102,7 @@ public partial class Chessboard : Node2D
 				Tile e = GetTile(i, j);
 				GD.Print("Placing");
 				GD.Print(e);
-				if ((_selectedTile.canMove(e.getPosition())) && e.hasPiece(_selectedTile.getSelectedPiece()))
+				if ((_selectedTile.canMove(e.getPosition())) && e.hasPieceNot(_selectedTile.getSelectedPiece()))
 				{
 					Node2D fry = circleScene.Instantiate() as Node2D;
 					circles.AddChild(fry);

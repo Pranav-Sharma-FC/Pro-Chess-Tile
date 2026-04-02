@@ -2,6 +2,6 @@ using Godot;
 
 public partial class MovementResource : Resource
 {
-	[Export] int xmov, ymov;
-	[Export] Vector2I closest;
+	[Export] public int xmov, ymov;
+	[Export] public Vector2I closest;
 }

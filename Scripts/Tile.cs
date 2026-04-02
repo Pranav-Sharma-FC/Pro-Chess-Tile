@@ -52,7 +52,7 @@ public partial class Tile : Node2D
 		return selectedPiece.returnType();
 	}
 
-	public bool hasPiece(Piece.PieceType pieceType)
+	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
 		if (selectedPiece is null)
 		{

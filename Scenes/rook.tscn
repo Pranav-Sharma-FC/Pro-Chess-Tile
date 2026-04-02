@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://devdobcp8uugj"]
+[gd_scene load_steps=12 format=3 uid="uid://devdobcp8uugj"]
 
 [ext_resource type="Script" uid="uid://djk5q7yab4fxw" path="res://Scripts/Rook.cs" id="1_wwc4d"]
+[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_5ob0w"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_j1kqh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
@@ -57,6 +58,7 @@ animations = [{
 
 [node name="Rook" type="CharacterBody2D"]
 script = ExtResource("1_wwc4d")
+Movements = Array[ExtResource("2_5ob0w")]([null, null, null, null])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
