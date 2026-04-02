@@ -1,8 +1,13 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
 
 public partial class Rook : Piece
 {
+	//AI helped me remember Godot.COllectins
+	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
 	protected override void SetPoints()
 	{
 		
