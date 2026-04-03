@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_2n15f")
 xmov = 1
-ymov = 1
+ymov = 0
 closest = Vector2i(0, 0)

@@ -26,6 +26,7 @@ public abstract partial class Piece : CharacterBody2D
 	}
 
 	protected abstract void SetPoints();
+	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
 	public abstract void GivePiece();
 	

@@ -38,17 +38,24 @@ public partial class Chessboard : Node2D
 		{
 			if (child is Tile tile)
 			{
-				i++;
 				GD.Print("I: " + i);
-				if(i<=8)
-				{
-					tile.setPiece(pScene);
-				}
+				
 				Vector2I pos = tile.getPosition();
 				grid[pos.X-1, pos.Y-1] = tile;
 				GD.Print(tile.getPosition());
 				tile.Position *= new Vector2(100, 100);
 				tile.Position -= new Vector2(50, 50);
+			}
+		}
+		foreach (Node2D child in GetChildren())
+		{
+			if (child is Tile tile)
+			{
+				i++;
+				if(i<=8)
+				{
+					tile.setPiece(pScene, grid);
+				}
 			}
 		}
 	}
@@ -116,7 +123,7 @@ public partial class Chessboard : Node2D
 	{
 		if(tile is null)
 			GD.Print("E");
-		tile.setPiece(pScene);
+		tile.setPiece(pScene, grid);
 	}
 
 	public Tile GetTile(int x, int y)

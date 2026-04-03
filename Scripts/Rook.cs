@@ -18,7 +18,7 @@ public partial class Rook : Piece
 		
 	}
 
-	public void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		foreach (MovementResource moveResource in Movements)
 		{
@@ -28,7 +28,7 @@ public partial class Rook : Piece
 			moveResource.closest = newPosition;
 			for (int i = 0; i < 8; i++)
 			{
-				Tile tile = tiles[newPosition.X, newPosition.Y];
+				Tile tile = tiles[newPosition.X-1, newPosition.Y-1];
 				if (!tile.hasPieceNot());
 				{
 					moveResource.closest = newPosition;
@@ -103,7 +103,7 @@ public partial class Rook : Piece
 			}
 
 			if (((NextPosition.X-CurrentPosition.X)<=int.Abs(closestCurrent.X-CurrentPosition.X))&&
-			    ((NextPosition.Y-CurrentPosition.Y)<=int.Abs(closestCurrent.Y-CurrentPosition.Y)))
+				((NextPosition.Y-CurrentPosition.Y)<=int.Abs(closestCurrent.Y-CurrentPosition.Y)))
 			{
 				moveFlag = true;
 			}

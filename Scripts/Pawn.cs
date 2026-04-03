@@ -4,6 +4,9 @@ using System;
 public partial class Pawn : Piece
 {
 	[Export] Texture2D whitePawn;
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	{
+	}
 	protected override void SetPoints()
 	{
 		

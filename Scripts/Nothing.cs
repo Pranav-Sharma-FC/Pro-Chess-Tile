@@ -4,7 +4,10 @@ using System;
 public partial class Nothing : Piece
 {
 	[Export] private bool a;
-
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	{
+		
+		}
 	protected override void SetPoints()
 	{
 		
