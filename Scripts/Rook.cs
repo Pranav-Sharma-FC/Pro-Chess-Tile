@@ -26,9 +26,10 @@ public partial class Rook : Piece
 			int ystart = FindStart(moveResource.ymov, CurrentPosition.Y);
 			Vector2I newPosition = new Vector2I(xstart, ystart);
 			moveResource.closest = newPosition;
-			for (int i = 0; i < 8; i++)
+			while(newPosition != CurrentPosition)
 			{
-				Tile tile = tiles[newPosition.X-1, newPosition.Y-1];
+				GD.Print(newPosition);
+				Tile tile = tiles[newPosition.X, newPosition.Y];
 				if (!tile.hasPieceNot());
 				{
 					moveResource.closest = newPosition;
@@ -42,10 +43,10 @@ public partial class Rook : Piece
 	private int FindStart(int vari, int current)
 	{
 		if (vari == 0)
-			return 0;
+			return current;
 		else if (vari == 1)
 		{
-			return current;
+			return 0;
 		}
 		else if (vari == -1)
 		{
