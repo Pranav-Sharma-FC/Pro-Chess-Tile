@@ -19,7 +19,6 @@ public partial class King : Piece
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		GD.Print("Hi");
 		bool moveFlag = true;
 		if(!(NextPosition.X >= (CurrentPosition.X - 1) && (NextPosition.X <= (CurrentPosition.X + 1))))
 		{

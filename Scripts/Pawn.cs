@@ -23,7 +23,6 @@ public partial class Pawn : Piece
 		bool moveFlag = true;
 		if(CurrentPosition.X == NextPosition.X)
 		{
-			GD.Print("X is Chill");
 			if ((CurrentPosition.Y < NextPosition.Y) && (NextPosition.Y <= (CurrentPosition.Y + 1)))
 			{
 				return true;

@@ -7,7 +7,7 @@ using System.Runtime.Loader;
 
 public partial class Rook : Piece
 {
-	//AI helped me remember Godot.Collections
+	//AI helped me remember Godot.Collectio`ns
 	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
 	protected override void SetPoints()
 	{
@@ -21,7 +21,7 @@ public partial class Rook : Piece
 
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
-		GD.Print("u");
+		//GD.Print("u");
 		CurrentPosition -= new Vector2I(1, 1);
 		foreach (MovementResource moveResource in Movements)
 		{
@@ -30,25 +30,25 @@ public partial class Rook : Piece
 			Vector2I newPosition = new Vector2I(CurrentPosition.X, CurrentPosition.Y);
 			GD.Print("NewPosition: " + newPosition);
 			bool flag = true;
+			newPosition += new Vector2I(moveResource.xmov, moveResource.ymov);
 			while(flag)
 			{
-				if(CurrentPosition != newPosition)
-				{
-					Tile tile = tiles[newPosition.X, newPosition.Y];
-					if (!tile.hasPieceNot());
-					{
-						GD.Print(newPosition + "PositionTile");
-						moveResource.closest = newPosition;
-						flag = false;
-					}
-				}
-				newPosition.X += moveResource.xmov;
-				newPosition.Y += moveResource.ymov;
-
 				if (newPosition.X is >= 0 and < 8 || newPosition.Y is >= 0 and < 8)
 				{
 					flag = false;
+					break;
 				}
+
+				Tile tile = tiles[newPosition.X, newPosition.Y];
+				GD.Print(newPosition + "Has Piece: " + !tile.hasPieceNot());
+				if (!tile.hasPieceNot());
+				{
+					GD.Print(newPosition + "PositionTile");
+					moveResource.closest = newPosition;
+					flag = false;
+				}
+			
+				newPosition += new Vector2I(moveResource.xmov, moveResource.ymov);
 				
 			}
 		}
@@ -82,29 +82,27 @@ public partial class Rook : Piece
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		GD.Print("Hi");
 		bool moveFlag = false;
+		Vector2I closestCurrent = new Vector2I(-1, -1);
 		if (((NextPosition.X == CurrentPosition.X) || (NextPosition.Y == CurrentPosition.Y)))
 		{
 			int ymoved = NextPosition.Y - CurrentPosition.Y;
 			int xmoved = NextPosition.X - CurrentPosition.X;
 			Vector2I movementSlope = FindSlope(xmoved, ymoved);
-			Vector2I closestCurrent = new Vector2I(-1, -1);
-			GD.Print(movementSlope + "EEEEE");
 			foreach (MovementResource moveResource in Movements)
 			{
-				GD.Print(moveResource.closest + " : Very Current");
+				//GD.Print(moveResource.closest + " : Very Current");
 				if ((moveResource.xmov == movementSlope.X) && (moveResource.ymov == movementSlope.Y))
 				{
-					GD.Print("Identified");
+					//GD.Print("Identified");
 					closestCurrent = moveResource.closest;
-					GD.Print(moveResource.closest);
+					//GD.Print(moveResource.closest);
 				}
 			}
 			Vector2I toNext = (CurrentPosition-NextPosition).Abs();
-			GD.Print(toNext);
+			//GD.Print(toNext);
 			Vector2I toClosest = (CurrentPosition-closestCurrent).Abs();
-			GD.Print(toClosest);
+			//GD.Print(toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
 			else if (toNext <= toClosest)
@@ -113,7 +111,7 @@ public partial class Rook : Piece
 			}
 		}
 
-		GD.Print(moveFlag);
+		//GD.Print(moveFlag);
 		return moveFlag;
 	}
 }
