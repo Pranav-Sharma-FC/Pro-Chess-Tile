@@ -51,7 +51,7 @@ public partial class Chessboard : Node2D
 				i++;
 				if(i<=8)
 				{
-					tile.setPiece(pScene, grid);
+					tile.setPiece(pScene);
 				}
 			}
 		}
@@ -92,7 +92,7 @@ public partial class Chessboard : Node2D
 		Tile tile = GetTile(pos.X, pos.Y);
 		_selectedTile = tile;
 		turn = Turn.Place;
-		_selectedTile.block();
+		_selectedTile.block(grid);
 		for (int i = 0; i < 8; i++)
 		{
 
@@ -113,7 +113,7 @@ public partial class Chessboard : Node2D
 	{
 		if(tile is null)
 			return;
-		tile.setPiece(pScene, grid);
+		tile.setPiece(pScene);
 	}
 
 	public Tile GetTile(int x, int y)

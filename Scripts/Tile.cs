@@ -6,26 +6,24 @@ public partial class Tile : Node2D
 	[Export] private Vector2I position;
 	[Export] private Piece selectedPiece;
 	[Export] private PackedScene pieceScene;
-	private Tile[,] tiless;
 
 	public Vector2I getPosition()
 	{
 		return position;
 	}
 
-	public void setPiece(PackedScene pScene, Tile[,] tiles)
+	public void setPiece(PackedScene pScene)
 	{
 		pieceScene = pScene;
 		selectedPiece = null;
 		Node fry = pieceScene.Instantiate();
 		AddChild(fry);
 		selectedPiece = fry as Piece;
-		this.tiless = tiles;
 	}
 
-	public void block()
+	public void block(Tile[,] tiles)
 	{
-		selectedPiece.PieceBlocking(getPosition(), tiless);
+		selectedPiece.PieceBlocking(getPosition(), tiles);
 	}
 
 	public bool canMove(Vector2I NextPosition)
@@ -57,8 +55,13 @@ public partial class Tile : Node2D
 		}
 		else
 		{
+			//GD.Print("ples");
 			Piece.PieceType current = getSelectedPiece();
-			if (pieceType == current)
+			if (pieceType == Piece.PieceType.Nothing)
+			{
+				return false;
+			}
+			else if (pieceType == current)
 			{
 				return false;
 			}
