@@ -75,11 +75,11 @@ public partial class Rook : Piece
 			xNext = -1;
 		}
 
-		if (y < 0)
+		if (y > 0)
 		{
 			yNext = 1;	
 		}
-		else if (y > 0)
+		else if (y < 0)
 		{
 			yNext = -1;
 		}
@@ -90,6 +90,8 @@ public partial class Rook : Piece
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
+		CurrentPosition -= new Vector2I(1, 1);
+		NextPosition -= new Vector2I(1, 1);
 		bool moveFlag = false;
 		Vector2I closestCurrent = new Vector2I(-1, -1);
 		if (((NextPosition.X == CurrentPosition.X) || (NextPosition.Y == CurrentPosition.Y)))
@@ -99,21 +101,21 @@ public partial class Rook : Piece
 			Vector2I movementSlope = FindSlope(xmoved, ymoved);
 			foreach (MovementResource moveResource in Movements)
 			{
-				//GD.Print(moveResource.closest + " : Very Current");
+				//GD.Print(moveResource.closest + " : Very Current : " + moveResource.xmov + " : " + moveResource.ymov);
 				if ((moveResource.xmov == movementSlope.X) && (moveResource.ymov == movementSlope.Y))
 				{
-					GD.Print("Identified");
+					//GD.Print("Identified");
 					closestCurrent = moveResource.closest;
-					GD.Print(moveResource.closest);
+					//GD.Print(moveResource.closest);
 				}
 			}
-			Vector2I toNext = (CurrentPosition-NextPosition).Abs();
-			GD.Print(toNext);
-			Vector2I toClosest = (CurrentPosition-closestCurrent).Abs();
-			GD.Print(toClosest);
+			int toNext = Math.Abs((CurrentPosition.X-NextPosition.X)+(CurrentPosition.Y-NextPosition.Y));
+			int toClosest = Math.Abs((CurrentPosition.X-closestCurrent.X)+(CurrentPosition.Y-closestCurrent.Y));
+			GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
+			GD.Print("Next: " + toNext + " Closest: " + toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
-			else if ((toNext.X+toNext.Y) <= (toClosest.X+toClosest.Y))
+			else if (toNext < toClosest)
 			{
 				moveFlag = true;
 			}
