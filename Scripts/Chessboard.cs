@@ -11,8 +11,10 @@ public partial class Chessboard : Node2D
 	private bool _isSelected;
 	private Tile[,] grid;
 	
+	
 	[Export] private PackedScene pScene;
-
+	[Export] private PackedScene circleScene;
+	[Export] private Node2D circles;
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
@@ -30,23 +32,27 @@ public partial class Chessboard : Node2D
 		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
-		GD.Print("Sup");
 		int i = 0;
 		foreach (Node2D child in GetChildren())
 		{
 			if (child is Tile tile)
 			{
+				
+				Vector2I pos = tile.getPosition();
+				grid[pos.X-1, pos.Y-1] = tile;
+				tile.Position *= new Vector2(100, 100);
+				tile.Position -= new Vector2(50, 50);
+			}
+		}
+		foreach (Node2D child in GetChildren())
+		{
+			if (child is Tile tile)
+			{
 				i++;
-				GD.Print("I: " + i);
 				if(i<=8)
 				{
 					tile.setPiece(pScene);
 				}
-				Vector2I pos = tile.getPosition();
-				grid[pos.X-1, pos.Y-1] = tile;
-				GD.Print(tile.getPosition());
-				tile.Position *= new Vector2(100, 100);
-				tile.Position -= new Vector2(50, 50);
 			}
 		}
 	}
@@ -68,35 +74,47 @@ public partial class Chessboard : Node2D
 	private void Place(Vector2I pos)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
-		GD.Print("Placing");
-		if (_selectedTile.canMove(tile.getPosition()))
+		if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
 			SetPieces(tile, pScene);
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
 			turn = Turn.Select;
-			GD.Print("Placed");
-
+			foreach (Node2D anim in circles.GetChildren())
+			{
+				anim.QueueFree();
+			}
 		}
 	}
 
 	private void Select(Vector2I pos)
 	{
-		GD.Print("Selecting");
-		GD.Print(pos);
 		Tile tile = GetTile(pos.X, pos.Y);
-		if (tile.hasPiece())
-		{
-			_selectedTile = tile;
+		_selectedTile = tile;
+		if(!tile.hasPieceNot())
+		{	
 			turn = Turn.Place;
-			GD.Print("Selected");
-		}
+			_selectedTile.block(grid);
+			for (int i = 0; i < 8; i++)
+			{
+
+				for(int j = 0; j < 8; j++)
+				{	
+					Tile e = GetTile(i, j);
+					if ((_selectedTile.canMove(e.getPosition())) && e.hasPieceNot(_selectedTile.getSelectedPiece()))
+					{
+						Node2D fry = circleScene.Instantiate() as Node2D;
+						circles.AddChild(fry);
+						fry.Position = (e.getPosition()*100);
+					}
+				}
+			}}
 	}
 
 	private void SetPieces(Tile tile, PackedScene PieceScene)
 	{
 		if(tile is null)
-			GD.Print("E");
+			return;
 		tile.setPiece(pScene);
 	}
 
@@ -106,7 +124,7 @@ public partial class Chessboard : Node2D
 		{
 			return null;
 	}
-		GD.Print(grid[x, y]);
+		//GD.Print(grid[x, y]);
 		return grid[x, y];
 	}
 

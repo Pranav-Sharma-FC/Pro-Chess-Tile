@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4v5cri31o44r"]
+
+[ext_resource type="Texture2D" uid="uid://c1yij06mgwonp" path="res://Assets/Icons/icon.svg" id="1_cf5ou"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ny5yc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cf5ou")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Circle" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(-50, -50)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ny5yc")

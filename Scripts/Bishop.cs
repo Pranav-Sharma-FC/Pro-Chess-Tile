@@ -3,6 +3,9 @@ using System;
 
 public partial class Bishop : Piece
 {
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	{
+	}
 	protected override void SetPoints()
 	{
 		

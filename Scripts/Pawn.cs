@@ -4,6 +4,9 @@ using System;
 public partial class Pawn : Piece
 {
 	[Export] Texture2D whitePawn;
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	{
+	}
 	protected override void SetPoints()
 	{
 		
@@ -20,7 +23,6 @@ public partial class Pawn : Piece
 		bool moveFlag = true;
 		if(CurrentPosition.X == NextPosition.X)
 		{
-			GD.Print("X is Chill");
 			if ((CurrentPosition.Y < NextPosition.Y) && (NextPosition.Y <= (CurrentPosition.Y + 1)))
 			{
 				return true;

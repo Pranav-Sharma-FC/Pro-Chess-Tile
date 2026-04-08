@@ -15,29 +15,24 @@ public partial class Tile : Node2D
 	public void setPiece(PackedScene pScene)
 	{
 		pieceScene = pScene;
-		instiantatePiece();
+		selectedPiece = null;
+		Node fry = pieceScene.Instantiate();
+		AddChild(fry);
+		selectedPiece = fry as Piece;
+	}
+
+	public void block(Tile[,] tiles)
+	{
+		selectedPiece.PieceBlocking(getPosition(), tiles);
 	}
 
 	public bool canMove(Vector2I NextPosition)
 	{
-		GD.Print("Hiiiiiiiiiiiii");
 		if((selectedPiece is not null) && (NextPosition != position))
 			return selectedPiece.Move(NextPosition, position);
 		else
 		{
 			return false;
-		}
-	}
-
-	private void instiantatePiece()
-	{
-		if(selectedPiece is null)
-		{
-			selectedPiece = null;
-			Node fry = pieceScene.Instantiate();
-			AddChild(fry);
-			selectedPiece = fry as Piece;
-			GD.Print(selectedPiece);
 		}
 	}
 	
@@ -47,16 +42,35 @@ public partial class Tile : Node2D
 		selectedPiece = null;
 	}
 
-	public bool hasPiece()
+	public Piece.PieceType getSelectedPiece()
+	{
+		return selectedPiece.returnType();
+	}
+
+	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
 		if (selectedPiece is null)
 		{
-			GD.Print("Oh No");
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			//GD.Print("ples");
+			Piece.PieceType current = getSelectedPiece();
+			if (pieceType == Piece.PieceType.Nothing)
+			{
+				return false;
+			}
+			else if (pieceType == current)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 	}
+	
+	
 }

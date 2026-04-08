@@ -3,6 +3,9 @@ using System;
 
 public partial class King : Piece
 {
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	{
+	}
 	protected override void SetPoints()
 	{
 		
@@ -16,7 +19,6 @@ public partial class King : Piece
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		GD.Print("Hi");
 		bool moveFlag = true;
 		if(!(NextPosition.X >= (CurrentPosition.X - 1) && (NextPosition.X <= (CurrentPosition.X + 1))))
 		{
