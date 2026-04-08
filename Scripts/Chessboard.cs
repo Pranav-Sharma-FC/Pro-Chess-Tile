@@ -70,20 +70,26 @@ public partial class Chessboard : Node2D
 	private void Place(Vector2I pos)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
-		if (tile.getSelectedPiece() == _selectedTile.getSelectedPiece())
+		if (tile.getSelectedPiece() == _selectedTile.getSelectedPiece() && (_selectedTile.getPosition() != tile.getPosition()))
 		{
-			Place(pos);
+			clearCircles();
+			Select(pos);
 		}
-		else if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
+		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
 			SetPieces(tile, _selectedTile.getPieceScene());
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
 			turn = Turn.Select;
-			foreach (Node2D anim in circles.GetChildren())
-			{
-				anim.QueueFree();
-			}
+			clearCircles();
+		}
+	}
+
+	private void clearCircles()
+	{
+		foreach (Node2D anim in circles.GetChildren())
+		{
+			anim.QueueFree();
 		}
 	}
 
