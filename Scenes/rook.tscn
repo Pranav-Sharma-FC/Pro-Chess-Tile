@@ -60,7 +60,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Rook" type="CharacterBody2D"]
+[node name="Rook2" type="CharacterBody2D"]
 script = ExtResource("1_wwc4d")
 Movements = Array[ExtResource("2_5ob0w")]([ExtResource("3_qgw01"), ExtResource("4_yoxvb"), ExtResource("5_losgq"), ExtResource("6_ce33x")])
 

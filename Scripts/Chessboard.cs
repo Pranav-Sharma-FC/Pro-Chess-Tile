@@ -12,7 +12,7 @@ public partial class Chessboard : Node2D
 	private Tile[,] grid;
 	
 	
-	[Export] private PackedScene pScene;
+	//[Export] private PackedScene pScene;
 	[Export] private PackedScene circleScene;
 	[Export] private Node2D circles;
 	[Export] private int width = 8;
@@ -47,12 +47,8 @@ public partial class Chessboard : Node2D
 		foreach (Node2D child in GetChildren())
 		{
 			if (child is Tile tile)
-			{
-				i++;
-				if(i<=8)
-				{
-					tile.setPiece(pScene);
-				}
+			{ 
+				tile.setPiece(tile.getPieceScene());
 			}
 		}
 	}
@@ -74,9 +70,13 @@ public partial class Chessboard : Node2D
 	private void Place(Vector2I pos)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
-		if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
+		if (tile.getSelectedPiece() == _selectedTile.getSelectedPiece())
 		{
-			SetPieces(tile, pScene);
+			Place(pos);
+		}
+		else if ((_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
+		{
+			SetPieces(tile, _selectedTile.getPieceScene());
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
 			turn = Turn.Select;
@@ -92,7 +92,8 @@ public partial class Chessboard : Node2D
 		Tile tile = GetTile(pos.X, pos.Y);
 		_selectedTile = tile;
 		if(!tile.hasPieceNot())
-		{	
+		{
+			bool hasMove = false;
 			turn = Turn.Place;
 			_selectedTile.block(grid);
 			for (int i = 0; i < 8; i++)
@@ -103,19 +104,28 @@ public partial class Chessboard : Node2D
 					Tile e = GetTile(i, j);
 					if ((_selectedTile.canMove(e.getPosition())) && e.hasPieceNot(_selectedTile.getSelectedPiece()))
 					{
+						hasMove = true;
 						Node2D fry = circleScene.Instantiate() as Node2D;
 						circles.AddChild(fry);
 						fry.Position = (e.getPosition()*100);
 					}
 				}
-			}}
+			}
+
+			if (!hasMove)
+			{
+				_selectedTile = null;
+				turn = Turn.Select;
+			}
+			
+		}
 	}
 
 	private void SetPieces(Tile tile, PackedScene PieceScene)
 	{
 		if(tile is null)
 			return;
-		tile.setPiece(pScene);
+		tile.setPiece(_selectedTile.getPieceScene());
 	}
 
 	public Tile GetTile(int x, int y)

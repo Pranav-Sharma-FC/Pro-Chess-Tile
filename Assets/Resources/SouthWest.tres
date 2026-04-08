@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_h67yv")
-xmov = 1
-ymov = 1
+xmov = -1
+ymov = -1
 closest = Vector2i(0, 0)

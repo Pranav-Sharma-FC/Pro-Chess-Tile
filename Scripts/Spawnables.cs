@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace UIProject.Scripts;
 
 public partial class Spawnables : CharacterBody2D
 {

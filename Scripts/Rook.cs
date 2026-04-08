@@ -1,9 +1,8 @@
+using System;
 using Godot;
 using Godot.Collections;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.JavaScript;
-using System.Runtime.Loader;
+
+namespace UIProject.Scripts;
 
 public partial class Rook : Piece
 {
@@ -60,31 +59,6 @@ public partial class Rook : Piece
 				
 			}
 		}
-	}
-
-	private Vector2I FindSlope(int x, int y)
-	{
-		int xNext = 0;
-		int yNext = 0;
-		if (x > 0)
-		{
-			xNext = 1;
-		}
-		else if (x < 0)
-		{
-			xNext = -1;
-		}
-
-		if (y > 0)
-		{
-			yNext = 1;	
-		}
-		else if (y < 0)
-		{
-			yNext = -1;
-		}
-		
-		return new Vector2I(xNext, yNext);
 	}
 	
 	//Logic to make sure piece can move there

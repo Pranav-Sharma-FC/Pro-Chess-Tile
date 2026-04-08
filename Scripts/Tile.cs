@@ -12,13 +12,21 @@ public partial class Tile : Node2D
 		return position;
 	}
 
+	public PackedScene getPieceScene()
+	{
+		return pieceScene;
+	}
+
 	public void setPiece(PackedScene pScene)
 	{
-		pieceScene = pScene;
-		selectedPiece = null;
-		Node fry = pieceScene.Instantiate();
-		AddChild(fry);
-		selectedPiece = fry as Piece;
+		if(pScene is not null)
+		{
+			pieceScene = pScene;
+			selectedPiece = null;
+			Node fry = pieceScene.Instantiate();
+			AddChild(fry);
+			selectedPiece = fry as Piece;
+		}
 	}
 
 	public void block(Tile[,] tiles)
@@ -44,7 +52,10 @@ public partial class Tile : Node2D
 
 	public Piece.PieceType getSelectedPiece()
 	{
-		return selectedPiece.returnType();
+		if(selectedPiece is not null)
+			return selectedPiece.returnType();
+		else
+			return Piece.PieceType.Nothing;
 	}
 
 	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
