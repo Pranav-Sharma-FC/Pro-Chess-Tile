@@ -89,6 +89,7 @@ public partial class Chessboard : Node2D
 			clearCircles();
 			if(pieceType == Piece.PieceType.Black)
 				turn = Turn.SelectWhite;
+				
 			else
 				turn = Turn.SelectBlack;
 			Select(pos, pieceType);
