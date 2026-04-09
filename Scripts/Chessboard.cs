@@ -38,7 +38,6 @@ public partial class Chessboard : Node2D
 		{
 			if (child is Tile tile)
 			{
-				
 				Vector2I pos = tile.getPosition();
 				grid[pos.X-1, pos.Y-1] = tile;
 				tile.Position *= new Vector2(100, 100);
@@ -59,6 +58,8 @@ public partial class Chessboard : Node2D
 				}
 			}
 		}
+
+		//ile = GetTile(3, 0);
 	}
 
 	private void OnTileClicked(Vector2I pos)
@@ -89,7 +90,6 @@ public partial class Chessboard : Node2D
 			clearCircles();
 			if(pieceType == Piece.PieceType.Black)
 				turn = Turn.SelectWhite;
-				
 			else
 				turn = Turn.SelectBlack;
 			Select(pos, pieceType);

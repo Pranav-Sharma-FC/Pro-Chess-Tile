@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using UIProject.Scripts;
 
 public partial class Tile : Node2D
 {
@@ -70,6 +71,14 @@ public partial class Tile : Node2D
 		if (selectedPiece is null)
 		{
 			return true;
+		}
+		else if (selectedPiece is King king)
+		{
+			if (king.canCapture())
+				return false; 
+			else
+				return true; 
+			
 		}
 		else
 		{
