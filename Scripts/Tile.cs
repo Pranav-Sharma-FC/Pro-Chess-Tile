@@ -29,6 +29,7 @@ public partial class Tile : Node2D
 			return false;
 		}
 	}
+	
  private void instantiatePiece()
 {
 if (selectedPiece == null)
