@@ -87,7 +87,7 @@ public partial class Bishop : Piece
 			GD.Print("Next: " + toNext + " Closest: " + toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
-			else if (toNext < toClosest)
+			else if (toNext <= toClosest)
 			{
 				moveFlag = true;
 			}

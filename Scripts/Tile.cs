@@ -17,15 +17,19 @@ public partial class Tile : Node2D
 		return pieceScene;
 	}
 
-	public void setPiece(PackedScene pScene)
+	public void setPiece(PackedScene pScene, bool isBlack = false)
 	{
 		if(pScene is not null)
 		{
+			ClearPiece();
 			pieceScene = pScene;
-			selectedPiece = null;
 			Node fry = pieceScene.Instantiate();
 			AddChild(fry);
 			selectedPiece = fry as Piece;
+			if(isBlack)
+			{
+				selectedPiece.blackPiece();
+			}
 		}
 	}
 
@@ -46,8 +50,11 @@ public partial class Tile : Node2D
 	
 	public void ClearPiece()
 	{
-		selectedPiece.QueueFree();
-		selectedPiece = null;
+		if(selectedPiece is not null)
+		{
+			selectedPiece.QueueFree();
+			selectedPiece = null;
+		}
 	}
 
 	public Piece.PieceType getSelectedPiece()

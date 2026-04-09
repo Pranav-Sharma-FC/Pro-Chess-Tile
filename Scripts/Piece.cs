@@ -10,7 +10,8 @@ public abstract partial class Piece : CharacterBody2D
 	[Export] protected PackedScene PieceScene;
 	[Export] protected Vector2[] Points;
 	protected Vector2I CrrentPosition;
-	[Export] Texture2D whitePawn;
+	[Export] Texture2D blackRes;
+	[Export] AnimatedSprite2D sprite;
 	
 	public enum PieceType
 	{
@@ -18,8 +19,17 @@ public abstract partial class Piece : CharacterBody2D
 		White,
 		Black
 	}
-	private PieceType pieceType = PieceType.White;
 
+
+	protected PieceType pieceType = PieceType.White;
+
+	public void blackPiece()
+	{
+		int spriteNum = sprite.Frame;
+		pieceType = PieceType.Black;
+		sprite.Play("BlackPieces");
+		sprite.Frame = spriteNum;
+	}
 	public PieceType returnType()
 	{
 		return pieceType;

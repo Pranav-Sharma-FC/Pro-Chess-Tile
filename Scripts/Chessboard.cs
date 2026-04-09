@@ -21,11 +21,12 @@ public partial class Chessboard : Node2D
 
 	private enum Turn
 	{
-		Select,
-		Place,
-		Change
+		SelectWhite,
+		PlaceWhite,
+		SelectBlack,
+		PlaceBlack
 	}
-	private Turn turn  = Turn.Select;
+	private Turn turn  = Turn.SelectWhite;
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
@@ -48,7 +49,14 @@ public partial class Chessboard : Node2D
 		{
 			if (child is Tile tile)
 			{ 
-				tile.setPiece(tile.getPieceScene());
+				if(tile.getPosition().Y >= 3)
+				{
+					tile.setPiece(tile.getPieceScene(), true);
+				}
+				else
+				{
+					tile.setPiece(tile.getPieceScene());
+				}
 			}
 		}
 	}
@@ -57,32 +65,46 @@ public partial class Chessboard : Node2D
 	{
 		switch(turn)
 		{
-			case Turn.Select:
-				Select(pos);
+			case Turn.SelectWhite:
+				Select(pos, Piece.PieceType.White);
 				break;
-			case Turn.Place:
-				Place(pos);
+			case Turn.PlaceWhite:
+				Place(pos, Piece.PieceType.White);
+				break;
+			case Turn.SelectBlack:
+				Select(pos, Piece.PieceType.Black);
+				break;
+			case Turn.PlaceBlack:
+				Place(pos, Piece.PieceType.Black);
 				break;
 
 		}
 	}
 
-	private void Place(Vector2I pos)
+	private void Place(Vector2I pos, Piece.PieceType pieceType)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
 		if (tile.getSelectedPiece() == _selectedTile.getSelectedPiece() && (_selectedTile.getPosition() != tile.getPosition()))
 		{
 			clearCircles();
-			Select(pos);
+			if(pieceType == Piece.PieceType.Black)
+				turn = Turn.SelectWhite;
+			else
+				turn = Turn.SelectBlack;
+			Select(pos, pieceType);
 		}
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
+			if(pieceType == Piece.PieceType.White)
+				turn = Turn.SelectBlack;
+			else
+				turn = Turn.SelectWhite;
 			SetPieces(tile, _selectedTile.getPieceScene());
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
-			turn = Turn.Select;
 			clearCircles();
 		}
+		GD.Print(turn);
 	}
 
 	private void clearCircles()
@@ -93,45 +115,56 @@ public partial class Chessboard : Node2D
 		}
 	}
 
-	private void Select(Vector2I pos)
+	private void Select(Vector2I pos, Piece.PieceType pieceType)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
+		GD.Print("Bruh" + tile + pieceType);
 		_selectedTile = tile;
+		bool hasMove = false;
 		if(!tile.hasPieceNot())
 		{
-			bool hasMove = false;
-			turn = Turn.Place;
-			_selectedTile.block(grid);
-			for (int i = 0; i < 8; i++)
+			if(pieceType==tile.getSelectedPiece())
 			{
+				tile.block(grid);
+				for (int i = 0; i < 8; i++)
+				{
 
-				for(int j = 0; j < 8; j++)
-				{	
-					Tile e = GetTile(i, j);
-					if ((_selectedTile.canMove(e.getPosition())) && e.hasPieceNot(_selectedTile.getSelectedPiece()))
-					{
-						hasMove = true;
-						Node2D fry = circleScene.Instantiate() as Node2D;
-						circles.AddChild(fry);
-						fry.Position = (e.getPosition()*100);
+					for(int j = 0; j < 8; j++)
+					{	
+						Tile e = GetTile(i, j);
+						if ((_selectedTile.canMove(e.getPosition())) && e.hasPieceNot(_selectedTile.getSelectedPiece()))
+						{
+							hasMove = true;
+							_selectedTile = tile;
+							Node2D fry = circleScene.Instantiate() as Node2D;
+							circles.AddChild(fry);
+							fry.Position = (e.getPosition()*100);
+						}
 					}
 				}
+				if(!hasMove)
+				{
+					_selectedTile = null;
+				}
+				else
+				{
+					if(pieceType == Piece.PieceType.White)
+						turn = Turn.PlaceWhite;
+					else
+						turn = Turn.PlaceBlack;
+				}
 			}
-
-			if (!hasMove)
-			{
-				_selectedTile = null;
-				turn = Turn.Select;
-			}
-			
 		}
 	}
 
 	private void SetPieces(Tile tile, PackedScene PieceScene)
 	{
+		//GD.Print(_selectedTile.getSelectedPiece());
+		bool isBlack = (Piece.PieceType.Black == _selectedTile.getSelectedPiece());
 		if(tile is null)
 			return;
-		tile.setPiece(_selectedTile.getPieceScene());
+		//GD.Print("PieceType: " + isBlack);
+		tile.setPiece(_selectedTile.getPieceScene(), isBlack);
 	}
 
 	public Tile GetTile(int x, int y)

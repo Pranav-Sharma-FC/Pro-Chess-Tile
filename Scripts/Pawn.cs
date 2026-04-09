@@ -3,7 +3,6 @@ using System;
 
 public partial class Pawn : Piece
 {
-	[Export] Texture2D whitePawn;
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 	}
@@ -20,14 +19,18 @@ public partial class Pawn : Piece
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		bool moveFlag = true;
+		bool moveFlag = false;
 		if(CurrentPosition.X == NextPosition.X)
 		{
-			if ((CurrentPosition.Y < NextPosition.Y) && (NextPosition.Y <= (CurrentPosition.Y + 1)))
+			if (pieceType == PieceType.White && (CurrentPosition.Y < NextPosition.Y) && (NextPosition.Y <= (CurrentPosition.Y + 1)))
 			{
-				return true;
+				moveFlag = true;
+			}
+			else if(pieceType == PieceType.Black && (CurrentPosition.Y > NextPosition.Y) && (NextPosition.Y >= (CurrentPosition.Y - 1)))
+			{
+				moveFlag = true;
 			}
 		}
-		return false;
+		return moveFlag;
 	}
 }

@@ -295,81 +295,97 @@ position = Vector2i(8, 6)
 position = Vector2i(1, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(1, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile50" type="Node2D" parent="Chess Board2"]
 position = Vector2i(2, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(2, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile51" type="Node2D" parent="Chess Board2"]
 position = Vector2i(3, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(3, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile52" type="Node2D" parent="Chess Board2"]
 position = Vector2i(4, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(4, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile53" type="Node2D" parent="Chess Board2"]
 position = Vector2i(5, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(5, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile54" type="Node2D" parent="Chess Board2"]
 position = Vector2i(6, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(6, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile55" type="Node2D" parent="Chess Board2"]
 position = Vector2i(7, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(7, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile56" type="Node2D" parent="Chess Board2"]
 position = Vector2i(8, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(8, 7)
+pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile57" type="Node2D" parent="Chess Board2"]
 position = Vector2i(1, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(1, 8)
+pieceScene = ExtResource("4_wh2or")
 
 [node name="Tile58" type="Node2D" parent="Chess Board2"]
 position = Vector2i(2, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(2, 8)
+pieceScene = ExtResource("7_rg0c0")
 
 [node name="Tile59" type="Node2D" parent="Chess Board2"]
 position = Vector2i(3, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(3, 8)
+pieceScene = ExtResource("8_i02s3")
 
 [node name="Tile60" type="Node2D" parent="Chess Board2"]
 position = Vector2i(4, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(4, 8)
+pieceScene = ExtResource("10_oy7aq")
 
 [node name="Tile61" type="Node2D" parent="Chess Board2"]
 position = Vector2i(5, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(5, 8)
+pieceScene = ExtResource("9_h7iwg")
 
 [node name="Tile62" type="Node2D" parent="Chess Board2"]
 position = Vector2i(6, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(6, 8)
+pieceScene = ExtResource("8_i02s3")
 
 [node name="Tile63" type="Node2D" parent="Chess Board2"]
 position = Vector2i(7, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(7, 8)
+pieceScene = ExtResource("7_rg0c0")
 
 [node name="Tile64" type="Node2D" parent="Chess Board2"]
 position = Vector2i(8, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(8, 8)
+pieceScene = ExtResource("4_wh2or")
 
 [node name="Button" type="Button" parent="."]
 offset_right = 800.0

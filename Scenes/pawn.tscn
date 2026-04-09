@@ -1,68 +1,118 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdmpfay0tveub"]
+[gd_scene load_steps=18 format=3 uid="uid://bdmpfay0tveub"]
 
 [ext_resource type="Script" uid="uid://r2ut03sw2a5g" path="res://Scripts/Pawn.cs" id="1_eu7ni"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_3865y"]
+[ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="3_culnp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_culnp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgw01"]
 atlas = ExtResource("2_3865y")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_018tw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoxvb"]
 atlas = ExtResource("2_3865y")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ab40"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_losgq"]
 atlas = ExtResource("2_3865y")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cr4cw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ce33x"]
 atlas = ExtResource("2_3865y")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b1whw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxdnj"]
 atlas = ExtResource("2_3865y")
 region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xq3kh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkk6j"]
 atlas = ExtResource("2_3865y")
 region = Rect2(80, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_byrkh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wtkm"]
+atlas = ExtResource("3_culnp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu3ov"]
+atlas = ExtResource("3_culnp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t4yi"]
+atlas = ExtResource("3_culnp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18jqx"]
+atlas = ExtResource("3_culnp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j64pt"]
+atlas = ExtResource("3_culnp")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enm2m"]
+atlas = ExtResource("3_culnp")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_018tw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_culnp")
+"texture": SubResource("AtlasTexture_qgw01")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_018tw")
+"texture": SubResource("AtlasTexture_yoxvb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3ab40")
+"texture": SubResource("AtlasTexture_losgq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cr4cw")
+"texture": SubResource("AtlasTexture_ce33x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b1whw")
+"texture": SubResource("AtlasTexture_rxdnj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xq3kh")
+"texture": SubResource("AtlasTexture_jkk6j")
+}],
+"loop": true,
+"name": &"BlackPieces",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wtkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu3ov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t4yi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18jqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j64pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enm2m")
 }],
 "loop": true,
 "name": &"Pieces",
 "speed": 5.0
 }]
 
-[node name="Pawn" type="CharacterBody2D"]
+[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_eu7ni")
+sprite = NodePath("AnimatedSprite2D2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
 shape = SubResource("RectangleShape2D_eu7ni")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.5, 4.5)
-sprite_frames = SubResource("SpriteFrames_byrkh")
+sprite_frames = SubResource("SpriteFrames_018tw")
 animation = &"Pieces"
+speed_scale = 0.0
