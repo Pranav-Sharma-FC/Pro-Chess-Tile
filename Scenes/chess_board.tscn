@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dgpbi4xuycn45" path="res://Scripts/Chessboard.cs" id="2_ewtbj"]
 [ext_resource type="Script" uid="uid://dhn7b7vwqi0t1" path="res://Scripts/BoardArt.cs" id="2_j8xde"]
 [ext_resource type="Script" uid="uid://42yb4slgjvoq" path="res://Scripts/Tile.cs" id="4_j8xde"]
-[ext_resource type="Script" path="res://Scenes/TimerManager.cs" id="5_8egpy"]
+[ext_resource type="Script" uid="uid://7jbfp4ku67xe" path="res://Scenes/TimerManager.cs" id="5_8egpy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8xde"]
 texture = ExtResource("1_f817v")
@@ -18,206 +18,271 @@ sources/1 = SubResource("TileSetAtlasSource_j8xde")
 
 [node name="Entire" type="Node2D"]
 
-[node name="Chess Board" type="TileMapLayer" parent="."]
+[node name="Chess Board" type="TileMapLayer" parent="." node_paths=PackedStringArray("timerManager")]
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAEAAQABAAAAAAACAAIAAQABAAAAAAADAAMAAQABAAAAAAAEAAQAAQABAAAAAAAFAAUAAQABAAAAAAAGAAYAAQABAAAAAAAHAAcAAQABAAAAAAABAAAAAQAAAAAAAAACAAEAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAUAAQABAAAAAAAGAAQAAQABAAAAAAAFAAMAAQABAAAAAAAEAAIAAQABAAAAAAADAAEAAQABAAAAAAACAAAAAQABAAAAAAAHAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQABAAAAAAAFAAEAAQABAAAAAAAGAAIAAQABAAAAAAAHAAMAAQABAAAAAAAHAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQABAAAAAAAGAAAAAQABAAAAAAAGAAcAAQAAAAAAAAAFAAYAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAQAAQAAAAAAAAACAAMAAQAAAAAAAAABAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAFAAcAAQABAAAAAAAEAAYAAQABAAAAAAADAAUAAQABAAAAAAACAAQAAQABAAAAAAABAAMAAQABAAAAAAAAAAIAAQABAAAAAAAEAAcAAQAAAAAAAAADAAYAAQAAAAAAAAACAAUAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAADAAcAAQABAAAAAAACAAYAAQABAAAAAAABAAUAAQABAAAAAAAAAAQAAQABAAAAAAACAAcAAQAAAAAAAAABAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAABAAcAAQABAAAAAAAAAAYAAQABAAAAAAAAAAcAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_f817v")
 script = ExtResource("2_j8xde")
+timerManager = NodePath("../TimerManager")
 
 [node name="Chess Board2" type="Node2D" parent="." node_paths=PackedStringArray("boardArt")]
 script = ExtResource("2_ewtbj")
 boardArt = NodePath("../Chess Board")
 
-[node name="Tile" type="Node2D" parent="Chess Board2"]
+[node name="Tile" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile2" type="Node2D" parent="Chess Board2"]
+[node name="Tile2" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile3" type="Node2D" parent="Chess Board2"]
+[node name="Tile3" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile4" type="Node2D" parent="Chess Board2"]
+[node name="Tile4" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile5" type="Node2D" parent="Chess Board2"]
+[node name="Tile5" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile6" type="Node2D" parent="Chess Board2"]
+[node name="Tile6" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile7" type="Node2D" parent="Chess Board2"]
+[node name="Tile7" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile8" type="Node2D" parent="Chess Board2"]
+[node name="Tile8" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile9" type="Node2D" parent="Chess Board2"]
+[node name="Tile9" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile10" type="Node2D" parent="Chess Board2"]
+[node name="Tile10" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile11" type="Node2D" parent="Chess Board2"]
+[node name="Tile11" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile12" type="Node2D" parent="Chess Board2"]
+[node name="Tile12" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile13" type="Node2D" parent="Chess Board2"]
+[node name="Tile13" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile14" type="Node2D" parent="Chess Board2"]
+[node name="Tile14" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile15" type="Node2D" parent="Chess Board2"]
+[node name="Tile15" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile16" type="Node2D" parent="Chess Board2"]
+[node name="Tile16" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile17" type="Node2D" parent="Chess Board2"]
+[node name="Tile17" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile18" type="Node2D" parent="Chess Board2"]
+[node name="Tile18" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile19" type="Node2D" parent="Chess Board2"]
+[node name="Tile19" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile20" type="Node2D" parent="Chess Board2"]
+[node name="Tile20" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile21" type="Node2D" parent="Chess Board2"]
+[node name="Tile21" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile22" type="Node2D" parent="Chess Board2"]
+[node name="Tile22" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile23" type="Node2D" parent="Chess Board2"]
+[node name="Tile23" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile24" type="Node2D" parent="Chess Board2"]
+[node name="Tile24" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile25" type="Node2D" parent="Chess Board2"]
+[node name="Tile25" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile26" type="Node2D" parent="Chess Board2"]
+[node name="Tile26" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile27" type="Node2D" parent="Chess Board2"]
+[node name="Tile27" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile28" type="Node2D" parent="Chess Board2"]
+[node name="Tile28" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile29" type="Node2D" parent="Chess Board2"]
+[node name="Tile29" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile30" type="Node2D" parent="Chess Board2"]
+[node name="Tile30" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile31" type="Node2D" parent="Chess Board2"]
+[node name="Tile31" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile32" type="Node2D" parent="Chess Board2"]
+[node name="Tile32" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile33" type="Node2D" parent="Chess Board2"]
+[node name="Tile33" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile34" type="Node2D" parent="Chess Board2"]
+[node name="Tile34" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile35" type="Node2D" parent="Chess Board2"]
+[node name="Tile35" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile36" type="Node2D" parent="Chess Board2"]
+[node name="Tile36" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile37" type="Node2D" parent="Chess Board2"]
+[node name="Tile37" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile38" type="Node2D" parent="Chess Board2"]
+[node name="Tile38" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile39" type="Node2D" parent="Chess Board2"]
+[node name="Tile39" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile40" type="Node2D" parent="Chess Board2"]
+[node name="Tile40" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile41" type="Node2D" parent="Chess Board2"]
+[node name="Tile41" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile42" type="Node2D" parent="Chess Board2"]
+[node name="Tile42" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile43" type="Node2D" parent="Chess Board2"]
+[node name="Tile43" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile44" type="Node2D" parent="Chess Board2"]
+[node name="Tile44" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile45" type="Node2D" parent="Chess Board2"]
+[node name="Tile45" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile46" type="Node2D" parent="Chess Board2"]
+[node name="Tile46" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile47" type="Node2D" parent="Chess Board2"]
+[node name="Tile47" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile48" type="Node2D" parent="Chess Board2"]
+[node name="Tile48" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile49" type="Node2D" parent="Chess Board2"]
+[node name="Tile49" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile50" type="Node2D" parent="Chess Board2"]
+[node name="Tile50" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile51" type="Node2D" parent="Chess Board2"]
+[node name="Tile51" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile52" type="Node2D" parent="Chess Board2"]
+[node name="Tile52" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile53" type="Node2D" parent="Chess Board2"]
+[node name="Tile53" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile54" type="Node2D" parent="Chess Board2"]
+[node name="Tile54" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile55" type="Node2D" parent="Chess Board2"]
+[node name="Tile55" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile56" type="Node2D" parent="Chess Board2"]
+[node name="Tile56" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile57" type="Node2D" parent="Chess Board2"]
+[node name="Tile57" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile58" type="Node2D" parent="Chess Board2"]
+[node name="Tile58" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile59" type="Node2D" parent="Chess Board2"]
+[node name="Tile59" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile60" type="Node2D" parent="Chess Board2"]
+[node name="Tile60" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile61" type="Node2D" parent="Chess Board2"]
+[node name="Tile61" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile62" type="Node2D" parent="Chess Board2"]
+[node name="Tile62" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile63" type="Node2D" parent="Chess Board2"]
+[node name="Tile63" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
-[node name="Tile64" type="Node2D" parent="Chess Board2"]
+[node name="Tile64" type="Node2D" parent="Chess Board2" node_paths=PackedStringArray("timerManager")]
 script = ExtResource("4_j8xde")
+timerManager = NodePath("../../TimerManager")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 15.0

@@ -6,6 +6,7 @@ public partial class Tile : Node2D
 	[Export] private Vector2I position;
 	[Export] private Piece selectedPiece;
 	[Export] private PackedScene pieceScene;
+	[Export] public TimerManager timerManager;
 
 	public Vector2I getPosition()
 	{
@@ -28,24 +29,31 @@ public partial class Tile : Node2D
 			return false;
 		}
 	}
+ private void instantiatePiece()
+{
+if (selectedPiece == null)
+{
+if (pieceScene == null)
+{
+GD.Print("pieceScene is null");
+return;
+}
 
-	private void instiantatePiece()
-	{
-		if(selectedPiece is null)
-		{
-			selectedPiece = null;
-			Node fry = pieceScene.Instantiate();
-			AddChild(fry);
-			selectedPiece = fry as Piece;
-			GD.Print(selectedPiece);
-		}
-	}
+Node fry = pieceScene.Instantiate();
+AddChild(fry);
+selectedPiece = fry as Piece;
+GD.Print(selectedPiece);
+}
+
 	
 	public void ClearPiece()
-	{
-		selectedPiece.QueueFree();
-		selectedPiece = null;
-	}
+{
+if (selectedPiece != null)
+{
+selectedPiece.QueueFree();
+selectedPiece = null;
+}
+}
 
 	public bool hasPiece()
 	{

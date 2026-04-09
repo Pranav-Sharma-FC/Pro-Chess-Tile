@@ -12,7 +12,6 @@ public partial class Chessboard : Node2D
 	private Tile[,] grid;
 	
 	[Export] private PackedScene pScene;
-
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
@@ -85,6 +84,11 @@ public partial class Chessboard : Node2D
 		GD.Print("Selecting");
 		GD.Print(pos);
 		Tile tile = GetTile(pos.X, pos.Y);
+		if (tile == null)
+		{
+			GD.Print("Title is null");
+			return;
+		}
 		if (tile.hasPiece())
 		{
 			_selectedTile = tile;
