@@ -60,6 +60,8 @@ public abstract partial class Piece : CharacterBody2D
 		return new Vector2I(xNext, yNext);
 	}
 
+//abstract class, spawnables 
+
 	protected abstract void SetPoints();
 	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
