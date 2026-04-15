@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://0w6b41qrkpnt"]
+[gd_scene load_steps=13 format=4 uid="uid://0w6b41qrkpnt"]
 
 [ext_resource type="Texture2D" uid="uid://dvn28mcyeigfo" path="res://Assets/pixil-frame-0.png" id="1_f817v"]
 [ext_resource type="Script" uid="uid://dgpbi4xuycn45" path="res://Scripts/Chessboard.cs" id="2_ewtbj"]
 [ext_resource type="Script" uid="uid://dhn7b7vwqi0t1" path="res://Scripts/BoardArt.cs" id="2_j8xde"]
 [ext_resource type="Script" uid="uid://42yb4slgjvoq" path="res://Scripts/Tile.cs" id="4_j8xde"]
 [ext_resource type="PackedScene" uid="uid://devdobcp8uugj" path="res://Scenes/rook.tscn" id="4_wh2or"]
-[ext_resource type="PackedScene" uid="uid://c4v5cri31o44r" path="res://Scenes/circle.tscn" id="5_wh2or"]
 [ext_resource type="PackedScene" uid="uid://b7dq70yrj1k8v" path="res://Scenes/knight.tscn" id="7_rg0c0"]
 [ext_resource type="PackedScene" uid="uid://coubeqqjf0uj4" path="res://Scenes/bishop.tscn" id="8_i02s3"]
 [ext_resource type="PackedScene" uid="uid://b47oa6e6gf0s2" path="res://Scenes/king.tscn" id="9_h7iwg"]
@@ -36,10 +35,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAEAAQABAAAAAAACAAIAAQABAAA
 tile_set = SubResource("TileSet_f817v")
 script = ExtResource("2_j8xde")
 
-[node name="Chess Board2" type="Node2D" parent="Board" node_paths=PackedStringArray("circles", "boardArt")]
+[node name="Chess Board2" type="Node2D" parent="Board" node_paths=PackedStringArray("boardArt")]
 script = ExtResource("2_ewtbj")
-circleScene = ExtResource("5_wh2or")
-circles = NodePath("../Places")
 boardArt = NodePath("../Chess Board")
 
 [node name="Tile" type="Node2D" parent="Board/Chess Board2"]
