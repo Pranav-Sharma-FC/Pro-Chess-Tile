@@ -16,7 +16,7 @@ public partial class Tile : Node2D
 	public void setPiece(PackedScene pScene)
 	{
 		pieceScene = pScene;
-		instiantatePiece();
+		 InstantiatePiece();
 	}
 
 	public bool canMove(Vector2I NextPosition)
@@ -30,7 +30,7 @@ public partial class Tile : Node2D
 		}
 	}
 	
- private void instantiatePiece()
+private void InstantiatePiece()
 {
 if (selectedPiece == null)
 {
@@ -44,6 +44,7 @@ Node fry = pieceScene.Instantiate();
 AddChild(fry);
 selectedPiece = fry as Piece;
 GD.Print(selectedPiece);
+} 
 }
 
 	
