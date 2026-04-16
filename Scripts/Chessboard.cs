@@ -94,9 +94,9 @@ public partial class Chessboard : Node2D
 		{
 			clearCircles();
 			if(pieceType == Piece.PieceType.Black)
-				turn = Turn.SelectWhite;
-			else
 				turn = Turn.SelectBlack;
+			else
+				turn = Turn.SelectWhite;
 			Select(pos, pieceType);
 		}
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))

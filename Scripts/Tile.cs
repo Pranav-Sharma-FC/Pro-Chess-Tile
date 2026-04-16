@@ -79,13 +79,14 @@ public partial class Tile : Node2D
 
 	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
+		Piece.PieceType current = getSelectedPiece();
 		if (selectedPiece is null)
 		{
 			return true;
 		}
 		else if (selectedPiece is King king)
 		{
-			if (king.canCapture())
+			if (king.canCapture() && pieceType != current)
 				return true; 
 			else
 				return false; 
@@ -94,7 +95,6 @@ public partial class Tile : Node2D
 		else
 		{
 			//GD.Print("ples");
-			Piece.PieceType current = getSelectedPiece();
 			if (pieceType == Piece.PieceType.Nothing)
 			{
 				return false;
