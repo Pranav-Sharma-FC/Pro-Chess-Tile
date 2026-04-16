@@ -26,10 +26,12 @@ public abstract partial class Piece : CharacterBody2D
 	public void blackPiece()
 	{
 		int spriteNum = sprite.Frame;
+		int health = ProgressBar; 
 		pieceType = PieceType.Black;
 		sprite.Play("BlackPieces");
 		sprite.Frame = spriteNum;
 	}
+	
 	public PieceType returnType()
 	{
 		return pieceType;

@@ -120,6 +120,12 @@ shape = SubResource("RectangleShape2D_eu7ni")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_byrkh")
-animation = &"Pieces"
+animation = &"BlackPieces"
 frame = 2
 speed_scale = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -56.0
+offset_top = 54.0
+offset_right = 57.0
+offset_bottom = 95.0
