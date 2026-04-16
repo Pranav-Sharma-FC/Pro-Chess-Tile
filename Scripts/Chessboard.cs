@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using UIProject.Scripts;
 
 public partial class Chessboard : Node2D
 {
 	//Why do we live just to suffer
 	//Update: everything that I made doesnt bloody work because tilemaplayers scene collections are **********
 	//Update: On track to complete first sprint by second sprint, cant do anything about tilemaplayers but oh well
+	//Update: Yo only a bit behind its just checking which shouldnt be too hard right                         right?
 
 	private Tile _selectedTile;
 	private bool _isSelected;
@@ -18,6 +20,7 @@ public partial class Chessboard : Node2D
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
+	private King white, black;
 
 	private enum Turn
 	{
@@ -48,6 +51,7 @@ public partial class Chessboard : Node2D
 		{
 			if (child is Tile tile)
 			{ 
+				tile.GameOver += EndGame;
 				if(tile.getPosition().Y >= 3)
 				{
 					tile.setPiece(tile.getPieceScene(), true);
@@ -58,8 +62,9 @@ public partial class Chessboard : Node2D
 				}
 			}
 		}
+		
 
-		//ile = GetTile(3, 0);
+		// ile = GetTile(3, 0);
 	}
 
 	private void OnTileClicked(Vector2I pos)
@@ -176,6 +181,17 @@ public partial class Chessboard : Node2D
 	}
 		//GD.Print(grid[x, y]);
 		return grid[x, y];
+	}
+
+	private void EndGame(int pieceType)
+	{
+		Piece.PieceType truth = (Piece.PieceType)pieceType;
+		if (truth == Piece.PieceType.White)
+		{
+			GD.Print("E");
+			
+		}
+		GetTree().Paused = true;
 	}
 
 	/*private Vector2 Cordinates()

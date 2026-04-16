@@ -4,8 +4,11 @@ namespace UIProject.Scripts;
 
 public partial class King : Piece
 {
-	[Signal]
-	public delegate void GameOverEventHandler(int pieceType);
+	public override void _Ready()
+	{
+		
+	}
+
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 	}
@@ -24,9 +27,9 @@ public partial class King : Piece
 		
 	}
 
-	public void capturedKing()
+	public PieceType capturedKing()
 	{
-		EmitSignal(SignalName.GameOver, (int)pieceType);
+		return pieceType;
 	}
 
 	//Logic to make sure piece can move there
