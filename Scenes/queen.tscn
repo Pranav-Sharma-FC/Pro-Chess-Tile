@@ -111,7 +111,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Queen" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Queen" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["chess_piece"]]
 script = ExtResource("1_gs1eq")
 Movements = [ExtResource("2_hkud0"), ExtResource("3_eiug3"), ExtResource("4_s6eqf"), ExtResource("5_su070"), ExtResource("6_72g7q"), ExtResource("7_exutl"), ExtResource("8_wkjcw"), ExtResource("9_rjid4")]
 sprite = NodePath("AnimatedSprite2D2")

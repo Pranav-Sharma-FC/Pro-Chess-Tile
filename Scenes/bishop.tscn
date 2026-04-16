@@ -107,7 +107,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bishop" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Bishop" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["chess_piece"]]
 script = ExtResource("1_boa6r")
 Movements = [ExtResource("2_mfrrc"), ExtResource("3_skn0d"), ExtResource("4_qg1m5"), ExtResource("5_5s4mj")]
 sprite = NodePath("AnimatedSprite2D2")

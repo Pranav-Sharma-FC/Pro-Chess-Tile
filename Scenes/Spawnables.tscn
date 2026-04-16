@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://vcer14n3ey3t"]
+[gd_scene load_steps=3 format=3 uid="uid://ceaj5lpimqfhy"]
 
 [ext_resource type="Script" uid="uid://b3oxta04y10sg" path="res://Scripts/Spawnables.cs" id="1_wohfk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0jq40"]
 
-[node name="Spawnables" type="CharacterBody2D"]
+[node name="Spawnables" type="CharacterBody2D" groups=["chess_piece"]]
 script = ExtResource("1_wohfk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
