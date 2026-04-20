@@ -26,10 +26,12 @@ public abstract partial class Piece : CharacterBody2D
 	public void blackPiece()
 	{
 		int spriteNum = sprite.Frame;
+		int health = ProgressBar; 
 		pieceType = PieceType.Black;
 		sprite.Play("BlackPieces");
 		sprite.Frame = spriteNum;
 	}
+	
 	public PieceType returnType()
 	{
 		return pieceType;
@@ -59,6 +61,8 @@ public abstract partial class Piece : CharacterBody2D
 		
 		return new Vector2I(xNext, yNext);
 	}
+
+//abstract class, spawnables 
 
 	protected abstract void SetPoints();
 	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);

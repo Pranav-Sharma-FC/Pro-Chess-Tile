@@ -18,6 +18,8 @@ public partial class Rook : Piece
 		
 	}
 
+// Signal, connect signal to every single tile, 
+
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");

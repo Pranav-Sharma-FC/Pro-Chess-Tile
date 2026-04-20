@@ -101,6 +101,7 @@ public partial class Chessboard : Node2D
 		}
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
+//here is where you need you signal, stop old spawnables, start new, check turn 
 			if(pieceType == Piece.PieceType.White)
 				turn = Turn.SelectBlack;
 			else
@@ -134,6 +135,7 @@ public partial class Chessboard : Node2D
 				tile.block(grid);
 				for (int i = 0; i < 8; i++)
 				{
+
 
 					for(int j = 0; j < 8; j++)
 					{	
