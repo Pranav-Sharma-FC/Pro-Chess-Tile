@@ -104,6 +104,7 @@ public partial class Chessboard : Node2D
 			else
 				turn = Turn.SelectWhite;
 			SetPieces(tile, _selectedTile.getPieceScene());
+			tile.SetPoints(_selectedTile.GivePiece());
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
 			clearCircles();

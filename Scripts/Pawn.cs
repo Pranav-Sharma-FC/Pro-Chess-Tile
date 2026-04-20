@@ -1,19 +1,24 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public partial class Pawn : Piece
 {
-	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
-	}
-	protected override void SetPoints()
-	{
-		
+		return true;
 	}
 
-	public override void GivePiece()
+	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
-		
+		Health = Resources["Health"];
+	}
+
+	public override Godot.Collections.Dictionary<string, int> GivePiece()
+	{
+		return new Dictionary<string, int>{
+			{"Health", Health}
+		};
 	}
 
 	//Logic to make sure piece can move there

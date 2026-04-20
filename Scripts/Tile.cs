@@ -90,5 +90,15 @@ public partial class Tile : Node2D
 		}
 	}
 	
+	public void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
+	{
+		selectedPiece.SetPoints(Resources);
+	}
+
+	public Godot.Collections.Dictionary<string, int> GivePiece()
+	{
+		return selectedPiece.GivePiece();
+	}
+	
 	
 }

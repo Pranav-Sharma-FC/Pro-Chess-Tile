@@ -125,5 +125,4 @@ position = Vector2(-1, 0)
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_s6eqf")
 animation = &"Pieces"
-frame = 4
 speed_scale = 0.0

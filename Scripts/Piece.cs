@@ -13,6 +13,10 @@ public abstract partial class Piece : CharacterBody2D
 	[Export] Texture2D blackRes;
 	[Export] AnimatedSprite2D sprite;
 	
+	//Spawnables
+	[Export] protected int Health;
+	[Export] protected int Damage;
+	
 	public enum PieceType
 	{
 		Nothing,
@@ -26,7 +30,6 @@ public abstract partial class Piece : CharacterBody2D
 	public void blackPiece()
 	{
 		int spriteNum = sprite.Frame;
-		int health = ProgressBar; 
 		pieceType = PieceType.Black;
 		sprite.Play("BlackPieces");
 		sprite.Frame = spriteNum;
@@ -62,11 +65,17 @@ public abstract partial class Piece : CharacterBody2D
 		return new Vector2I(xNext, yNext);
 	}
 
+	public void damagePiece(int damage)
+	{
+		Health -= damage;
+	}
+	
+
 //abstract class, spawnables 
 
-	protected abstract void SetPoints();
-	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
+	public abstract void SetPoints(Godot.Collections.Dictionary<string, int> Resources);
+	public abstract bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
-	public abstract void GivePiece();
+	public abstract Godot.Collections.Dictionary<string, int> GivePiece();
 	
 }
