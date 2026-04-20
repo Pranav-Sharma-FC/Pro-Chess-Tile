@@ -18,6 +18,15 @@ public partial class King : Piece
 			{"Health", Health}
 		};
 	}
+	
+	public bool canCapture()
+	{
+		return true;
+	}
+	public PieceType capturedKing()
+	{
+		return pieceType;
+	}
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
