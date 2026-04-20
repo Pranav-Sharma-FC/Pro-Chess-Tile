@@ -4,8 +4,18 @@ namespace UIProject.Scripts;
 
 public partial class King : Piece
 {
+	public override void _Ready()
+	{
+		
+	}
+
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
+	}
+
+	public bool canCapture()
+	{
+		return true;
 	}
 	protected override void SetPoints()
 	{
@@ -15,6 +25,11 @@ public partial class King : Piece
 	public override void GivePiece()
 	{
 		
+	}
+
+	public PieceType capturedKing()
+	{
+		return pieceType;
 	}
 
 	//Logic to make sure piece can move there

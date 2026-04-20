@@ -1,8 +1,12 @@
 using Godot;
 using System;
+using UIProject.Scripts;
 
 public partial class Tile : Node2D
 {
+	[Signal]
+	public delegate void GameOverEventHandler(int pieceType);
+
 	[Export] private Vector2I position;
 	[Export] private Piece selectedPiece;
 	[Export] private PackedScene pieceScene;
@@ -23,13 +27,14 @@ public partial class Tile : Node2D
 		{
 			ClearPiece();
 			pieceScene = pScene;
-			Node fry = pieceScene.Instantiate();
-			AddChild(fry);
-			selectedPiece = fry as Piece;
+			Piece fry = pieceScene.Instantiate<Piece>();
+			selectedPiece = fry;
 			if(isBlack)
 			{
 				selectedPiece.blackPiece();
 			}
+			AddChild(fry);
+			
 		}
 	}
 
@@ -48,10 +53,17 @@ public partial class Tile : Node2D
 		}
 	}
 	
+	
+	
 	public void ClearPiece()
 	{
 		if(selectedPiece is not null)
 		{
+			if (selectedPiece is King king)
+			{
+				GD.Print("Shaurya");
+				EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
+			}
 			selectedPiece.QueueFree();
 			selectedPiece = null;
 		}
@@ -67,14 +79,22 @@ public partial class Tile : Node2D
 
 	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
+		Piece.PieceType current = getSelectedPiece();
 		if (selectedPiece is null)
 		{
 			return true;
 		}
+		else if (selectedPiece is King king)
+		{
+			if (king.canCapture() && pieceType != current)
+				return true; 
+			else
+				return false; 
+			
+		}
 		else
 		{
 			//GD.Print("ples");
-			Piece.PieceType current = getSelectedPiece();
 			if (pieceType == Piece.PieceType.Nothing)
 			{
 				return false;

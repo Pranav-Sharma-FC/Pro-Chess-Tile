@@ -6,7 +6,7 @@ namespace UIProject.Scripts;
 
 public partial class Rook : Piece
 {
-	//AI helped me remember Godot.Collectio`ns
+	//AI helped me remember Godot.Collections
 	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
 	protected override void SetPoints()
 	{
