@@ -16,6 +16,10 @@ run/main_scene="uid://0w6b41qrkpnt"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="uid://b7vwhkkimxmsl"
 
+[autoload]
+
+GameManager="*res://Scripts/Chessboard.cs"
+
 [display]
 
 window/size/viewport_width=960

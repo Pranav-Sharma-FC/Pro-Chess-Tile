@@ -368,13 +368,13 @@ pieceScene = ExtResource("8_i02s3")
 position = Vector2i(4, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(4, 8)
-pieceScene = ExtResource("10_oy7aq")
+pieceScene = ExtResource("9_h7iwg")
 
 [node name="Tile61" type="Node2D" parent="Board/Chess Board2"]
 position = Vector2i(5, 8)
 script = ExtResource("4_j8xde")
 position = Vector2i(5, 8)
-pieceScene = ExtResource("9_h7iwg")
+pieceScene = ExtResource("10_oy7aq")
 
 [node name="Tile62" type="Node2D" parent="Board/Chess Board2"]
 position = Vector2i(6, 8)
