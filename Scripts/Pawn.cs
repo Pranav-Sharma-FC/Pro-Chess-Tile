@@ -21,6 +21,16 @@ public partial class Pawn : Piece
 		};
 	}
 
+	public override void SpawnSpawnables(int pieceType)
+	{
+
+	}
+
+	public override void setGrid(Tile[,] grid)
+	{
+		gridPiece = grid;
+	}
+
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{

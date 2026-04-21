@@ -13,6 +13,8 @@ public partial class Chessboard : Node2D
 	private bool _isSelected;
 	private Tile[,] grid;
 	
+	[Signal]
+	public delegate void SpawnSwitchEventHandler(int pieceType);
 	
 	//[Export] private PackedScene pScene;
 	[Export] private PackedScene circleScene;
@@ -52,6 +54,8 @@ public partial class Chessboard : Node2D
 			if (child is Tile tile)
 			{ 
 				tile.GameOver += EndGame;
+				this.SpawnSwitch += tile.switchSpawnables;
+				
 				if(tile.getPosition().Y >= 3)
 				{
 					tile.setPiece(tile.getPieceScene(), true);
@@ -60,6 +64,7 @@ public partial class Chessboard : Node2D
 				{
 					tile.setPiece(tile.getPieceScene());
 				}
+				tile.gridPiece(grid);
 			}
 		}
 		
@@ -102,10 +107,16 @@ public partial class Chessboard : Node2D
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
 //here is where you need you signal, stop old spawnables, start new, check turn 
-			if(pieceType == Piece.PieceType.White)
+			if (pieceType == Piece.PieceType.White)
+			{
 				turn = Turn.SelectBlack;
+				EmitSignal(SignalName.SpawnSwitch, true);
+			}
 			else
+			{
 				turn = Turn.SelectWhite;
+				EmitSignal(SignalName.SpawnSwitch, false);
+			}
 			SetPieces(tile, _selectedTile.getPieceScene());
 			tile.SetPoints(_selectedTile.GivePiece());
 			_selectedTile.ClearPiece();

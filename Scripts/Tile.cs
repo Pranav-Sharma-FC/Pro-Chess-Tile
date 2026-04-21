@@ -21,6 +21,12 @@ public partial class Tile : Node2D
 		return pieceScene;
 	}
 
+	public void switchSpawnables(int pieceType)
+	{
+		if(selectedPiece is not null)
+			selectedPiece.SpawnSpawnables(pieceType);
+	}
+
 	public void setPiece(PackedScene pScene, bool isBlack = false)
 	{
 		if(pScene is not null)
@@ -119,6 +125,16 @@ public partial class Tile : Node2D
 	{
 		return selectedPiece.GivePiece();
 	}
-	
+
+	public void DamagePiece(int damage)
+	{
+		selectedPiece.damagePiece(damage);
+	}
+
+	public void gridPiece(Tile[,] grid)
+	{
+		if(selectedPiece is not null)
+			selectedPiece.setGri(grid);
+	}
 	
 }

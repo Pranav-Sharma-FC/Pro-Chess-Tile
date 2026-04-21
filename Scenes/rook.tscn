@@ -108,10 +108,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_wwc4d")
 Movements = Array[ExtResource("2_5ob0w")]([ExtResource("3_qgw01"), ExtResource("4_yoxvb"), ExtResource("5_losgq"), ExtResource("6_ce33x")])
 sprite = NodePath("AnimatedSprite2D")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -120,7 +122,7 @@ shape = SubResource("RectangleShape2D_eu7ni")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_byrkh")
-animation = &"BlackPieces"
+animation = &"Pieces"
 frame = 2
 speed_scale = 0.0
 
@@ -129,3 +131,7 @@ offset_left = -56.0
 offset_top = 54.0
 offset_right = 57.0
 offset_bottom = 95.0
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5

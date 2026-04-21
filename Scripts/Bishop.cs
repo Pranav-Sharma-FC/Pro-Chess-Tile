@@ -62,6 +62,24 @@ public partial class Bishop : Piece
 			{"Health", Health}
 		};
 	}
+	public override void setGrid(Tile[,] grid)
+	{
+		gridPiece = grid;
+	}
+	
+	public override void SpawnSpawnables(int pType)
+	{
+		if (this.pieceType == (PieceType)pType)
+		{
+			
+		}
+
+		else
+		{
+			
+		}
+	}
+
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{

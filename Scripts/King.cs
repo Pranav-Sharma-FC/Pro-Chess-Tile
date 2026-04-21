@@ -7,6 +7,10 @@ public partial class King : Piece
 	{
 		return true;
 	}
+	public override void setGrid(Tile[,] grid)
+	{
+		gridPiece = grid;
+	}
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];
@@ -17,8 +21,10 @@ public partial class King : Piece
 		return new Dictionary<string, int>{
 			{"Health", Health}
 		};
+	}	
+	public override void SpawnSpawnables(int pieceType)
+	{
 	}
-	
 	public bool canCapture()
 	{
 		return true;
@@ -40,7 +46,7 @@ public partial class King : Piece
 			moveFlag = false;
 		}
 		
-		GD.Print(moveFlag);
+		GD.Print("Lomg"+ moveFlag);
 		return moveFlag;
 	}
 }

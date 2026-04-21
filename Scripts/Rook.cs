@@ -20,6 +20,47 @@ public partial class Rook : Piece
 		};
 	}
 
+	public override void _Process(double delta)
+	{
+		bar.Value = Health;
+		if (canSpawn && timerDone)
+		{
+			timerDone = false;
+			timer.Start();
+			
+			foreach (MovementResource moveResource in Movements)
+			{
+				if (moveResource.closest != new Vector2I(-1, -1))
+				{
+					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
+					if (gridPiece[moveResource.closest.X, moveResource.closest.Y].getSelectedPiece() != pieceType)
+					{
+						cur.DamagePiece(Damage);
+					}
+				}
+			}
+		}
+	}
+
+	public void TimerDone()
+	{
+		timerDone = true;
+	}
+
+	public override void SpawnSpawnables(int pType)
+	{
+		canSpawn = (this.pieceType == (PieceType)pType);
+		if (canSpawn)
+			timer.Start();
+		else
+			timer.Stop();
+	}
+	public override void setGrid(Tile[,] grid)
+	{
+		gridPiece = grid;
+	}
+
+
 // Signal, connect signal to every single tile, 
 
 	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
