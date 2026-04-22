@@ -114,6 +114,7 @@ Movements = Array[ExtResource("2_5ob0w")]([ExtResource("3_qgw01"), ExtResource("
 sprite = NodePath("AnimatedSprite2D")
 bar = NodePath("ProgressBar")
 timer = NodePath("Timer")
+Damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -135,3 +136,5 @@ value = 100.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]

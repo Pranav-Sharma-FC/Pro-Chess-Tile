@@ -10,6 +10,7 @@ public partial class Tile : Node2D
 	[Export] private Vector2I position;
 	[Export] private Piece selectedPiece;
 	[Export] private PackedScene pieceScene;
+	private Tile[,] gridTile;
 
 	public Vector2I getPosition()
 	{
@@ -39,6 +40,7 @@ public partial class Tile : Node2D
 			{
 				selectedPiece.blackPiece();
 			}
+			selectedPiece.setGri(gridTile, getPosition());
 			AddChild(fry);
 			
 		}
@@ -133,8 +135,11 @@ public partial class Tile : Node2D
 
 	public void gridPiece(Tile[,] grid)
 	{
-		if(selectedPiece is not null)
-			selectedPiece.setGri(grid);
+		if (selectedPiece is not null)
+		{
+			selectedPiece.setGri(grid, getPosition());
+			gridTile = grid;
+		}
 	}
 	
 }

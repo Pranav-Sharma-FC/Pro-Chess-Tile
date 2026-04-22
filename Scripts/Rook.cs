@@ -16,25 +16,31 @@ public partial class Rook : Piece
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
 		return new Dictionary<string, int>{
-			{"Health", Health}
+			{"Health", Health},
 		};
 	}
 
 	public override void _Process(double delta)
 	{
 		bar.Value = Health;
+		
 		if (canSpawn && timerDone)
 		{
+			GD.Print(Health);
+			//GD.Print("Spawn Done");
 			timerDone = false;
 			timer.Start();
-			
+			PieceBlocking(CrrentPosition, gridPiece);
 			foreach (MovementResource moveResource in Movements)
 			{
-				if (moveResource.closest != new Vector2I(-1, -1))
+				Vector2I temp = new Vector2I(-1, -1);
+				if (moveResource.closest != temp)
 				{
 					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
+					GD.Print(moveResource.closest.X, moveResource.closest.Y, pieceType, gridPiece[moveResource.closest.X, moveResource.closest.Y].getSelectedPiece());
 					if (gridPiece[moveResource.closest.X, moveResource.closest.Y].getSelectedPiece() != pieceType)
 					{
+						GD.Print("Does This work?");
 						cur.DamagePiece(Damage);
 					}
 				}
@@ -50,6 +56,7 @@ public partial class Rook : Piece
 	public override void SpawnSpawnables(int pType)
 	{
 		canSpawn = (this.pieceType == (PieceType)pType);
+		GD.Print("Is Connected" + canSpawn);
 		if (canSpawn)
 			timer.Start();
 		else
@@ -132,8 +139,8 @@ public partial class Rook : Piece
 			}
 			int toNext = Math.Abs((CurrentPosition.X-NextPosition.X)+(CurrentPosition.Y-NextPosition.Y));
 			int toClosest = Math.Abs((CurrentPosition.X-closestCurrent.X)+(CurrentPosition.Y-closestCurrent.Y));
-			GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
-			GD.Print("Next: " + toNext + " Closest: " + toClosest);
+			//GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
+			//GD.Print("Next: " + toNext + " Closest: " + toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
 			else if (toNext <= toClosest)

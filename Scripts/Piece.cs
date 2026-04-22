@@ -76,9 +76,10 @@ public abstract partial class Piece : CharacterBody2D
 		Health -= damage;
 	}
 
-	public void setGri(Tile[,] grid)
+	public void setGri(Tile[,] grid, Vector2I CurrentPosition)
 	{
 		gridPiece = grid;
+		CrrentPosition =  CurrentPosition;
 	}
 	
 

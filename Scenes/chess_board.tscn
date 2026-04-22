@@ -94,7 +94,6 @@ pieceScene = ExtResource("4_wh2or")
 position = Vector2i(1, 2)
 script = ExtResource("4_j8xde")
 position = Vector2i(1, 2)
-pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile10" type="Node2D" parent="Board/Chess Board2"]
 position = Vector2i(2, 2)
@@ -302,7 +301,6 @@ position = Vector2i(8, 6)
 position = Vector2i(1, 7)
 script = ExtResource("4_j8xde")
 position = Vector2i(1, 7)
-pieceScene = ExtResource("11_f7s2e")
 
 [node name="Tile50" type="Node2D" parent="Board/Chess Board2"]
 position = Vector2i(2, 7)

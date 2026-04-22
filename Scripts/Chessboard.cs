@@ -110,12 +110,12 @@ public partial class Chessboard : Node2D
 			if (pieceType == Piece.PieceType.White)
 			{
 				turn = Turn.SelectBlack;
-				EmitSignal(SignalName.SpawnSwitch, true);
+				EmitSignal(SignalName.SpawnSwitch, (int)Piece.PieceType.White);
 			}
 			else
 			{
 				turn = Turn.SelectWhite;
-				EmitSignal(SignalName.SpawnSwitch, false);
+				EmitSignal(SignalName.SpawnSwitch, (int)Piece.PieceType.Black);
 			}
 			SetPieces(tile, _selectedTile.getPieceScene());
 			tile.SetPoints(_selectedTile.GivePiece());
