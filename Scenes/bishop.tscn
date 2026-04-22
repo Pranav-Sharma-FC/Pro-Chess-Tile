@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://coubeqqjf0uj4"]
+[gd_scene load_steps=23 format=3 uid="uid://coubeqqjf0uj4"]
 
 [ext_resource type="Script" uid="uid://bw6mdxs0ffg35" path="res://Scripts/Bishop.cs" id="1_boa6r"]
 [ext_resource type="Resource" uid="uid://cujt7xom4j4y8" path="res://Assets/Resources/NorthEast.tres" id="2_mfrrc"]
+[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_qg1m5"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_uqrk8"]
 [ext_resource type="Resource" uid="uid://cg7eonhum8wb8" path="res://Assets/Resources/NorthWest.tres" id="3_skn0d"]
 [ext_resource type="Resource" uid="uid://ch4ladysdewor" path="res://Assets/Resources/SouthEast.tres" id="4_qg1m5"]
@@ -109,7 +110,7 @@ animations = [{
 
 [node name="Bishop" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["chess_piece"]]
 script = ExtResource("1_boa6r")
-Movements = [ExtResource("2_mfrrc"), ExtResource("3_skn0d"), ExtResource("4_qg1m5"), ExtResource("5_5s4mj")]
+Movements = Array[ExtResource("2_qg1m5")]([ExtResource("2_mfrrc"), ExtResource("3_skn0d"), ExtResource("4_qg1m5"), ExtResource("5_5s4mj")])
 sprite = NodePath("AnimatedSprite2D2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

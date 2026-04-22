@@ -10,6 +10,8 @@ public partial class Chessboard : Node2D
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
+	private PackedScene coinScene = GD.Load<PackedScene>("res://Scenes/coin.tscn");
+	private Node2D spawnables;
 	
 	
 	//[Export] private PackedScene pScene;
@@ -33,6 +35,9 @@ public partial class Chessboard : Node2D
 		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
+		spawnables = GetNode<Node2D>("Spawnables");
+		SpawnCoin(new Vector2(300, 300));
+		
 		int i = 0;
 		foreach (Node2D child in GetChildren())
 		{
@@ -180,6 +185,13 @@ public partial class Chessboard : Node2D
 	}
 		//GD.Print(grid[x, y]);
 		return grid[x, y];
+	}
+	
+	private void SpawnCoin(Vector2 position)
+	{
+		var coin = coinScene.Instantiate<Node2D>();
+		coin.Position = position;
+		spawnables.AddChild(coin);
 	}
 
 	/*private Vector2 Cordinates()
