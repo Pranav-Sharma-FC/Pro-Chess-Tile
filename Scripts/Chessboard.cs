@@ -35,7 +35,7 @@ public partial class Chessboard : Node2D
 		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
-		spawnables = GetNode<Node2D>(".. /Spawnables");
+		spawnables = GetNode<Node2D>("../Spawnables");
 		SpawnCoin(new Vector2(300, 300));
 		
 		int i = 0;

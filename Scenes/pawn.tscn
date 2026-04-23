@@ -103,9 +103,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["chess_piece"]]
+[node name="Pawn" type="CharacterBody2D" groups=["chess_piece"]]
 script = ExtResource("1_eu7ni")
-sprite = NodePath("AnimatedSprite2D2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7dq70yrj1k8v"]
+[gd_scene load_steps=18 format=3 uid="uid://1br6lccoei18"]
 
 [ext_resource type="Script" uid="uid://wvc140pnb5jj" path="res://Scripts/Knight.cs" id="1_b66j6"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_43hye"]

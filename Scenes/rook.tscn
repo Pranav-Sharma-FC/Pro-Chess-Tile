@@ -1,7 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://devdobcp8uugj"]
+[gd_scene load_steps=22 format=3 uid="uid://bllpohahp825p"]
 
 [ext_resource type="Script" uid="uid://djk5q7yab4fxw" path="res://Scripts/Rook.cs" id="1_wwc4d"]
-[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_5ob0w"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_j1kqh"]
 [ext_resource type="Resource" uid="uid://jm6ybl6l1vsv" path="res://Assets/Resources/East.tres" id="3_qgw01"]
 [ext_resource type="Resource" uid="uid://cd3r6dd7m2h73" path="res://Assets/Resources/North.tres" id="4_yoxvb"]
@@ -110,7 +109,7 @@ animations = [{
 
 [node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["chess_piece"]]
 script = ExtResource("1_wwc4d")
-Movements = Array[ExtResource("2_5ob0w")]([ExtResource("3_qgw01"), ExtResource("4_yoxvb"), ExtResource("5_losgq"), ExtResource("6_ce33x")])
+Movements = [ExtResource("3_qgw01"), ExtResource("4_yoxvb"), ExtResource("5_losgq"), ExtResource("6_ce33x")]
 sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
