@@ -68,7 +68,7 @@ public partial class Queen : Piece
 		};
 	}
 	
-	public override void SpawnSpawnables(int pType)
+	public override void SpawnSpawnables(int pType, Vector2I curPos)
 	{
 		if (this.pieceType == (PieceType)pType)
 		{

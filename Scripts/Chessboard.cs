@@ -107,6 +107,18 @@ public partial class Chessboard : Node2D
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
 //here is where you need you signal, stop old spawnables, start new, check turn 
+			SetPieces(tile, _selectedTile.getPieceScene());
+			tile.SetPoints(_selectedTile.GivePiece());
+			_selectedTile.ClearPiece();
+			_selectedTile = null;
+			clearCircles();
+			foreach (Node2D child in GetChildren())
+			{
+				if (child is Tile tiles)
+				{
+					tiles.gridPiece(grid); 
+				}
+			}
 			if (pieceType == Piece.PieceType.White)
 			{
 				turn = Turn.SelectBlack;
@@ -117,11 +129,6 @@ public partial class Chessboard : Node2D
 				turn = Turn.SelectWhite;
 				EmitSignal(SignalName.SpawnSwitch, (int)Piece.PieceType.Black);
 			}
-			SetPieces(tile, _selectedTile.getPieceScene());
-			tile.SetPoints(_selectedTile.GivePiece());
-			_selectedTile.ClearPiece();
-			_selectedTile = null;
-			clearCircles();
 		}
 		GD.Print(turn);
 	}
@@ -142,13 +149,13 @@ public partial class Chessboard : Node2D
 		bool hasMove = false;
 		if(!tile.hasPieceNot())
 		{
+			GD.Print("King Please");
 			if(pieceType==tile.getSelectedPiece())
 			{
+				GD.Print("King Please");
 				tile.block(grid);
 				for (int i = 0; i < 8; i++)
 				{
-
-
 					for(int j = 0; j < 8; j++)
 					{	
 						Tile e = GetTile(i, j);

@@ -25,14 +25,14 @@ public partial class Tile : Node2D
 	public void switchSpawnables(int pieceType)
 	{
 		if(selectedPiece is not null)
-			selectedPiece.SpawnSpawnables(pieceType);
+			selectedPiece.SpawnSpawnables(pieceType, getPosition());
 	}
 
 	public void setPiece(PackedScene pScene, bool isBlack = false)
 	{
 		if(pScene is not null)
 		{
-			ClearPiece();
+			ClearPiece(true);
 			pieceScene = pScene;
 			Piece fry = pieceScene.Instantiate<Piece>();
 			selectedPiece = fry;
@@ -63,11 +63,11 @@ public partial class Tile : Node2D
 	
 	
 	
-	public void ClearPiece()
+	public void ClearPiece(bool isClear = false)
 	{
 		if(selectedPiece is not null)
 		{
-			if (selectedPiece is King king)
+			if (selectedPiece is King king && isClear)
 			{
 				GD.Print("Shaurya");
 				EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
@@ -94,7 +94,9 @@ public partial class Tile : Node2D
 		}
 		else if (selectedPiece is King king)
 		{
-			if (king.canCapture() && pieceType != current)
+			if(pieceType == Piece.PieceType.Nothing)
+				return false;
+			else if (king.canCapture() && pieceType != current)
 				return true; 
 			else
 				return false; 

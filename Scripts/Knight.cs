@@ -20,7 +20,7 @@ public partial class Knight : Piece
 		};
 	}
 	
-	public override void SpawnSpawnables(int pieceType)
+	public override void SpawnSpawnables(int pieceType, Vector2I curPos)
 	{
 	}
 	public override void setGrid(Tile[,] grid)

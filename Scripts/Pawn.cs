@@ -21,7 +21,7 @@ public partial class Pawn : Piece
 		};
 	}
 
-	public override void SpawnSpawnables(int pieceType)
+	public override void SpawnSpawnables(int pieceType, Vector2I curPos)
 	{
 
 	}
@@ -46,6 +46,7 @@ public partial class Pawn : Piece
 				moveFlag = true;
 			}
 		}
+		GD.Print("Lomg");
 		return moveFlag;
 	}
 }

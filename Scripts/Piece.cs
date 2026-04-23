@@ -89,7 +89,7 @@ public abstract partial class Piece : CharacterBody2D
 	public abstract bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
 	public abstract Godot.Collections.Dictionary<string, int> GivePiece();
-	public abstract void SpawnSpawnables(int pieceType);
+	public abstract void SpawnSpawnables(int pieceType, Vector2I curPos);
 	public abstract void setGrid(Tile[,] grid);
 
 }

@@ -67,7 +67,7 @@ public partial class Bishop : Piece
 		gridPiece = grid;
 	}
 	
-	public override void SpawnSpawnables(int pType)
+	public override void SpawnSpawnables(int pType, Vector2I curPos)
 	{
 		if (this.pieceType == (PieceType)pType)
 		{

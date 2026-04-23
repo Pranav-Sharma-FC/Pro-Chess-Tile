@@ -22,7 +22,7 @@ public partial class King : Piece
 			{"Health", Health}
 		};
 	}	
-	public override void SpawnSpawnables(int pieceType)
+	public override void SpawnSpawnables(int pieceType, Vector2I curPos)
 	{
 	}
 	public bool canCapture()
