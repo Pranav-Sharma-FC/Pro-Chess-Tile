@@ -1,33 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://coubeqqjf0uj4"]
+[gd_scene load_steps=20 format=3 uid="uid://coubeqqjf0uj4"]
 
 [ext_resource type="Script" uid="uid://bw6mdxs0ffg35" path="res://Scripts/Bishop.cs" id="1_boa6r"]
-[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_qg1m5"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_uqrk8"]
 [ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="7_skn0d"]
-
-[sub_resource type="Resource" id="Resource_djaqy"]
-script = ExtResource("2_qg1m5")
-xmov = 1
-ymov = 1
-closest = Vector2i(0, 0)
-
-[sub_resource type="Resource" id="Resource_aoygi"]
-script = ExtResource("2_qg1m5")
-xmov = -1
-ymov = 1
-closest = Vector2i(0, 0)
-
-[sub_resource type="Resource" id="Resource_mfrrc"]
-script = ExtResource("2_qg1m5")
-xmov = 1
-ymov = -1
-closest = Vector2i(0, 0)
-
-[sub_resource type="Resource" id="Resource_skn0d"]
-script = ExtResource("2_qg1m5")
-xmov = -1
-ymov = -1
-closest = Vector2i(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
 
@@ -128,10 +103,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bishop" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djaqy"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoygi"]
+bg_color = Color(0.941176, 0, 0, 0.239216)
+
+[node name="Bishop" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_boa6r")
-Movements = Array[ExtResource("2_qg1m5")]([SubResource("Resource_djaqy"), SubResource("Resource_aoygi"), SubResource("Resource_mfrrc"), SubResource("Resource_skn0d")])
 sprite = NodePath("AnimatedSprite2D2")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+Damage = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -143,3 +126,16 @@ sprite_frames = SubResource("SpriteFrames_qg1m5")
 animation = &"Pieces"
 frame = 3
 speed_scale = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 28.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_djaqy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aoygi")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]

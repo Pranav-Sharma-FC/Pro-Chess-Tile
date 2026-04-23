@@ -1,33 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://devdobcp8uugj"]
+[gd_scene load_steps=20 format=3 uid="uid://devdobcp8uugj"]
 
 [ext_resource type="Script" uid="uid://djk5q7yab4fxw" path="res://Scripts/Rook.cs" id="1_wwc4d"]
-[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_5ob0w"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_j1kqh"]
 [ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="8_yoxvb"]
-
-[sub_resource type="Resource" id="Resource_5ob0w"]
-script = ExtResource("2_5ob0w")
-xmov = 1
-ymov = 0
-closest = Vector2i(0, 0)
-
-[sub_resource type="Resource" id="Resource_rdgg5"]
-script = ExtResource("2_5ob0w")
-xmov = 0
-ymov = 1
-closest = Vector2i(0, 0)
-
-[sub_resource type="Resource" id="Resource_qjr7j"]
-script = ExtResource("2_5ob0w")
-xmov = 0
-ymov = -1
-closest = Vector2i(0, 0)
-
-[sub_resource type="Resource" id="Resource_qgw01"]
-script = ExtResource("2_5ob0w")
-xmov = -1
-ymov = 0
-closest = Vector2i(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
 
@@ -136,11 +111,10 @@ bg_color = Color(0.941176, 0, 0, 0.239216)
 
 [node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_wwc4d")
-Movements = Array[ExtResource("2_5ob0w")]([SubResource("Resource_5ob0w"), SubResource("Resource_rdgg5"), SubResource("Resource_qjr7j"), SubResource("Resource_qgw01")])
 sprite = NodePath("AnimatedSprite2D")
 bar = NodePath("ProgressBar")
 timer = NodePath("Timer")
-Damage = 1
+Damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)

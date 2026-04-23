@@ -15,13 +15,13 @@ public partial class Rook : Piece
 		north.setValues(0, 1);
 		Movements.Add(north);
 		MovementResource south = new MovementResource();
-		north.setValues(0, -1);
+		south.setValues(0, -1);
 		Movements.Add(south);
 		MovementResource east = new MovementResource();
-		north.setValues(1, 0);
+		east.setValues(1, 0);
 		Movements.Add(east);
 		MovementResource west = new MovementResource();
-		north.setValues(-1, 0);
+		west.setValues(-1, 0);
 		Movements.Add(west);	
 	}
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
