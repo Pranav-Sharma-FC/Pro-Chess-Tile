@@ -1,14 +1,13 @@
 using Godot;
-using System;
 using Godot.Collections;
+using System;
 
-public partial class Pawn : Piece
+public partial class Knight : Piece
 {
 	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		return true;
 	}
-
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];
@@ -20,12 +19,10 @@ public partial class Pawn : Piece
 			{"Health", Health}
 		};
 	}
-
+	
 	public override void SpawnSpawnables(int pieceType, Vector2I curPos)
 	{
-
 	}
-
 	public override void setGrid(Tile[,] grid)
 	{
 		gridPiece = grid;
@@ -34,19 +31,15 @@ public partial class Pawn : Piece
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
-		bool moveFlag = false;
-		if(CurrentPosition.X == NextPosition.X)
+		bool moveFlag = true;
+		double DISKNIGHT = Math.Sqrt(5);
+		double xmov = NextPosition.X - CurrentPosition.X;
+		double ymov = NextPosition.Y - CurrentPosition.Y;
+		if(!(Math.Sqrt((ymov*ymov)+(xmov*xmov))==DISKNIGHT))
 		{
-			if (pieceType == PieceType.White && (CurrentPosition.Y < NextPosition.Y) && (NextPosition.Y <= (CurrentPosition.Y + 1)))
-			{
-				moveFlag = true;
-			}
-			else if(pieceType == PieceType.Black && (CurrentPosition.Y > NextPosition.Y) && (NextPosition.Y >= (CurrentPosition.Y - 1)))
-			{
-				moveFlag = true;
-			}
+			moveFlag = false;
 		}
-		GD.Print("Lomg");
+		GD.Print(moveFlag);
 		return moveFlag;
 	}
 }

@@ -1,0 +1,176 @@
+using System;
+using Godot;
+using Godot.Collections;
+
+namespace UIProject.Scripts;
+
+public partial class Rook : Piece
+{
+	
+	//AI helped me remember Godot.Collections
+	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
+	public override void _Ready()
+	{
+		MovementResource north = new MovementResource();
+		north.setValues(0, 1);
+		Movements.Add(north);
+		MovementResource south = new MovementResource();
+		south.setValues(0, -1);
+		Movements.Add(south);
+		MovementResource east = new MovementResource();
+		east.setValues(1, 0);
+		Movements.Add(east);
+		MovementResource west = new MovementResource();
+		west.setValues(-1, 0);
+		Movements.Add(west);	
+	}
+	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
+	{
+		Health = Resources["Health"];
+	}
+
+	public override Godot.Collections.Dictionary<string, int> GivePiece()
+	{
+		return new Dictionary<string, int>{
+			{"Health", Health},
+		};
+	}
+
+	public override void _Process(double delta)
+	{
+		bar.Value = Health;
+		if (canSpawn && timerDone)
+		{
+			GD.Print(Health);
+			//GD.Print("Spawn Done");
+			timerDone = false;
+			timer.Start();
+			foreach (MovementResource moveResource in Movements)
+			{
+				Vector2I temp = new Vector2I(-1, -1);
+				if (moveResource.closest != temp)
+				{
+					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
+					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
+					if (cur.getSelectedPiece() != pieceType)
+					{
+						GD.Print("Does This work?");
+						cur.DamagePiece(Damage);
+					}
+				}
+			}
+		}
+	}
+
+	public void TimerDone()
+	{
+		timerDone = true;
+	}
+
+	public override void SpawnSpawnables(int pType, Vector2I curPos)
+	{
+		CrrentPosition = curPos;
+		canSpawn = (this.pieceType == (PieceType)pType);
+		PieceBlocking(CrrentPosition, gridPiece);
+		GD.Print("Is Connected" + canSpawn + curPos);
+		//GD.Print(gridPiece[0,0].getSelectedPiece());
+		if (canSpawn)
+			timer.Start();
+		else
+			timer.Stop();
+		foreach (MovementResource moveResource in Movements)
+		{
+			GD.Print(moveResource.closest);
+		}
+	}
+
+	public override void setGrid(Tile[,] grid)
+	{
+		gridPiece = grid;
+	}
+
+
+// Signal, connect signal to every single tile, 
+
+	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	{
+		//GD.Print("u");
+		CurrentPosition -= new Vector2I(1, 1);
+		foreach (MovementResource moveResource in Movements)
+		{
+			//GD.Print(moveResource.xmov + " : " + moveResource.ymov);
+			moveResource.closest = new Vector2I(-1, -1);
+			Vector2I newPosition = new Vector2I(CurrentPosition.X, CurrentPosition.Y);
+			//GD.Print("NewPosition: " + newPosition);
+			bool flag = true;
+			newPosition += new Vector2I(moveResource.xmov, moveResource.ymov);
+			while(flag)
+			{
+				if (newPosition.X is >= 0 and < 8 && newPosition.Y is >= 0 and < 8)
+				{
+					try
+					{
+						Tile tile = tiles[newPosition.X, newPosition.Y];
+						//GD.Print(newPosition + "Has Piece: " + !tile.hasPieceNot());
+						if (!tile.hasPieceNot())
+						{
+							//GD.Print(newPosition + "PositionTile");
+							moveResource.closest = newPosition;
+							flag = false;
+						}
+					}
+					catch (IndexOutOfRangeException)
+					{
+						//GD.Print(newPosition + "Error");
+						flag = false;
+					}
+				}
+				else
+				{
+					flag = false;
+				}
+				newPosition += new Vector2I(moveResource.xmov, moveResource.ymov);
+				
+			}
+		}
+
+		return false;
+	}
+	
+	//Logic to make sure piece can move there
+	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
+	{
+		CurrentPosition -= new Vector2I(1, 1);
+		NextPosition -= new Vector2I(1, 1);
+		bool moveFlag = false;
+		Vector2I closestCurrent = new Vector2I(-1, -1);
+		if (((NextPosition.X == CurrentPosition.X) || (NextPosition.Y == CurrentPosition.Y)))
+		{
+			int ymoved = NextPosition.Y - CurrentPosition.Y;
+			int xmoved = NextPosition.X - CurrentPosition.X;
+			Vector2I movementSlope = FindSlope(xmoved, ymoved);
+			foreach (MovementResource moveResource in Movements)
+			{
+				//GD.Print(moveResource.closest + " : Very Current : " + moveResource.xmov + " : " + moveResource.ymov);
+				if ((moveResource.xmov == movementSlope.X) && (moveResource.ymov == movementSlope.Y))
+				{
+					//GD.Print("Identified");
+					closestCurrent = moveResource.closest;
+					//GD.Print(moveResource.closest);
+				}
+			}
+			int toNext = Math.Abs((CurrentPosition.X-NextPosition.X)+(CurrentPosition.Y-NextPosition.Y));
+			int toClosest = Math.Abs((CurrentPosition.X-closestCurrent.X)+(CurrentPosition.Y-closestCurrent.Y));
+			//GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
+			//GD.Print("Next: " + toNext + " Closest: " + toClosest);
+			if (closestCurrent == new Vector2I(-1, -1)) 
+				moveFlag = true;
+			else if (toNext <= toClosest)
+			{
+				moveFlag = true;
+			}
+		}
+		//GD.Print(moveFlag);
+		return moveFlag;
+	}
+}

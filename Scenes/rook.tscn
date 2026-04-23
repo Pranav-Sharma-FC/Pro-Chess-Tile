@@ -1,60 +1,60 @@
-[gd_scene load_steps=18 format=3 uid="uid://b47oa6e6gf0s2"]
+[gd_scene load_steps=20 format=3 uid="uid://devdobcp8uugj"]
 
-[ext_resource type="Script" uid="uid://1lugnclx6oku" path="res://Scripts/King.cs" id="1_n3uat"]
-[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_36v0m"]
-[ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="3_36v0m"]
+[ext_resource type="Script" uid="uid://djk5q7yab4fxw" path="res://Scripts/Rook.cs" id="1_wwc4d"]
+[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_j1kqh"]
+[ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="8_yoxvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgw01"]
-atlas = ExtResource("2_36v0m")
+atlas = ExtResource("2_j1kqh")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yoxvb"]
-atlas = ExtResource("2_36v0m")
+atlas = ExtResource("2_j1kqh")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_losgq"]
-atlas = ExtResource("2_36v0m")
+atlas = ExtResource("2_j1kqh")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ce33x"]
-atlas = ExtResource("2_36v0m")
+atlas = ExtResource("2_j1kqh")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxdnj"]
-atlas = ExtResource("2_36v0m")
+atlas = ExtResource("2_j1kqh")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jkk6j"]
-atlas = ExtResource("2_36v0m")
+atlas = ExtResource("2_j1kqh")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wtkm"]
-atlas = ExtResource("3_36v0m")
+atlas = ExtResource("8_yoxvb")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yu3ov"]
-atlas = ExtResource("3_36v0m")
+atlas = ExtResource("8_yoxvb")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5t4yi"]
-atlas = ExtResource("3_36v0m")
+atlas = ExtResource("8_yoxvb")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_18jqx"]
-atlas = ExtResource("3_36v0m")
+atlas = ExtResource("8_yoxvb")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j64pt"]
-atlas = ExtResource("3_36v0m")
+atlas = ExtResource("8_yoxvb")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enm2m"]
-atlas = ExtResource("3_36v0m")
+atlas = ExtResource("8_yoxvb")
 region = Rect2(80, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_72xsc"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_byrkh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -103,17 +103,39 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Rook" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
-script = ExtResource("1_n3uat")
-sprite = NodePath("AnimatedSprite2D2")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoxvb"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_losgq"]
+bg_color = Color(0.941176, 0, 0, 0.239216)
+
+[node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
+script = ExtResource("1_wwc4d")
+sprite = NodePath("AnimatedSprite2D")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+Damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
 shape = SubResource("RectangleShape2D_eu7ni")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.5, 4.5)
-sprite_frames = SubResource("SpriteFrames_72xsc")
+sprite_frames = SubResource("SpriteFrames_byrkh")
 animation = &"Pieces"
-frame = 5
+frame = 2
 speed_scale = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 28.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yoxvb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_losgq")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]
