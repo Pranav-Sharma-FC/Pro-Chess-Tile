@@ -8,9 +8,9 @@ public partial class Rook : Piece
 {
 	
 	//AI helped me remember Godot.Collections
-	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
 	public override void _Ready()
 	{
+		spriteNum = sprite.Frame;
 		MovementResource north = new MovementResource();
 		north.setValues(0, 1);
 		Movements.Add(north);
@@ -38,55 +38,7 @@ public partial class Rook : Piece
 
 	public override void _Process(double delta)
 	{
-		bar.Value = Health;
-		if (canSpawn && timerDone)
-		{
-			GD.Print(Health);
-			//GD.Print("Spawn Done");
-			timerDone = false;
-			timer.Start();
-			foreach (MovementResource moveResource in Movements)
-			{
-				Vector2I temp = new Vector2I(-1, -1);
-				if (moveResource.closest != temp)
-				{
-					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
-					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
-					if (cur.getSelectedPiece() != pieceType)
-					{
-						GD.Print("Does This work?");
-						cur.DamagePiece(Damage);
-					}
-				}
-			}
-		}
-	}
-
-	public void TimerDone()
-	{
-		timerDone = true;
-	}
-
-	public override void SpawnSpawnables(int pType, Vector2I curPos)
-	{
-		CrrentPosition = curPos;
-		canSpawn = (this.pieceType == (PieceType)pType);
-		PieceBlocking(CrrentPosition, gridPiece);
-		GD.Print("Is Connected" + canSpawn + curPos);
-		//GD.Print(gridPiece[0,0].getSelectedPiece());
-		if (canSpawn)
-			timer.Start();
-		else
-			timer.Stop();
-		foreach (MovementResource moveResource in Movements)
-		{
-			GD.Print(moveResource.closest);
-		}
-	}
-
-	public override void setGrid(Tile[,] grid)
-	{
-		gridPiece = grid;
+		base._Process(delta);
 	}
 
 

@@ -38,7 +38,6 @@ public partial class Chessboard : Node2D
 		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
-		int i = 0;
 		foreach (Node2D child in GetChildren())
 		{
 			if (child is Tile tile)

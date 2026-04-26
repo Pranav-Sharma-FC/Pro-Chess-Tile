@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7dq70yrj1k8v"]
+[gd_scene load_steps=20 format=3 uid="uid://b7dq70yrj1k8v"]
 
-[ext_resource type="Script" uid="uid://wvc140pnb5jj" path="res://Scripts/Knight.cs" id="1_b66j6"]
+[ext_resource type="Script" uid="uid://bba61c61ubk8t" path="res://Scripts/Knight.cs" id="1_b66j6"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_43hye"]
 [ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="3_43hye"]
 
@@ -103,9 +103,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_43hye"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rslyr"]
+bg_color = Color(0.941176, 0, 0, 0.239216)
+
+[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_b66j6")
 sprite = NodePath("AnimatedSprite2D2")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+Damage = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -117,3 +126,16 @@ sprite_frames = SubResource("SpriteFrames_rslyr")
 animation = &"Pieces"
 frame = 1
 speed_scale = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 28.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_43hye")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rslyr")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]

@@ -85,6 +85,7 @@ public partial class Tile : Node2D
 			return Piece.PieceType.Nothing;
 	}
 
+	//If it works it works ok
 	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
 		Piece.PieceType current = getSelectedPiece();

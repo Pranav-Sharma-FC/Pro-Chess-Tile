@@ -2,8 +2,43 @@ using Godot;
 using System;
 using Godot.Collections;
 
+namespace UIProject.Scripts;
+
 public partial class Pawn : Piece
 {
+	public override void _Ready()
+	{
+		spriteNum = sprite.Frame;
+		if(pieceType == PieceType.White)
+		{
+			spriteNum = sprite.Frame;
+			MovementResource northe = new MovementResource();
+			northe.setValues(0, -1);
+			Movements.Add(northe);
+			MovementResource eastw = new MovementResource();
+			eastw.setValues(-1, -1);
+			Movements.Add(eastw);
+			MovementResource westw = new MovementResource();
+			westw.setValues(1, -1);
+			Movements.Add(westw);	
+		}
+		else
+		{
+			spriteNum = sprite.Frame;
+			MovementResource northe = new MovementResource();
+			northe.setValues(1, 1);
+			Movements.Add(northe);
+			MovementResource southe = new MovementResource();
+			southe.setValues(1, -1);
+			Movements.Add(southe);
+			MovementResource eastw = new MovementResource();
+			eastw.setValues(-1, -1);
+			Movements.Add(eastw);
+			MovementResource westw = new MovementResource();
+			westw.setValues(-1, 1);
+			Movements.Add(westw);	
+		}
+	}
 	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		return true;
@@ -19,16 +54,6 @@ public partial class Pawn : Piece
 		return new Dictionary<string, int>{
 			{"Health", Health}
 		};
-	}
-
-	public override void SpawnSpawnables(int pieceType, Vector2I curPos)
-	{
-
-	}
-
-	public override void setGrid(Tile[,] grid)
-	{
-		gridPiece = grid;
 	}
 
 	//Logic to make sure piece can move there

@@ -5,11 +5,10 @@ using Godot.Collections;
 namespace UIProject.Scripts;
 
 public partial class Queen : Piece
-{
-	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
-	
+{	
 	public override void _Ready()
 	{
+		spriteNum = sprite.Frame;
 		MovementResource north = new MovementResource();
 		north.setValues(0, 1);
 		Movements.Add(north);
@@ -80,15 +79,8 @@ public partial class Queen : Piece
 
 		return false;
 	}
-	public override void setGrid(Tile[,] grid)
-	{
-		gridPiece = grid;
-	}
-	
-	public void TimerDone()
-	{
-		timerDone = true;
-	}
+
+
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];
@@ -103,46 +95,9 @@ public partial class Queen : Piece
 	
 	public override void _Process(double delta)
 	{
-		bar.Value = Health;
-		if (canSpawn && timerDone)
-		{
-			GD.Print(Health);
-			//GD.Print("Spawn Done");
-			timerDone = false;
-			timer.Start();
-			foreach (MovementResource moveResource in Movements)
-			{
-				Vector2I temp = new Vector2I(-1, -1);
-				if (moveResource.closest != temp)
-				{
-					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
-					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
-					if (cur.getSelectedPiece() != pieceType)
-					{
-						GD.Print("Does This work?");
-						cur.DamagePiece(Damage);
-					}
-				}
-			}
-		}
+		base._Process(delta);
 	}
-	
-	public override void SpawnSpawnables(int pType, Vector2I curPos)
-	{
-		CrrentPosition = curPos;
-		canSpawn = (this.pieceType == (PieceType)pType);
-		PieceBlocking(CrrentPosition, gridPiece);
-		GD.Print("Is Connected" + canSpawn + curPos);
-		//GD.Print(gridPiece[0,0].getSelectedPiece());
-		if (canSpawn)
-			timer.Start();
-		else
-			timer.Stop();
-		foreach (MovementResource moveResource in Movements)
-		{
-			GD.Print(moveResource.closest);
-		}
-	}
+
 
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
