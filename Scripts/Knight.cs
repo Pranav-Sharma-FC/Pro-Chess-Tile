@@ -94,7 +94,7 @@ public partial class Knight : Piece
 		{
 			moveFlag = false;
 		}
-		GD.Print(moveFlag);
+		//GD.Print(moveFlag);
 		return moveFlag;
 	}
 }

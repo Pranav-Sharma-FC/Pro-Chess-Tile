@@ -20,7 +20,7 @@ public partial class Spawnables : CharacterBody2D
 		angle = tan;
 		dama = damag;
 		tilly = til;
-		this.Rotation = tan;
+		this.Rotation = tan + ((float) (Mathf.Pi/2.0));
 	}
 
 	public void deleteSpawnables()

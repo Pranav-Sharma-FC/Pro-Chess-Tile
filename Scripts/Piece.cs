@@ -16,6 +16,7 @@ public abstract partial class Piece : CharacterBody2D
 	protected bool canSpawn = false;
 	protected Tile[,] gridPiece;
 	protected int spriteNum;
+	protected bool isPawn;
 	
 	[Export] protected Timer timer;
 
@@ -97,7 +98,7 @@ public abstract partial class Piece : CharacterBody2D
 			timer.Stop();
 		foreach (MovementResource moveResource in Movements)
 		{
-			GD.Print(moveResource.closest);
+			//GD.Print(moveResource.closest);
 		}
 	}
 
@@ -106,7 +107,7 @@ public abstract partial class Piece : CharacterBody2D
 		bar.Value = Health;
 		if (canSpawn && timerDone)
 		{
-			GD.Print(Health);
+			//GD.Print(Health);
 			//GD.Print("Spawn Done");
 			timerDone = false;
 			timer.Start();
@@ -116,23 +117,26 @@ public abstract partial class Piece : CharacterBody2D
 				if (moveResource.closest != temp)
 				{
 					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
-					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
+					//GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
 					Vector2I curp = CrrentPosition + temp;
 					float xmov = moveResource.closest.X - curp.X;
 					float ymov = moveResource.closest.Y - curp.Y;
 					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
 					//The pawn is so special bro
-					if ((cur.getSelectedPiece() != pieceType && this is not Pawn pawns)||(this is Pawn pawnss && dist == Mathf.Sqrt(2)))
+					GD.Print(isPawn);
+					if(isPawn)
+						GD.Print(dist);
+					if ((cur.getSelectedPiece() != pieceType && !isPawn)||(isPawn && (int)(dist*dist) == 2))
 					{
-						GD.Print("Does This work?");
+						//GD.Print("Does This work?");
 						//cur.DamagePiece(Damage);
 						Spawnables spawnings = spawning.Instantiate<Spawnables>();
 						
-						GD.Print(moveResource.closest, curp);
+						//GD.Print(moveResource.closest, curp);
 						float tan = (Mathf.Atan2(ymov, xmov));
 						bool black = pieceType == PieceType.Black;
 						float tim = (dist/spawnings.getSpeed())*100f;
-						GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
+						//GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
 						spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage);
 						AddChild(spawnings);
 					}

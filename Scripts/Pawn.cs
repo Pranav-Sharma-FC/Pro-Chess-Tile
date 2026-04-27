@@ -8,11 +8,12 @@ public partial class Pawn : Piece
 {
 	//The pawn has more exceptions than a chemistry class
 	//For being a pawn this thing sure acting like its the king of my sanity
-	bool isFirstMove;
+	bool isFirstMove = true;
 	int thing;
 	public override void _Ready()
 	{
-		thing = (pieceType == PieceType.Black) ? -1 : 1;
+		isPawn = true;
+		thing = (pieceType == PieceType.Black) ? -1 : 1;	
 		spriteNum = sprite.Frame;
 		MovementResource northe = new MovementResource();
 		northe.setValues(0, 1 * thing);
@@ -43,6 +44,7 @@ public partial class Pawn : Piece
 			double xmov = newPosition.X - CurrentPosition.X;
 			double ymov = newPosition.Y - CurrentPosition.Y;
 			double current = (Math.Sqrt((ymov*ymov)+(xmov*xmov)));
+			//GD.Print(current+ " E"+((int)(current*current) == 2));
 			if(current == Mathf.Sqrt(4))
 			{
 				Vector2I pawnsNewPosition = new Vector2I(thing + newPosition.X, newPosition.Y);
@@ -50,7 +52,7 @@ public partial class Pawn : Piece
 				if(moveResource.closest == temp)
 					moveResource.closest = pawnBlock(newPosition, tiles, false);
 			}
-			else if(current == Mathf.Sqrt(2))
+			else if((int)(current*current) == 2)
 			{
 				moveResource.closest = pawnBlock(newPosition, tiles, true);
 			}
@@ -58,6 +60,7 @@ public partial class Pawn : Piece
 			{
 				moveResource.closest = pawnBlock(newPosition, tiles, false);
 			}
+			//GD.Print(moveResource.closest);
 		}
 	}
 
@@ -75,7 +78,7 @@ public partial class Pawn : Piece
 						//GD.Print(newPosition + "PositionTile");
 						closest = newPosition;
 					}
-					else if(tile.hasPieceNot() && isSide)
+					else if(!tile.hasPieceNot() && isSide)
 					{
 						closest = newPosition;
 					}
@@ -112,33 +115,30 @@ public partial class Pawn : Piece
 		double xmov = NextPosition.X - CurrentPosition.X;
 		double ymov = NextPosition.Y - CurrentPosition.Y;
 		double current = (Math.Sqrt((ymov*ymov)+(xmov*xmov)));
-		double imov = 0.0;
 		Vector2I closestCurrent = new Vector2I(-1, -1);
 		foreach (MovementResource moveResource in Movements)
 		{
-			//GD.Print(moveResource.xmov + " : " + moveResource.ymov);
-			moveResource.closest = new Vector2I(-1, -1);
+			//GD.Print(moveResource.xmov + " : " + moveResource.ymov + moveResource.closest)
 			Vector2I newPosition = new Vector2I(CurrentPosition.X, CurrentPosition.Y);
 			//GD.Print("NewPosition: " + newPosition);
 			newPosition += new Vector2I(moveResource.xmov, moveResource.ymov);
-			double xmovn = newPosition.X - CurrentPosition.X;
-			double ymovn = newPosition.Y - CurrentPosition.Y;
-			double moveCurrent = (Math.Sqrt((ymovn*ymovn)+(xmovn*xmovn)));
-			if(moveCurrent == current && ymov == ymovn)
+			if(newPosition == NextPosition)
 			{
-				imov = ymovn;
 				closestCurrent = moveResource.closest;
 			}
 		}
+		//GD.Print(closestCurrent);
 		if(closestCurrent == new Vector2I(-1, -1))
 		{
-			if(ymov == imov && (((current == Mathf.Sqrt(4)) && isFirstMove)||current == Mathf.Sqrt(1)))
+			if(((current == Mathf.Sqrt(4)) && isFirstMove && (int)(ymov/2) == thing)||(current == Mathf.Sqrt(1) && ymov == thing))
 			{
+				//GD.Print("Interesting");
 				moveFlag = true;	
 			}
 		}
-		else if(current == Mathf.Sqrt(2))
+		else if((int)(current*current) == 2)
 		{
+			//GD.Print("CanMove");
 			if(gridPiece[NextPosition.X, NextPosition.Y].getSelectedPiece() != pieceType)
 				moveFlag = true;
 		}

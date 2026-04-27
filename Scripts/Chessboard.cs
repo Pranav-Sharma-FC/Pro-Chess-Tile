@@ -129,7 +129,7 @@ public partial class Chessboard : Node2D
 				EmitSignal(SignalName.SpawnSwitch, (int)Piece.PieceType.Black);
 			}
 		}
-		GD.Print(turn);
+		//Gd.Print(turn);
 	}
 
 	private void clearCircles()
@@ -143,15 +143,15 @@ public partial class Chessboard : Node2D
 	private void Select(Vector2I pos, Piece.PieceType pieceType)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
-		GD.Print("Bruh" + tile + pieceType);
+		//Gd.Print("Bruh" + tile + pieceType);
 		_selectedTile = tile;
 		bool hasMove = false;
 		if(!tile.hasPieceNot())
 		{
-			GD.Print("King Please");
+			//Gd.Print("King Please");
 			if(pieceType==tile.getSelectedPiece())
 			{
-				GD.Print("King Please");
+				//Gd.Print("King Please");
 				tile.block(grid);
 				for (int i = 0; i < 8; i++)
 				{
@@ -208,7 +208,7 @@ public partial class Chessboard : Node2D
 		Piece.PieceType truth = (Piece.PieceType)pieceType;
 		if (truth == Piece.PieceType.White)
 		{
-			GD.Print("E");
+			//Gd.Print("E");
 			
 		}
 		GetTree().Paused = true;

@@ -69,7 +69,7 @@ public partial class Tile : Node2D
 		{
 			if (selectedPiece is King king && isClear)
 			{
-				GD.Print("Shaurya");
+				//Gd.Print("Shaurya");
 				EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
 			}
 			selectedPiece.QueueFree();
