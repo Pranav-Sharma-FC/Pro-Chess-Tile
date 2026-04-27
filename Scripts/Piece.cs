@@ -16,7 +16,6 @@ public abstract partial class Piece : CharacterBody2D
 	protected bool canSpawn = false;
 	protected Tile[,] gridPiece;
 	protected int spriteNum;
-	protected bool isPawn;
 	
 	[Export] protected Timer timer;
 
@@ -123,10 +122,7 @@ public abstract partial class Piece : CharacterBody2D
 					float ymov = moveResource.closest.Y - curp.Y;
 					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
 					//The pawn is so special bro
-					GD.Print(isPawn);
-					if(isPawn)
-						GD.Print(dist);
-					if ((cur.getSelectedPiece() != pieceType && !isPawn)||(isPawn && (int)(dist*dist) == 2))
+					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny)
 					{
 						//GD.Print("Does This work?");
 						//cur.DamagePiece(Damage);

@@ -141,7 +141,8 @@ public partial class Tile : Node2D
 
 	public void DamagePiece(int damage)
 	{
-		selectedPiece.damagePiece(damage);
+		if(selectedPiece is not null)
+			selectedPiece.damagePiece(damage);
 	}
 
 	public void gridPiece(Tile[,] grid)

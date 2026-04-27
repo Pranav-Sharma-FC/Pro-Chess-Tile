@@ -114,6 +114,7 @@ script = ExtResource("1_eu7ni")
 sprite = NodePath("AnimatedSprite2D2")
 bar = NodePath("ProgressBar")
 timer = NodePath("Timer")
+Damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -135,3 +136,5 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_018tw")
 value = 100.0
 
 [node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]

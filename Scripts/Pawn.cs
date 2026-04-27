@@ -10,13 +10,14 @@ public partial class Pawn : Piece
 	//For being a pawn this thing sure acting like its the king of my sanity
 	bool isFirstMove = true;
 	int thing;
+	//isPawn = true;
 	public override void _Ready()
 	{
-		isPawn = true;
 		thing = (pieceType == PieceType.Black) ? -1 : 1;	
 		spriteNum = sprite.Frame;
 		MovementResource northe = new MovementResource();
 		northe.setValues(0, 1 * thing);
+		northe.pawn();
 		Movements.Add(northe);
 		MovementResource eastw = new MovementResource();
 		eastw.setValues(-1, 1* thing);
@@ -26,6 +27,7 @@ public partial class Pawn : Piece
 		Movements.Add(westw);	
 		MovementResource westww = new MovementResource();
 		westww.setValues(0, 2* thing);
+		westww.pawn();
 		Movements.Add(westww);	
 	}
 
@@ -47,8 +49,9 @@ public partial class Pawn : Piece
 			//GD.Print(current+ " E"+((int)(current*current) == 2));
 			if(current == Mathf.Sqrt(4))
 			{
-				Vector2I pawnsNewPosition = new Vector2I(thing + newPosition.X, newPosition.Y);
+				Vector2I pawnsNewPosition = new Vector2I(newPosition.X, newPosition.Y - thing);
 				moveResource.closest = pawnBlock(pawnsNewPosition, tiles, false);
+				//(moveResource.closest + "4" + pawnsNewPosition);
 				if(moveResource.closest == temp)
 					moveResource.closest = pawnBlock(newPosition, tiles, false);
 			}
