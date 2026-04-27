@@ -38,7 +38,6 @@ public partial class Chessboard : Node2D
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
-		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
 		foreach (Node2D child in GetChildren())
