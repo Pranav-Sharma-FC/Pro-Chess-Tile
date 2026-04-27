@@ -117,18 +117,21 @@ public abstract partial class Piece : CharacterBody2D
 				{
 					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
 					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
-					if (cur.getSelectedPiece() != pieceType)
+					Vector2I curp = CrrentPosition + temp;
+					float xmov = moveResource.closest.X - curp.X;
+					float ymov = moveResource.closest.Y - curp.Y;
+					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
+					//The pawn is so special bro
+					if ((cur.getSelectedPiece() != pieceType && this is not Pawn pawns)||(this is Pawn pawnss && dist == Mathf.Sqrt(2)))
 					{
-						Vector2I curp = CrrentPosition + temp;
 						GD.Print("Does This work?");
 						//cur.DamagePiece(Damage);
 						Spawnables spawnings = spawning.Instantiate<Spawnables>();
-						float xmov = moveResource.closest.X - curp.X;
-						float ymov = moveResource.closest.Y - curp.Y;
+						
 						GD.Print(moveResource.closest, curp);
 						float tan = (Mathf.Atan2(ymov, xmov));
 						bool black = pieceType == PieceType.Black;
-						float tim = (Mathf.Sqrt((ymov*ymov)+(xmov*xmov))/spawnings.getSpeed())*100f;
+						float tim = (dist/spawnings.getSpeed())*100f;
 						GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
 						spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage);
 						AddChild(spawnings);
@@ -147,7 +150,7 @@ public abstract partial class Piece : CharacterBody2D
 //abstract class, spawnables 
 
 	public abstract void SetPoints(Godot.Collections.Dictionary<string, int> Resources);
-	public abstract bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
+	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
 	public abstract Godot.Collections.Dictionary<string, int> GivePiece();
 

@@ -35,7 +35,7 @@ public partial class Knight : Piece
 		Movements.Add(westw);	
 	}
 
-	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");
 		CurrentPosition -= new Vector2I(1, 1);
@@ -64,7 +64,6 @@ public partial class Knight : Piece
 				}
 			}
 		}
-		return false;
 	}
 
 	public override void _Process(double delta)

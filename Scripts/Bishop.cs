@@ -23,7 +23,7 @@ public partial class Bishop : Piece
 		westw.setValues(-1, 1);
 		Movements.Add(westw);	
 	}
-	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");
 		CurrentPosition -= new Vector2I(1, 1);
@@ -64,8 +64,6 @@ public partial class Bishop : Piece
 				
 			}
 		}
-
-		return false;
 	}
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{

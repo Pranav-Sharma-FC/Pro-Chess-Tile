@@ -85,6 +85,14 @@ public partial class Tile : Node2D
 			return Piece.PieceType.Nothing;
 	}
 
+	public bool hasPiece()
+	{
+		if(selectedPiece is not null)
+			return true;
+		else
+			return false;
+	}
+
 	//If it works it works ok
 	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
