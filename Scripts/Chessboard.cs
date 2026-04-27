@@ -8,13 +8,14 @@ public partial class Chessboard : Node2D
 	//Update: everything that I made doesnt bloody work because tilemaplayers scene collections are **********
 	//Update: On track to complete first sprint by second sprint, cant do anything about tilemaplayers but oh well
 	//Update: Yo only a bit behind its just checking which shouldnt be too hard right                         right?
-
+	//Update: Pranav's code is incomprehensible
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
-	
+	//
 	[Signal]
 	public delegate void SpawnSwitchEventHandler(int pieceType);
+	// allows SpawnSwitchEventHandler to be used and altered across scripts
 	
 	//[Export] private PackedScene pScene;
 	[Export] private PackedScene circleScene;
@@ -31,7 +32,9 @@ public partial class Chessboard : Node2D
 		SelectBlack,
 		PlaceBlack
 	}
+	//informs the code who's turn it is
 	private Turn turn  = Turn.SelectWhite;
+	
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
