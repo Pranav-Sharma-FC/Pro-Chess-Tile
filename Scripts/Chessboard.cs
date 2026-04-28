@@ -12,7 +12,7 @@ public partial class Chessboard : Node2D
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
-	//
+	
 	[Signal]
 	public delegate void SpawnSwitchEventHandler(int pieceType);
 	// allows SpawnSwitchEventHandler to be used and altered across scripts
