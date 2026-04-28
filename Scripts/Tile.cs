@@ -4,6 +4,9 @@ using UIProject.Scripts;
 
 public partial class Tile : Node2D
 {
+	
+	[Signal]
+	public delegate void DeathEventHandler();
 	[Signal]
 	public delegate void GameOverEventHandler(int pieceType);
 
@@ -60,9 +63,19 @@ public partial class Tile : Node2D
 			return false;
 		}
 	}
-	
-	
-	
+
+	public override void _Process(double delta)
+	{
+		if (selectedPiece is not null)
+		{
+			if (selectedPiece.getHealth() <= 0)
+			{
+				EmitSignal(SignalName.Death);
+				ClearPiece();
+			}
+		}
+	}
+
 	public void ClearPiece(bool isClear = false)
 	{
 		if(selectedPiece is not null)
@@ -145,12 +158,14 @@ public partial class Tile : Node2D
 			selectedPiece.damagePiece(damage);
 	}
 
-	public void gridPiece(Tile[,] grid)
+	public void gridPiece(Tile[,] grid, bool isFallen = false)
 	{
 		if (selectedPiece is not null)
 		{
 			selectedPiece.setGri(grid, getPosition());
 			gridTile = grid;
+			if(isFallen)
+				block(grid);
 		}
 	}
 	
