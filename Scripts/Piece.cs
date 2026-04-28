@@ -30,6 +30,7 @@ public abstract partial class Piece : CharacterBody2D
 		White,
 		Black
 	}
+//creates constant variables for different kinds of pieces 
 
 
 	protected PieceType pieceType = PieceType.White;
@@ -41,6 +42,7 @@ public abstract partial class Piece : CharacterBody2D
 		sprite.Play("BlackPieces");
 		sprite.Frame = spriteNum;
 	}
+// "sprite.Frame=spriteNum" Deals with the sprite frame going back to its default frame, that's why its there twice
 	
 	public PieceType returnType()
 	{
@@ -71,11 +73,13 @@ public abstract partial class Piece : CharacterBody2D
 		
 		return new Vector2I(xNext, yNext);
 	}
+//Collects the data to see what coordinate the selected piece is going to 
 
 	public void damagePiece(int damage)
 	{
 		Health -= damage;
 	}
+//Creates a health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
 
 	public void setGri(Tile[,] grid, Vector2I CurrentPosition)
 	{
