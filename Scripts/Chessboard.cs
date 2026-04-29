@@ -12,6 +12,7 @@ public partial class Chessboard : Node2D
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
+
 	
 	[Signal]
 	public delegate void SpawnSwitchEventHandler(int pieceType);
@@ -20,6 +21,8 @@ public partial class Chessboard : Node2D
 	//[Export] private PackedScene pScene;
 	[Export] private PackedScene circleScene;
 	[Export] private Node2D circles;
+	private PackedScene coinScene = GD.Load<PackedScene>("res://Scenes/coin.tscn");
+	private Node2D spawnables;
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
