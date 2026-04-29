@@ -121,8 +121,8 @@ public partial class Queen : Piece
 			}
 			int toNext = (Math.Abs(CurrentPosition.X-NextPosition.X)+Math.Abs(CurrentPosition.Y-NextPosition.Y));
 			int toClosest = (Math.Abs(CurrentPosition.X-closestCurrent.X)+Math.Abs(CurrentPosition.Y-closestCurrent.Y));
-			GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
-			GD.Print("Next: " + toNext + " Closest: " + toClosest);
+			//GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
+			//GD.Print("Next: " + toNext + " Closest: " + toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
 			else if (toNext <= toClosest)
@@ -131,7 +131,7 @@ public partial class Queen : Piece
 			}
 		}
 		
-		GD.Print(moveFlag);
+		//GD.Print(moveFlag);
 		return moveFlag;
 	}
 }

@@ -98,7 +98,7 @@ public partial class King : Piece
 			moveFlag = false;
 		}
 		
-		GD.Print("Lomg"+ moveFlag);
+		//GD.Print("Lomg"+ moveFlag);
 		return moveFlag;
 	}
 }

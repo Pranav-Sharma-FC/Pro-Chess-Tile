@@ -8,8 +8,14 @@ public partial class Pawn : Piece
 {
 	//The pawn has more exceptions than a chemistry class
 	//For being a pawn this thing sure acting like its the king of my sanity
-	bool isFirstMove = true;
-	int thing;
+	[Signal]
+	public delegate void PassantEventHandler(int pieceTyp);
+	private Tile tillyPawn;
+	private Vector2I passantAngle;
+	private bool isFirstMove = true;
+	private bool canPassat = false;
+	private int thing;
+	private int passan = 0;
 	//isPawn = true;
 	public override void _Ready()
 	{
@@ -98,12 +104,29 @@ public partial class Pawn : Piece
 	{
 		Health = Resources["Health"];
 		isFirstMove = false;
+		if(Resources["Passant"] == 1)
+		{
+			EmitSignal(SignalName.Passant, (int)pieceType);
+		}
+
+	}
+
+	public void Passanting(Vector2I vec)
+	{
+		canPassat = true;
+		tillyPawn = gridPiece[vec.X, vec.Y];
+		passantAngle = vec;
 	}
 
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
+		if(passan == 2)
+		{
+			tillyPawn.ClearPiece();
+		}
 		return new Dictionary<string, int>{
 			{"Health", Health},
+			{"Passant", passan},
 		};
 	}
 
@@ -137,13 +160,28 @@ public partial class Pawn : Piece
 			{
 				//GD.Print("Interesting");
 				moveFlag = true;	
+				passan = 0;
+				if(current == Mathf.Sqrt(4))
+					passan = 1;
+			}
+			else if(((int)(current*current) == 2) && canPassat && ymov == thing && (passantAngle.X == NextPosition.X))
+			{
+				//GD.Print("CanMove");
+				if(gridPiece[NextPosition.X, NextPosition.Y].getSelectedPiece() != pieceType)
+				{
+					moveFlag = true;
+					passan = 2;
+				}
 			}
 		}
 		else if((int)(current*current) == 2)
 		{
 			//GD.Print("CanMove");
 			if(gridPiece[NextPosition.X, NextPosition.Y].getSelectedPiece() != pieceType)
+			{
 				moveFlag = true;
+				passan = 0;
+			}
 		}
 		return moveFlag;
 	}

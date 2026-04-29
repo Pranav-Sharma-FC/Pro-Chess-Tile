@@ -79,7 +79,7 @@ public abstract partial class Piece : CharacterBody2D
 	{
 		Health -= damage;
 	}
-//Creates a health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
+//Uses the health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
 
 	public void setGri(Tile[,] grid, Vector2I CurrentPosition)
 	{
@@ -130,7 +130,7 @@ public abstract partial class Piece : CharacterBody2D
 					float xmov = moveResource.closest.X - curp.X;
 					float ymov = moveResource.closest.Y - curp.Y;
 					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
-					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
+					//GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
 					//The pawn is so special bro
 					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny && (cur.getSelectedPiece() != PieceType.Nothing))
 					{
