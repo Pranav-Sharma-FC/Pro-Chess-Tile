@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bdmpfay0tveub"]
+[gd_scene load_steps=20 format=3 uid="uid://bdmpfay0tveub"]
 
 [ext_resource type="Script" uid="uid://r2ut03sw2a5g" path="res://Scripts/Pawn.cs" id="1_eu7ni"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_3865y"]
@@ -103,9 +103,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_culnp"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_018tw"]
+bg_color = Color(0.941176, 0, 0, 0.239216)
+
+[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_eu7ni")
 sprite = NodePath("AnimatedSprite2D2")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+Damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -116,3 +125,16 @@ scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_018tw")
 animation = &"Pieces"
 speed_scale = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 28.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_culnp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_018tw")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]

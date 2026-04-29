@@ -9,6 +9,7 @@ public partial class Bishop : Piece
 	
 	public override void _Ready()
 	{
+		spriteNum = sprite.Frame;
 		MovementResource northe = new MovementResource();
 		northe.setValues(1, 1);
 		Movements.Add(northe);
@@ -22,8 +23,7 @@ public partial class Bishop : Piece
 		westw.setValues(-1, 1);
 		Movements.Add(westw);	
 	}
-	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
-	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");
 		CurrentPosition -= new Vector2I(1, 1);
@@ -64,17 +64,10 @@ public partial class Bishop : Piece
 				
 			}
 		}
-
-		return false;
 	}
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];
-	}
-	
-	public void TimerDone()
-	{
-		timerDone = true;
 	}
 
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
@@ -83,54 +76,12 @@ public partial class Bishop : Piece
 			{"Health", Health}
 		};
 	}
-	public override void setGrid(Tile[,] grid)
-	{
-		gridPiece = grid;
-	}
 	
 	public override void _Process(double delta)
 	{
-		bar.Value = Health;
-		if (canSpawn && timerDone)
-		{
-			GD.Print(Health);
-			//GD.Print("Spawn Done");
-			timerDone = false;
-			timer.Start();
-			foreach (MovementResource moveResource in Movements)
-			{
-				Vector2I temp = new Vector2I(-1, -1);
-				if (moveResource.closest != temp)
-				{
-					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
-					GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
-					if (cur.getSelectedPiece() != pieceType)
-					{
-						GD.Print("Does This work?");
-						cur.DamagePiece(Damage);
-					}
-				}
-			}
-		}
+		base._Process(delta);
 	}
 	
-	public override void SpawnSpawnables(int pType, Vector2I curPos)
-	{
-		CrrentPosition = curPos;
-		canSpawn = (this.pieceType == (PieceType)pType);
-		PieceBlocking(CrrentPosition, gridPiece);
-		GD.Print("Is Connected" + canSpawn + curPos);
-		//GD.Print(gridPiece[0,0].getSelectedPiece());
-		if (canSpawn)
-			timer.Start();
-		else
-			timer.Stop();
-		foreach (MovementResource moveResource in Movements)
-		{
-			GD.Print(moveResource.closest);
-		}
-	}
-
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{
@@ -155,8 +106,8 @@ public partial class Bishop : Piece
 			}
 			int toNext = (Math.Abs(CurrentPosition.X-NextPosition.X)+Math.Abs(CurrentPosition.Y-NextPosition.Y));
 			int toClosest = (Math.Abs(CurrentPosition.X-closestCurrent.X)+Math.Abs(CurrentPosition.Y-closestCurrent.Y));
-			GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
-			GD.Print("Next: " + toNext + " Closest: " + toClosest);
+			//GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
+			//GD.Print("Next: " + toNext + " Closest: " + toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
 			else if (toNext <= toClosest)

@@ -10,8 +10,25 @@ The logic of our game is a little wonky. We have an idea and a good "concept" of
 How interconnected everything in our game is. When we were dividing up the work, we realized how the chessboard and the logic with the pieces basically go completely hand in hand. And creating the actual pieces is just a sprite and a collision shape. 
 ### Lessons
 I definetly think we should have thought more about the actual coding part of our game. The concept of this game is really cool and it's challenging but not impossible, but it's definetly a little bit more difficult than necessary as when we were planning we talked about elemenets of the game and ideas instead of how we're actually going to code it. 
+
 ## Sprint 2
-
-
+We continued working on game logic
+### Work done 
+I worked on some of the piece blocking and getting all the pieces to work at the same time
+### Difficulties 
+Getting all the pieces to work at the same time 
+### Surprises 
+How simple the game logic actually is 
+### Lessons 
+Less is more and this isn't as complicated as we're making it
 
 ## Sprint 3
+We're more or less done with the technical mechanics and logic of our game, and now all that's left is a few abilities and mostly everything visual.
+### Work Done 
+I worked on the spawnables 
+### Difficulties 
+Understanding godot signals for the first time, having to deal with my work falling off the face of the Earth because I worked on this on my computer at home. 
+### Surprises 
+Having my work fall off the face of the Earth because I wrote most of the code for spawnables on my computer at home. 
+### Lessons 
+Don't work on my computer at home 
