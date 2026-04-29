@@ -4,6 +4,9 @@ using UIProject.Scripts;
 
 public partial class Tile : Node2D
 {
+	
+	[Signal]
+	public delegate void DeathEventHandler();
 	[Signal]
 	public delegate void GameOverEventHandler(int pieceType);
 
@@ -40,6 +43,10 @@ public partial class Tile : Node2D
 			{
 				selectedPiece.blackPiece();
 			}
+			if(fry is Pawn paw)
+			{
+				paw.Passant += EnPassant;
+			}
 			selectedPiece.setGri(gridTile, getPosition());
 			AddChild(fry);
 			
@@ -60,9 +67,53 @@ public partial class Tile : Node2D
 			return false;
 		}
 	}
-	
-	
-	
+
+	public override void _Process(double delta)
+	{
+		if (selectedPiece is not null)
+		{
+			if (selectedPiece.getHealth() <= 0)
+			{
+				EmitSignal(SignalName.Death);
+				ClearPiece();
+			}
+		}
+	}
+
+	public void EnPassant(int pTye)
+	{
+		if(selectedPiece is not null)
+		{
+			Piece.PieceType truth = (Piece.PieceType)pTye;
+			Vector2I truePos = new Vector2I(position.X-1 , position.Y -1);
+			canPassant(truth, (truePos + (new Vector2I(-1, 0))));
+			canPassant(truth, (truePos + (new Vector2I(1, 0))));
+		}
+	}
+
+	private void canPassant(Piece.PieceType truth, Vector2I loco)
+	{
+		if(loco.X is >= 0 and < 8 && loco.Y is >= 0 and < 8)
+		{
+			Vector2I noLoco = new Vector2I(position.X-1 , position.Y -1);
+			Tile tile = gridTile[loco.X, loco.Y];
+			tile.sendPassant(truth, noLoco);
+		}
+		
+	}
+
+	public void sendPassant(Piece.PieceType truth, Vector2I loco)
+	{
+		if(selectedPiece is not null)
+		{
+			//GD.Print(loco);
+			if(selectedPiece is Pawn pin && (truth != selectedPiece.returnType()))
+			{
+				pin.Passanting(loco);
+			}
+		}
+	}
+
 	public void ClearPiece(bool isClear = false)
 	{
 		if(selectedPiece is not null)
@@ -145,12 +196,14 @@ public partial class Tile : Node2D
 			selectedPiece.damagePiece(damage);
 	}
 
-	public void gridPiece(Tile[,] grid)
+	public void gridPiece(Tile[,] grid, bool isFallen = false)
 	{
+		gridTile = grid;
 		if (selectedPiece is not null)
 		{
 			selectedPiece.setGri(grid, getPosition());
-			gridTile = grid;
+			if(isFallen)
+				block(grid);
 		}
 	}
 	

@@ -23,6 +23,7 @@ public partial class Chessboard : Node2D
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
+	private int pieceTypeM;
 	private King white, black;
 
 	private enum Turn
@@ -57,6 +58,7 @@ public partial class Chessboard : Node2D
 			{ 
 				tile.GameOver += EndGame;
 				this.SpawnSwitch += tile.switchSpawnables;
+				tile.Death += Fallen;
 				
 				if(tile.getPosition().Y >= 3)
 				{
@@ -121,15 +123,29 @@ public partial class Chessboard : Node2D
 			if (pieceType == Piece.PieceType.White)
 			{
 				turn = Turn.SelectBlack;
-				EmitSignal(SignalName.SpawnSwitch, (int)Piece.PieceType.White);
+				pieceTypeM = (int)Piece.PieceType.White;
+				EmitSignal(SignalName.SpawnSwitch,pieceTypeM);
 			}
 			else
 			{
 				turn = Turn.SelectWhite;
-				EmitSignal(SignalName.SpawnSwitch, (int)Piece.PieceType.Black);
+				pieceTypeM = (int)Piece.PieceType.Black;
+				EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
 			}
 		}
 		//Gd.Print(turn);
+	}
+
+	private void Fallen()
+	{
+		foreach (Node2D child in GetChildren())
+		{
+			if (child is Tile tiles)
+			{
+				tiles.gridPiece(grid, isFallen:true); 
+			}
+		}
+		EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
 	}
 
 	private void clearCircles()

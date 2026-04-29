@@ -79,7 +79,7 @@ public abstract partial class Piece : CharacterBody2D
 	{
 		Health -= damage;
 	}
-//Creates a health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
+//Uses the health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
 
 	public void setGri(Tile[,] grid, Vector2I CurrentPosition)
 	{
@@ -105,9 +105,15 @@ public abstract partial class Piece : CharacterBody2D
 		}
 	}
 
+	public int getHealth()
+	{
+		return Health;
+	}
+
 	public override void _Process(double delta)
 	{
 		bar.Value = Health;
+
 		if (canSpawn && timerDone)
 		{
 			//GD.Print(Health);
@@ -120,13 +126,13 @@ public abstract partial class Piece : CharacterBody2D
 				if (moveResource.closest != temp)
 				{
 					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
-					//GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
 					Vector2I curp = CrrentPosition + temp;
 					float xmov = moveResource.closest.X - curp.X;
 					float ymov = moveResource.closest.Y - curp.Y;
 					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
+					//GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
 					//The pawn is so special bro
-					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny)
+					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny && (cur.getSelectedPiece() != PieceType.Nothing))
 					{
 						//GD.Print("Does This work?");
 						//cur.DamagePiece(Damage);
