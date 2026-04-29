@@ -23,3 +23,12 @@ I didn't realize how many small steps are needed for simple game mechanics.
 I learned that testing small parts of the game helps find problems earlier.
 
 ## Sprint 3
+In sprint 3, I worked on connecting the UI with the game and fixing errors.
+### Work Done
+I attached the mana button to the chessboard and fixed scripts. I also connected labels so they show the correct values.
+### Difficulties
+It was confusing to connect labels and UI properly, and some things didn’t work even when they looked right.
+### Surprises
+Small mistakes in UI or scripts can break everything.
+### Lessons
+I learned to debug step by step and double-check all connections.
