@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://l62krggc6wa0"]
 
-[ext_resource type="Script" uid="uid://bf70edu00rn3w" path="res://Scripts/King.cs" id="1_36v0m"]
+[ext_resource type="Script" uid="uid://bctl0igv78nwm" path="res://Scripts/King.cs" id="1_36v0m"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_72xsc"]
 [ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="3_abtvy"]
 
