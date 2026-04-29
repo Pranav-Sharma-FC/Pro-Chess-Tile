@@ -73,7 +73,7 @@ public abstract partial class Piece : CharacterBody2D
 		
 		return new Vector2I(xNext, yNext);
 	}
-//Collects the data to see what coordinate the selected piece is going to 
+//Collects the data to see what coordinate the selected piece is going to through slope
 
 	public void damagePiece(int damage)
 	{

@@ -22,7 +22,18 @@ How simple the game logic actually is
 ### Lessons 
 Less is more and this isn't as complicated as we're making it
 
-## Sprint 3
+## Sprint 3 
+We worked on piece blocking, and finished fixing our screwed up game logic. 
+### Work Done 
+I started working on early spawmables, just to be able to do something. And I would occasionally do some debugging. 
+### Difficulties 
+Spawnables suck, I didn't know how to do this at all until like a week after starting. 
+###Surprises 
+Spawnables are a little complex. 
+### Lessons 
+Pay more attention to the little details in our game, code/logic wise. 
+
+## Sprint 4
 We're more or less done with the technical mechanics and logic of our game, and now all that's left is a few abilities and mostly everything visual.
 ### Work Done 
 I worked on the spawnables 

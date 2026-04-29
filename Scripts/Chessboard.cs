@@ -50,6 +50,7 @@ public partial class Chessboard : Node2D
 				tile.Position -= new Vector2(50, 50);
 			}
 		}
+	//Capital Tile is the class, and lowercase tile is the object 
 		foreach (Node2D child in GetChildren())
 		{
 			if (child is Tile tile)
@@ -68,9 +69,6 @@ public partial class Chessboard : Node2D
 				tile.gridPiece(grid);
 			}
 		}
-		
-
-		// ile = GetTile(3, 0);
 	}
 
 	private void OnTileClicked(Vector2I pos)
