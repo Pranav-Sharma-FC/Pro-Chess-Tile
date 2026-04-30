@@ -11,6 +11,8 @@ public abstract partial class Piece : CharacterBody2D
 	protected Array<MovementResource> Movements = new Array<MovementResource>();
 	private static readonly PackedScene spawning = GD.Load<PackedScene>("res://Scenes/spawnables.tscn");
 	protected Vector2I CrrentPosition;
+	
+	protected Vector2I TrueCurPosition;
 	[Export] protected AnimatedSprite2D sprite;
 	[Export] protected ProgressBar bar;
 	protected bool canSpawn = false;
@@ -23,6 +25,7 @@ public abstract partial class Piece : CharacterBody2D
 	//Spawnables
 	[Export] protected int Health = 100;
 	[Export] protected int Damage;
+	protected int spawnableSpecial = 0;
 	
 	public enum PieceType
 	{
@@ -127,28 +130,58 @@ public abstract partial class Piece : CharacterBody2D
 				{
 					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
 					Vector2I curp = CrrentPosition + temp;
-					float xmov = moveResource.closest.X - curp.X;
-					float ymov = moveResource.closest.Y - curp.Y;
-					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
 					//GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
 					//The pawn is so special bro
 					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny && (cur.getSelectedPiece() != PieceType.Nothing))
 					{
-						//GD.Print("Does This work?");
-						//cur.DamagePiece(Damage);
-						Spawnables spawnings = spawning.Instantiate<Spawnables>();
-						
-						//GD.Print(moveResource.closest, curp);
-						float tan = (Mathf.Atan2(ymov, xmov));
-						bool black = pieceType == PieceType.Black;
-						float tim = (dist/spawnings.getSpeed())*100f;
-						//GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
-						spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage);
-						AddChild(spawnings);
+						spawnThings(cur, moveResource.closest, curp);
 					}
 				}
 			}
 		}
+	}
+
+	public void AttackAll(bool friend)
+	{
+		for(int i = -1; i <= 1; i++)
+		{
+			for (int j = -1; j <= 1; j++)
+			{
+				Vector2I curp = CrrentPosition + new Vector2I(-1, -1);
+				Vector2I next = new Vector2I(i+curp.X, j+curp.Y);
+				Tile cur = gridPiece[next.X, next.Y];
+				if ((cur.getSelectedPiece() != PieceType.Nothing))
+				{
+					if ((cur.getSelectedPiece() != pieceType) && !friend)
+					{
+						spawnThings(cur, next, curp);
+					}
+					else if ((cur.getSelectedPiece() == pieceType) && friend)
+					{
+						spawnThings(cur, next, curp);
+					}
+				}
+			}
+		}
+	}
+
+	private void spawnThings(Tile cur, Vector2I spawnVec, Vector2I spawn)
+	{
+		float xmov = spawnVec.X - spawn.X;
+		float ymov = spawnVec.Y - spawn.Y;
+		float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
+		//GD.Print("Does This work?");
+		//cur.DamagePiece(Damage);
+		Spawnables spawnings = spawning.Instantiate<Spawnables>();
+
+		//GD.Print(moveResource.closest, curp);
+		float tan = (Mathf.Atan2(xmov, ymov));
+		bool black = pieceType == PieceType.Black;
+		float tim = Mathf.Sqrt((2 * dist) / spawnings.getSpeed()) * 10f;
+
+		//GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
+		spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage, spawnableSpecial);
+		AddChild(spawnings);
 	}
 	
 	public void TimerDone()

@@ -1,55 +1,55 @@
 [gd_scene load_steps=18 format=3 uid="uid://dksks48fxft1n"]
 
-[ext_resource type="Script" uid="uid://b3oxta04y10sg" path="res://Scripts/Spawnables.cs" id="1_wohfk"]
-[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_cufo7"]
-[ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="3_70lwq"]
+[ext_resource type="Script" uid="uid://b3oxta04y10sg" path="res://Scripts/Spawnables.cs" id="1_xipul"]
+[ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_bxsfc"]
+[ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="3_io2jp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgw01"]
-atlas = ExtResource("2_cufo7")
+atlas = ExtResource("2_bxsfc")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yoxvb"]
-atlas = ExtResource("2_cufo7")
+atlas = ExtResource("2_bxsfc")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_losgq"]
-atlas = ExtResource("2_cufo7")
+atlas = ExtResource("2_bxsfc")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ce33x"]
-atlas = ExtResource("2_cufo7")
+atlas = ExtResource("2_bxsfc")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxdnj"]
-atlas = ExtResource("2_cufo7")
+atlas = ExtResource("2_bxsfc")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jkk6j"]
-atlas = ExtResource("2_cufo7")
+atlas = ExtResource("2_bxsfc")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wtkm"]
-atlas = ExtResource("3_70lwq")
+atlas = ExtResource("3_io2jp")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yu3ov"]
-atlas = ExtResource("3_70lwq")
+atlas = ExtResource("3_io2jp")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5t4yi"]
-atlas = ExtResource("3_70lwq")
+atlas = ExtResource("3_io2jp")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_18jqx"]
-atlas = ExtResource("3_70lwq")
+atlas = ExtResource("3_io2jp")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j64pt"]
-atlas = ExtResource("3_70lwq")
+atlas = ExtResource("3_io2jp")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enm2m"]
-atlas = ExtResource("3_70lwq")
+atlas = ExtResource("3_io2jp")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_678ki"]
@@ -105,8 +105,10 @@ animations = [{
 size = Vector2(54, 63)
 
 [node name="Spawnables" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "timeren")]
-script = ExtResource("1_wohfk")
-speed = 1000.0
+z_index = -1
+script = ExtResource("1_xipul")
+MaxSpeed = 2000.0
+Acceleration = 1600.0
 sprite = NodePath("AnimatedSprite2D2")
 timeren = NodePath("Timer")
 

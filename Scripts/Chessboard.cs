@@ -148,6 +148,13 @@ public partial class Chessboard : Node2D
 			}
 		}
 		EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
+		foreach (Node2D child in GetChildren())
+		{
+			if (child is Tile tiles)
+			{
+				tiles.gridPiece(grid, isFallen:true); 
+			}
+		}
 	}
 
 	private void clearCircles()
