@@ -25,6 +25,7 @@ public partial class Chessboard : Node2D
 	[Export] private BoardArt boardArt;
 	private int pieceTypeM;
 	private King white, black;
+	private bool special;
 
 	private enum Turn
 	{

@@ -18,6 +18,7 @@ public abstract partial class Piece : CharacterBody2D
 	protected bool canSpawn = false;
 	protected Tile[,] gridPiece;
 	protected int spriteNum;
+	protected Node2D boardNode;
 	
 	[Export] protected Timer timer;
 
@@ -84,10 +85,11 @@ public abstract partial class Piece : CharacterBody2D
 	}
 //Uses the health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
 
-	public void setGri(Tile[,] grid, Vector2I CurrentPosition)
+	public void setGri(Tile[,] grid, Vector2I CurrentPosition, Node2D board)
 	{
 		gridPiece = grid;
 		CrrentPosition =  CurrentPosition;
+		boardNode = board;
 	}
 
 	public void SpawnSpawnables(int pType, Vector2I curPos)
@@ -150,7 +152,7 @@ public abstract partial class Piece : CharacterBody2D
 				Vector2I curp = CrrentPosition + new Vector2I(-1, -1);
 				Vector2I next = new Vector2I(i+curp.X, j+curp.Y);
 				Tile cur = gridPiece[next.X, next.Y];
-				if ((cur.getSelectedPiece() != PieceType.Nothing))
+				if ((cur.getSelectedPiece() != PieceType.Nothing) && (i != 0 && j != 0))
 				{
 					if ((cur.getSelectedPiece() != pieceType) && !friend)
 					{
@@ -173,15 +175,16 @@ public abstract partial class Piece : CharacterBody2D
 		//GD.Print("Does This work?");
 		//cur.DamagePiece(Damage);
 		Spawnables spawnings = spawning.Instantiate<Spawnables>();
-
+		spawnings.Position = this.Position;
 		//GD.Print(moveResource.closest, curp);
-		float tan = (Mathf.Atan2(xmov, ymov));
+		float tan = (Mathf.Atan2(ymov, xmov));
 		bool black = pieceType == PieceType.Black;
 		float tim = Mathf.Sqrt((2 * dist) / spawnings.getSpeed()) * 10f;
+		//GD.Print(tan + "Tan");
 
 		//GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
 		spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage, spawnableSpecial);
-		AddChild(spawnings);
+		boardNode.AddChild(spawnings);
 	}
 	
 	public void TimerDone()

@@ -402,4 +402,12 @@ flat = true
 
 [node name="Places" type="Node2D" parent="Board"]
 
+[node name="Button2" type="Button" parent="Board"]
+offset_left = 960.0
+offset_top = 8.0
+offset_right = 1329.0
+offset_bottom = 349.0
+text = "Special
+"
+
 [connection signal="pressed" from="Board/Button" to="Board/Chess Board" method="Pressed"]

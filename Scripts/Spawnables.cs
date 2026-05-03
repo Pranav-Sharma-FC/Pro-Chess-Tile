@@ -20,10 +20,10 @@ public partial class Spawnables : CharacterBody2D
 			sprite.Play("BlackPieces");
 		sprite.Frame = num;
 		timeren.WaitTime = time;
-		angle = tan + ((float) (Mathf.Pi/2.0));
+		angle = tan;
 		dama = damag;
 		tilly = til;
-		this.Rotation = tan + ((float) (Mathf.Pi));
+		this.Rotation = tan + ((float) (Mathf.Pi)/2f);
 //		if(special == 1)
 			
 	}

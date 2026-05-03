@@ -47,7 +47,7 @@ public partial class Tile : Node2D
 			{
 				paw.Passant += EnPassant;
 			}
-			selectedPiece.setGri(gridTile, getPosition());
+			selectedPiece.setGri(gridTile, getPosition(), this);
 			AddChild(fry);
 			
 		}
@@ -118,10 +118,12 @@ public partial class Tile : Node2D
 	{
 		if(selectedPiece is not null)
 		{
-			if (selectedPiece is King king && isClear)
+			if (isClear)
 			{
+				selectedPiece.AttackAll(false);
 				//Gd.Print("Shaurya");
-				EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
+				if(selectedPiece is King king)
+					EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
 			}
 			selectedPiece.QueueFree();
 			selectedPiece = null;
@@ -201,7 +203,7 @@ public partial class Tile : Node2D
 		gridTile = grid;
 		if (selectedPiece is not null)
 		{
-			selectedPiece.setGri(grid, getPosition());
+			selectedPiece.setGri(grid, getPosition(), this);
 			if(isFallen)
 				block(grid);
 		}
