@@ -82,7 +82,10 @@ public partial class Knight : Piece
 			{"Health", Health}
 		};
 	}
-
+	public override void ActivateSpecial()
+	{
+		
+	}
 	//Logic to make sure piece can move there
 	public override bool Move(Vector2I NextPosition, Vector2I CurrentPosition)
 	{

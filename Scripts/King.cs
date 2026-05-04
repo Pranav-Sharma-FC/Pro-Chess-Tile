@@ -64,7 +64,10 @@ public partial class King : Piece
 			}
 		}
 	}
-
+	public override void ActivateSpecial()
+	{
+		
+	}
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];

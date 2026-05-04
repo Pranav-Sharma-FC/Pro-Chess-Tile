@@ -411,3 +411,4 @@ text = "Special
 "
 
 [connection signal="pressed" from="Board/Button" to="Board/Chess Board" method="Pressed"]
+[connection signal="pressed" from="Board/Button2" to="Board/Chess Board2" method="SpecialAccept"]

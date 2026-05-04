@@ -136,7 +136,7 @@ public abstract partial class Piece : CharacterBody2D
 					//The pawn is so special bro
 					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny && (cur.getSelectedPiece() != PieceType.Nothing))
 					{
-						spawnThings(cur, moveResource.closest, curp);
+						spawnThings(cur, moveResource.closest, curp, Damage);
 					}
 				}
 			}
@@ -151,23 +151,26 @@ public abstract partial class Piece : CharacterBody2D
 			{
 				Vector2I curp = CrrentPosition + new Vector2I(-1, -1);
 				Vector2I next = new Vector2I(i+curp.X, j+curp.Y);
-				Tile cur = gridPiece[next.X, next.Y];
-				if ((cur.getSelectedPiece() != PieceType.Nothing) && (i != 0 && j != 0))
+				if(next.X is >= 0 and < 8 && next.Y is >= 0 and < 8)
 				{
-					if ((cur.getSelectedPiece() != pieceType) && !friend)
+					Tile cur = gridPiece[next.X, next.Y]; 
+					if ((cur.getSelectedPiece() != PieceType.Nothing) && (next != curp))
 					{
-						spawnThings(cur, next, curp);
-					}
-					else if ((cur.getSelectedPiece() == pieceType) && friend)
-					{
-						spawnThings(cur, next, curp);
+						if ((cur.getSelectedPiece() != pieceType) && !friend)
+						{
+							spawnThings(cur, next, curp, Damage/2);
+						}
+						else if ((cur.getSelectedPiece() == pieceType) && friend)
+						{
+							spawnThings(cur, next, curp, 1);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	private void spawnThings(Tile cur, Vector2I spawnVec, Vector2I spawn)
+	private void spawnThings(Tile cur, Vector2I spawnVec, Vector2I spawn, int dam)
 	{
 		float xmov = spawnVec.X - spawn.X;
 		float ymov = spawnVec.Y - spawn.Y;
@@ -183,7 +186,8 @@ public abstract partial class Piece : CharacterBody2D
 		//GD.Print(tan + "Tan");
 
 		//GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
-		spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage, spawnableSpecial);
+		GD.Print(spawnableSpecial);
+		spawnings.setInstances(tim, spriteNum, black, tan, cur, dam, spawnableSpecial);
 		boardNode.AddChild(spawnings);
 	}
 	
@@ -199,5 +203,5 @@ public abstract partial class Piece : CharacterBody2D
 	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
 	public abstract Godot.Collections.Dictionary<string, int> GivePiece();
-
+	public abstract void ActivateSpecial();
 }

@@ -13,23 +13,32 @@ public partial class Spawnables : CharacterBody2D
 	private float angle; 
 	private Tile tilly;
 	private int dama;
+	private int spec;
 
 	public void setInstances(float time, int num, bool isBlack, float tan, Tile til, int damag, int special)
 	{
-		if(isBlack)
+		if (isBlack)
 			sprite.Play("BlackPieces");
 		sprite.Frame = num;
-		timeren.WaitTime = time;
 		angle = tan;
 		dama = damag;
 		tilly = til;
-		this.Rotation = tan + ((float) (Mathf.Pi)/2f);
-//		if(special == 1)
-			
-	}
+		this.Rotation = tan + ((float)(Mathf.Pi) / 2f);
+		spec = special;
+		if (spec == 1)
+		{
+			MaxSpeed *= 2f; 
+			Acceleration *= 2f;
+			time /= 2;
+		}
+		
+		timeren.WaitTime = time;
+}
 
 	public void deleteSpawnables()
 	{
+		if (spec == 1) //Bishop
+			tilly.AttackAlls(true);
 		tilly.DamagePiece(dama);
 		this.QueueFree();
 	}

@@ -69,7 +69,10 @@ public partial class Bishop : Piece
 	{
 		Health = Resources["Health"];
 	}
-
+	public override void ActivateSpecial()
+	{
+		spawnableSpecial = 1;
+	}
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
 		return new Dictionary<string, int>{

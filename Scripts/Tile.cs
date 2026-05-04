@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO.IsolatedStorage;
 using UIProject.Scripts;
 
 public partial class Tile : Node2D
@@ -80,6 +81,12 @@ public partial class Tile : Node2D
 		}
 	}
 
+	public void specialActivation()
+	{
+		if(selectedPiece is not null)
+			selectedPiece.ActivateSpecial();
+	}
+
 	public void EnPassant(int pTye)
 	{
 		if(selectedPiece is not null)
@@ -120,7 +127,6 @@ public partial class Tile : Node2D
 		{
 			if (isClear)
 			{
-				selectedPiece.AttackAll(false);
 				//Gd.Print("Shaurya");
 				if(selectedPiece is King king)
 					EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
@@ -128,6 +134,11 @@ public partial class Tile : Node2D
 			selectedPiece.QueueFree();
 			selectedPiece = null;
 		}
+	}
+
+	public void AttackAlls(bool isFriend)
+	{
+		selectedPiece.AttackAll(isFriend);
 	}
 
 	public Piece.PieceType getSelectedPiece()

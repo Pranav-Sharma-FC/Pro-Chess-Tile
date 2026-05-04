@@ -40,7 +40,10 @@ public partial class Rook : Piece
 	{
 		base._Process(delta);
 	}
-
+	public override void ActivateSpecial()
+	{
+		
+	}
 
 // Signal, connect signal to every single tile, 
 

@@ -34,7 +34,10 @@ public partial class Queen : Piece
 		westw.setValues(-1, 1);
 		Movements.Add(westw);	
 	}
-
+	public override void ActivateSpecial()
+	{
+		
+	}
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");

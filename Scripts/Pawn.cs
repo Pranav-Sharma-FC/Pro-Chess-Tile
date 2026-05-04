@@ -37,6 +37,11 @@ public partial class Pawn : Piece
 		Movements.Add(westww);	
 	}
 
+	public override void ActivateSpecial()
+	{
+		
+	}
+
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");

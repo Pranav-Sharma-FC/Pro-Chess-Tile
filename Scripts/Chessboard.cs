@@ -9,6 +9,7 @@ public partial class Chessboard : Node2D
 	//Update: On track to complete first sprint by second sprint, cant do anything about tilemaplayers but oh well
 	//Update: Yo only a bit behind its just checking which shouldnt be too hard right                         right?
 	//Update: Pranav's code is incomprehensible
+	//Update: ^Skill Issue^ && Also Special Abilities hooray (more exceptions)
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
@@ -25,7 +26,7 @@ public partial class Chessboard : Node2D
 	[Export] private BoardArt boardArt;
 	private int pieceTypeM;
 	private King white, black;
-	private bool special;
+	private bool special = false;
 
 	private enum Turn
 	{
@@ -76,6 +77,12 @@ public partial class Chessboard : Node2D
 		// ile = GetTile(3, 0);
 	}
 
+	/*public override void _Process(double delta)
+	{
+		if(_selectedTile.getSelectedPiece() == Piece.PieceType.Nothing)
+			clearCircles();
+	}*/
+
 	private void OnTileClicked(Vector2I pos)
 	{
 		switch(turn)
@@ -96,6 +103,11 @@ public partial class Chessboard : Node2D
 		}
 	}
 
+	public void SpecialAccept()
+	{
+		special = true;
+	}
+
 	private void Place(Vector2I pos, Piece.PieceType pieceType)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
@@ -108,7 +120,13 @@ public partial class Chessboard : Node2D
 				turn = Turn.SelectWhite;
 			Select(pos, pieceType);
 		}
-		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
+		else if (special)
+		{
+			dealWithSpecials(pos, pieceType);
+			clearCircles();
+			special = false;
+		}
+		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()) && !special)
 		{
 //here is where you need you signal, stop old spawnables, start new, check turn 
 			SetPieces(tile, _selectedTile.getPieceScene());
@@ -123,20 +141,35 @@ public partial class Chessboard : Node2D
 					tiles.gridPiece(grid); 
 				}
 			}
-			if (pieceType == Piece.PieceType.White)
-			{
-				turn = Turn.SelectBlack;
-				pieceTypeM = (int)Piece.PieceType.White;
-				EmitSignal(SignalName.SpawnSwitch,pieceTypeM);
-			}
-			else
-			{
-				turn = Turn.SelectWhite;
-				pieceTypeM = (int)Piece.PieceType.Black;
-				EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
-			}
+			SwitchTurns(pieceType);
+			
 		}
 		//Gd.Print(turn);
+	}
+
+	private void SwitchTurns(Piece.PieceType pieceType)
+	{
+		if (pieceType == Piece.PieceType.White)
+		{
+			turn = Turn.SelectBlack;
+			pieceTypeM = (int)Piece.PieceType.White;
+			EmitSignal(SignalName.SpawnSwitch,pieceTypeM);
+		}
+		else
+		{
+			turn = Turn.SelectWhite;
+			pieceTypeM = (int)Piece.PieceType.Black;
+			EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
+		}
+	}
+
+	private void dealWithSpecials(Vector2I pos, Piece.PieceType pieceType)
+	{
+		if (true) //Mana Dealing
+		{
+			_selectedTile.specialActivation();
+			SwitchTurns(pieceType);
+		}
 	}
 
 	private void Fallen()
