@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using System.Xml;
 using Godot.Collections;
 
+namespace UIProject.Scripts;
+
 public abstract partial class Piece : CharacterBody2D
 {
-	public Chessboard ChessBoard;
-	[Export] protected PackedScene PieceScene;
-	[Export] protected Vector2[] Points;
+	protected Array<MovementResource> Movements = new Array<MovementResource>();
+	private static readonly PackedScene spawning = GD.Load<PackedScene>("res://Scenes/spawnables.tscn");
 	protected Vector2I CrrentPosition;
-	[Export] Texture2D blackRes;
-	[Export] AnimatedSprite2D sprite;
+	[Export] protected AnimatedSprite2D sprite;
+	[Export] protected ProgressBar bar;
+	protected bool canSpawn = false;
+	protected Tile[,] gridPiece;
+	protected int spriteNum;
 	
+	[Export] protected Timer timer;
+
+	protected bool timerDone;
 	//Spawnables
-	[Export] protected int Health;
+	[Export] protected int Health = 100;
 	[Export] protected int Damage;
 	
 	public enum PieceType
@@ -23,17 +30,19 @@ public abstract partial class Piece : CharacterBody2D
 		White,
 		Black
 	}
+//creates constant variables for different kinds of pieces 
 
 
 	protected PieceType pieceType = PieceType.White;
 
 	public void blackPiece()
 	{
-		int spriteNum = sprite.Frame;
+		spriteNum = sprite.Frame;
 		pieceType = PieceType.Black;
 		sprite.Play("BlackPieces");
 		sprite.Frame = spriteNum;
 	}
+// "sprite.Frame=spriteNum" Deals with the sprite frame going back to its default frame, that's why its there twice
 	
 	public PieceType returnType()
 	{
@@ -64,18 +73,95 @@ public abstract partial class Piece : CharacterBody2D
 		
 		return new Vector2I(xNext, yNext);
 	}
+//Collects the data to see what coordinate the selected piece is going to 
 
 	public void damagePiece(int damage)
 	{
 		Health -= damage;
+	}
+//Uses the health variable as an integer, having the damage be subtract from it, with the original health exported earlier 
+
+	public void setGri(Tile[,] grid, Vector2I CurrentPosition)
+	{
+		gridPiece = grid;
+		CrrentPosition =  CurrentPosition;
+	}
+
+	public void SpawnSpawnables(int pType, Vector2I curPos)
+	{
+		timer.WaitTime = 0.75;
+		CrrentPosition = curPos;
+		canSpawn = (this.pieceType == (PieceType)pType);
+		PieceBlocking(CrrentPosition, gridPiece);
+		//GD.Print("Is Connected" + canSpawn + curPos);
+		//GD.Print(gridPiece[0,0].getSelectedPiece());
+		if (canSpawn)
+			timer.Start();
+		else
+			timer.Stop();
+		foreach (MovementResource moveResource in Movements)
+		{
+			//GD.Print(moveResource.closest);
+		}
+	}
+
+	public int getHealth()
+	{
+		return Health;
+	}
+
+	public override void _Process(double delta)
+	{
+		bar.Value = Health;
+
+		if (canSpawn && timerDone)
+		{
+			//GD.Print(Health);
+			//GD.Print("Spawn Done");
+			timerDone = false;
+			timer.Start();
+			foreach (MovementResource moveResource in Movements)
+			{
+				Vector2I temp = new Vector2I(-1, -1);
+				if (moveResource.closest != temp)
+				{
+					Tile cur = gridPiece[moveResource.closest.X, moveResource.closest.Y];
+					Vector2I curp = CrrentPosition + temp;
+					float xmov = moveResource.closest.X - curp.X;
+					float ymov = moveResource.closest.Y - curp.Y;
+					float dist = Mathf.Sqrt((ymov*ymov)+(xmov*xmov));
+					//GD.Print(moveResource.closest, pieceType, cur.getSelectedPiece(), CrrentPosition);
+					//The pawn is so special bro
+					if ((cur.getSelectedPiece() != pieceType) && moveResource.pawny && (cur.getSelectedPiece() != PieceType.Nothing))
+					{
+						//GD.Print("Does This work?");
+						//cur.DamagePiece(Damage);
+						Spawnables spawnings = spawning.Instantiate<Spawnables>();
+						
+						//GD.Print(moveResource.closest, curp);
+						float tan = (Mathf.Atan2(ymov, xmov));
+						bool black = pieceType == PieceType.Black;
+						float tim = (dist/spawnings.getSpeed())*100f;
+						//GD.Print("Time: " + tim + ", Tan: " + tan + ", YMov, XMov" + ymov + ", " + xmov);
+						spawnings.setInstances(tim, spriteNum, black, tan, cur, Damage);
+						AddChild(spawnings);
+					}
+				}
+			}
+		}
+	}
+	
+	public void TimerDone()
+	{
+		timerDone = true;
 	}
 	
 
 //abstract class, spawnables 
 
 	public abstract void SetPoints(Godot.Collections.Dictionary<string, int> Resources);
-	public abstract bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
+	public abstract void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles);
 	public abstract bool Move(Vector2I NextPosition,  Vector2I CurrentPosition);
 	public abstract Godot.Collections.Dictionary<string, int> GivePiece();
-	
+
 }

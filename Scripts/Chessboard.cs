@@ -8,11 +8,14 @@ public partial class Chessboard : Node2D
 	//Update: everything that I made doesnt bloody work because tilemaplayers scene collections are **********
 	//Update: On track to complete first sprint by second sprint, cant do anything about tilemaplayers but oh well
 	//Update: Yo only a bit behind its just checking which shouldnt be too hard right                         right?
-
+	//Update: Pranav's code is incomprehensible
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
 	
+	[Signal]
+	public delegate void SpawnSwitchEventHandler(int pieceType);
+	// allows SpawnSwitchEventHandler to be used and altered across scripts
 	
 	//[Export] private PackedScene pScene;
 	[Export] private PackedScene circleScene;
@@ -21,6 +24,7 @@ public partial class Chessboard : Node2D
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
 	[Export] private Control MateScreen;
+	private int pieceTypeM;
 	private King white, black;
 
 	private enum Turn
@@ -30,14 +34,14 @@ public partial class Chessboard : Node2D
 		SelectBlack,
 		PlaceBlack
 	}
+	//informs the code who's turn it is
 	private Turn turn  = Turn.SelectWhite;
+	
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
-		
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
-		int i = 0;
 		foreach (Node2D child in GetChildren())
 		{
 			if (child is Tile tile)
@@ -53,6 +57,9 @@ public partial class Chessboard : Node2D
 			if (child is Tile tile)
 			{ 
 				tile.GameOver += EndGame;
+				this.SpawnSwitch += tile.switchSpawnables;
+				tile.Death += Fallen;
+				
 				if(tile.getPosition().Y >= 3)
 				{
 					tile.setPiece(tile.getPieceScene(), true);
@@ -61,6 +68,7 @@ public partial class Chessboard : Node2D
 				{
 					tile.setPiece(tile.getPieceScene());
 				}
+				tile.gridPiece(grid);
 			}
 		}
 		
@@ -103,17 +111,44 @@ public partial class Chessboard : Node2D
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()))
 		{
 //here is where you need you signal, stop old spawnables, start new, check turn 
-			if(pieceType == Piece.PieceType.White)
-				turn = Turn.SelectBlack;
-			else
-				turn = Turn.SelectWhite;
 			SetPieces(tile, _selectedTile.getPieceScene());
 			tile.SetPoints(_selectedTile.GivePiece());
 			_selectedTile.ClearPiece();
 			_selectedTile = null;
 			clearCircles();
+			foreach (Node2D child in GetChildren())
+			{
+				if (child is Tile tiles)
+				{
+					tiles.gridPiece(grid); 
+				}
+			}
+			if (pieceType == Piece.PieceType.White)
+			{
+				turn = Turn.SelectBlack;
+				pieceTypeM = (int)Piece.PieceType.White;
+				EmitSignal(SignalName.SpawnSwitch,pieceTypeM);
+			}
+			else
+			{
+				turn = Turn.SelectWhite;
+				pieceTypeM = (int)Piece.PieceType.Black;
+				EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
+			}
 		}
-		GD.Print(turn);
+		//Gd.Print(turn);
+	}
+
+	private void Fallen()
+	{
+		foreach (Node2D child in GetChildren())
+		{
+			if (child is Tile tiles)
+			{
+				tiles.gridPiece(grid, isFallen:true); 
+			}
+		}
+		EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
 	}
 
 	private void clearCircles()
@@ -127,18 +162,18 @@ public partial class Chessboard : Node2D
 	private void Select(Vector2I pos, Piece.PieceType pieceType)
 	{
 		Tile tile = GetTile(pos.X, pos.Y);
-		GD.Print("Bruh" + tile + pieceType);
+		//Gd.Print("Bruh" + tile + pieceType);
 		_selectedTile = tile;
 		bool hasMove = false;
 		if(!tile.hasPieceNot())
 		{
+			//Gd.Print("King Please");
 			if(pieceType==tile.getSelectedPiece())
 			{
+				//Gd.Print("King Please");
 				tile.block(grid);
 				for (int i = 0; i < 8; i++)
 				{
-
-
 					for(int j = 0; j < 8; j++)
 					{	
 						Tile e = GetTile(i, j);

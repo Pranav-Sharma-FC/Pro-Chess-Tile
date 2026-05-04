@@ -1,12 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://devdobcp8uugj"]
+[gd_scene load_steps=20 format=3 uid="uid://devdobcp8uugj"]
 
 [ext_resource type="Script" uid="uid://djk5q7yab4fxw" path="res://Scripts/Rook.cs" id="1_wwc4d"]
-[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_5ob0w"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_j1kqh"]
-[ext_resource type="Resource" uid="uid://jm6ybl6l1vsv" path="res://Assets/Resources/East.tres" id="3_qgw01"]
-[ext_resource type="Resource" uid="uid://cd3r6dd7m2h73" path="res://Assets/Resources/North.tres" id="4_yoxvb"]
-[ext_resource type="Resource" uid="uid://2a2qnmtvcj2m" path="res://Assets/Resources/South.tres" id="5_losgq"]
-[ext_resource type="Resource" uid="uid://3bdju1x4sp66" path="res://Assets/Resources/West.tres" id="6_ce33x"]
 [ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="8_yoxvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
@@ -108,10 +103,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoxvb"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_losgq"]
+bg_color = Color(0.941176, 0, 0, 0.239216)
+
+[node name="Rook2" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_wwc4d")
-Movements = Array[ExtResource("2_5ob0w")]([ExtResource("3_qgw01"), ExtResource("4_yoxvb"), ExtResource("5_losgq"), ExtResource("6_ce33x")])
 sprite = NodePath("AnimatedSprite2D")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+Damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -120,12 +123,19 @@ shape = SubResource("RectangleShape2D_eu7ni")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_byrkh")
-animation = &"BlackPieces"
+animation = &"Pieces"
 frame = 2
 speed_scale = 0.0
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -56.0
-offset_top = 54.0
-offset_right = 57.0
-offset_bottom = 95.0
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 28.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yoxvb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_losgq")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]

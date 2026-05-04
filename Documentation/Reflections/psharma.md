@@ -21,3 +21,22 @@ How overcimplicated I was making it earlier
 ### Lessons
 It was easy all along. 
 ## Sprint 3
+In sprint 3, we worked on piece blocking and all of that sort, with a little bit of work on checking
+### Work Done
+Finished PieceBlocking and Checking in Progress
+### Difficulties
+Figuring out how to make Pieceblocking work
+### Surprises
+How fun debugging Pieceblocking was
+### Lessons
+Get on the grind
+## Sprint 4
+In sprint 4, we worked on spawnables, and finished checking
+### Work Done
+Finished spawnables mainly, except for king knight and pawn, and set up code for next sprint for those three
+### Difficulties
+Figuring out how to incorporate pieceblocking code into spawnables
+### Surprises
+The eventual trial and error process of the code
+### Lessons
+Keep on pushin

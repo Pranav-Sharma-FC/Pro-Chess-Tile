@@ -6,8 +6,24 @@ namespace UIProject.Scripts;
 
 public partial class Rook : Piece
 {
+	
 	//AI helped me remember Godot.Collections
-	[Export] private Array<MovementResource> Movements = new Array<MovementResource>();
+	public override void _Ready()
+	{
+		spriteNum = sprite.Frame;
+		MovementResource north = new MovementResource();
+		north.setValues(0, 1);
+		Movements.Add(north);
+		MovementResource south = new MovementResource();
+		south.setValues(0, -1);
+		Movements.Add(south);
+		MovementResource east = new MovementResource();
+		east.setValues(1, 0);
+		Movements.Add(east);
+		MovementResource west = new MovementResource();
+		west.setValues(-1, 0);
+		Movements.Add(west);	
+	}
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];
@@ -16,13 +32,19 @@ public partial class Rook : Piece
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
 		return new Dictionary<string, int>{
-			{"Health", Health}
+			{"Health", Health},
 		};
 	}
 
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+	}
+
+
 // Signal, connect signal to every single tile, 
 
-	public override bool PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
+	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{
 		//GD.Print("u");
 		CurrentPosition -= new Vector2I(1, 1);
@@ -63,8 +85,6 @@ public partial class Rook : Piece
 				
 			}
 		}
-
-		return false;
 	}
 	
 	//Logic to make sure piece can move there
@@ -91,8 +111,8 @@ public partial class Rook : Piece
 			}
 			int toNext = Math.Abs((CurrentPosition.X-NextPosition.X)+(CurrentPosition.Y-NextPosition.Y));
 			int toClosest = Math.Abs((CurrentPosition.X-closestCurrent.X)+(CurrentPosition.Y-closestCurrent.Y));
-			GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
-			GD.Print("Next: " + toNext + " Closest: " + toClosest);
+			//GD.Print("Current: " + CurrentPosition + ", Next: " + NextPosition + ", Cloests: " + closestCurrent);
+			//GD.Print("Next: " + toNext + " Closest: " + toClosest);
 			if (closestCurrent == new Vector2I(-1, -1)) 
 				moveFlag = true;
 			else if (toNext <= toClosest)

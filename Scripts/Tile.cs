@@ -4,12 +4,16 @@ using UIProject.Scripts;
 
 public partial class Tile : Node2D
 {
+	
+	[Signal]
+	public delegate void DeathEventHandler();
 	[Signal]
 	public delegate void GameOverEventHandler(int pieceType);
 
 	[Export] private Vector2I position;
 	[Export] private Piece selectedPiece;
 	[Export] private PackedScene pieceScene;
+	private Tile[,] gridTile;
 
 	public Vector2I getPosition()
 	{
@@ -21,11 +25,17 @@ public partial class Tile : Node2D
 		return pieceScene;
 	}
 
+	public void switchSpawnables(int pieceType)
+	{
+		if(selectedPiece is not null)
+			selectedPiece.SpawnSpawnables(pieceType, getPosition());
+	}
+
 	public void setPiece(PackedScene pScene, bool isBlack = false)
 	{
 		if(pScene is not null)
 		{
-			ClearPiece();
+			ClearPiece(true);
 			pieceScene = pScene;
 			Piece fry = pieceScene.Instantiate<Piece>();
 			selectedPiece = fry;
@@ -33,6 +43,11 @@ public partial class Tile : Node2D
 			{
 				selectedPiece.blackPiece();
 			}
+			if(fry is Pawn paw)
+			{
+				paw.Passant += EnPassant;
+			}
+			selectedPiece.setGri(gridTile, getPosition());
 			AddChild(fry);
 			
 		}
@@ -52,16 +67,60 @@ public partial class Tile : Node2D
 			return false;
 		}
 	}
-	
-	
-	
-	public void ClearPiece()
+
+	public override void _Process(double delta)
+	{
+		if (selectedPiece is not null)
+		{
+			if (selectedPiece.getHealth() <= 0)
+			{
+				EmitSignal(SignalName.Death);
+				ClearPiece();
+			}
+		}
+	}
+
+	public void EnPassant(int pTye)
 	{
 		if(selectedPiece is not null)
 		{
-			if (selectedPiece is King king)
+			Piece.PieceType truth = (Piece.PieceType)pTye;
+			Vector2I truePos = new Vector2I(position.X-1 , position.Y -1);
+			canPassant(truth, (truePos + (new Vector2I(-1, 0))));
+			canPassant(truth, (truePos + (new Vector2I(1, 0))));
+		}
+	}
+
+	private void canPassant(Piece.PieceType truth, Vector2I loco)
+	{
+		if(loco.X is >= 0 and < 8 && loco.Y is >= 0 and < 8)
+		{
+			Vector2I noLoco = new Vector2I(position.X-1 , position.Y -1);
+			Tile tile = gridTile[loco.X, loco.Y];
+			tile.sendPassant(truth, noLoco);
+		}
+		
+	}
+
+	public void sendPassant(Piece.PieceType truth, Vector2I loco)
+	{
+		if(selectedPiece is not null)
+		{
+			//GD.Print(loco);
+			if(selectedPiece is Pawn pin && (truth != selectedPiece.returnType()))
 			{
-				GD.Print("Shaurya");
+				pin.Passanting(loco);
+			}
+		}
+	}
+
+	public void ClearPiece(bool isClear = false)
+	{
+		if(selectedPiece is not null)
+		{
+			if (selectedPiece is King king && isClear)
+			{
+				//Gd.Print("Shaurya");
 				EmitSignal(SignalName.GameOver, (int)selectedPiece.returnType());
 			}
 			selectedPiece.QueueFree();
@@ -77,6 +136,15 @@ public partial class Tile : Node2D
 			return Piece.PieceType.Nothing;
 	}
 
+	public bool hasPiece()
+	{
+		if(selectedPiece is not null)
+			return true;
+		else
+			return false;
+	}
+
+	//If it works it works ok
 	public bool hasPieceNot(Piece.PieceType pieceType = Piece.PieceType.Nothing)
 	{
 		Piece.PieceType current = getSelectedPiece();
@@ -86,7 +154,9 @@ public partial class Tile : Node2D
 		}
 		else if (selectedPiece is King king)
 		{
-			if (king.canCapture() && pieceType != current)
+			if(pieceType == Piece.PieceType.Nothing)
+				return false;
+			else if (king.canCapture() && pieceType != current)
 				return true; 
 			else
 				return false; 
@@ -119,6 +189,22 @@ public partial class Tile : Node2D
 	{
 		return selectedPiece.GivePiece();
 	}
-	
+
+	public void DamagePiece(int damage)
+	{
+		if(selectedPiece is not null)
+			selectedPiece.damagePiece(damage);
+	}
+
+	public void gridPiece(Tile[,] grid, bool isFallen = false)
+	{
+		gridTile = grid;
+		if (selectedPiece is not null)
+		{
+			selectedPiece.setGri(grid, getPosition());
+			if(isFallen)
+				block(grid);
+		}
+	}
 	
 }

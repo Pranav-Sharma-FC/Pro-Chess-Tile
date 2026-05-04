@@ -1,16 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://mmreuf30njqo"]
+[gd_scene load_steps=20 format=3 uid="uid://mmreuf30njqo"]
 
 [ext_resource type="Script" uid="uid://5npaf4ct1awj" path="res://Scripts/Queen.cs" id="1_gs1eq"]
-[ext_resource type="Resource" uid="uid://jm6ybl6l1vsv" path="res://Assets/Resources/East.tres" id="2_hkud0"]
 [ext_resource type="Texture2D" uid="uid://54u1jgrk0krd" path="res://Assets/pixel chess_v1.2/16x16 pieces/BlackPieces.png" id="2_jje3b"]
-[ext_resource type="Script" uid="uid://bh7e0ytqeij2o" path="res://Scripts/MovementResource.cs" id="2_s6eqf"]
-[ext_resource type="Resource" uid="uid://cd3r6dd7m2h73" path="res://Assets/Resources/North.tres" id="3_eiug3"]
-[ext_resource type="Resource" uid="uid://cujt7xom4j4y8" path="res://Assets/Resources/NorthEast.tres" id="4_s6eqf"]
-[ext_resource type="Resource" uid="uid://cg7eonhum8wb8" path="res://Assets/Resources/NorthWest.tres" id="5_su070"]
-[ext_resource type="Resource" uid="uid://2a2qnmtvcj2m" path="res://Assets/Resources/South.tres" id="6_72g7q"]
-[ext_resource type="Resource" uid="uid://ch4ladysdewor" path="res://Assets/Resources/SouthEast.tres" id="7_exutl"]
-[ext_resource type="Resource" uid="uid://bbrgd2nri722y" path="res://Assets/Resources/SouthWest.tres" id="8_wkjcw"]
-[ext_resource type="Resource" uid="uid://3bdju1x4sp66" path="res://Assets/Resources/West.tres" id="9_rjid4"]
 [ext_resource type="Texture2D" uid="uid://bgybtxm38h81o" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="11_eiug3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu7ni"]
@@ -112,10 +103,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Queen" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hw32"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh6ev"]
+bg_color = Color(0.941176, 0, 0, 0.239216)
+
+[node name="Queen" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "bar", "timer")]
 script = ExtResource("1_gs1eq")
-Movements = Array[ExtResource("2_s6eqf")]([ExtResource("2_hkud0"), ExtResource("3_eiug3"), ExtResource("4_s6eqf"), ExtResource("5_su070"), ExtResource("6_72g7q"), ExtResource("7_exutl"), ExtResource("8_wkjcw"), ExtResource("9_rjid4")])
 sprite = NodePath("AnimatedSprite2D2")
+bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+Damage = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4.5, 4.5)
@@ -128,3 +127,16 @@ sprite_frames = SubResource("SpriteFrames_s6eqf")
 animation = &"Pieces"
 frame = 4
 speed_scale = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 28.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1hw32")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yh6ev")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="TimerDone"]
