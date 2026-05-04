@@ -20,6 +20,7 @@ public partial class Chessboard : Node2D
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
+	[Export] private Control MateScreen;
 	private King white, black;
 
 	private enum Turn
@@ -192,11 +193,12 @@ public partial class Chessboard : Node2D
 		if (truth == Piece.PieceType.White)
 		{
 			GD.Print("E");
-			
 		}
 		GetTree().Paused = true;
+		var MateScreen = GetNode<Control>("MateScreen");
+		MateScreen.Visible = true;
 	}
-
+				
 	/*private Vector2 Cordinates()
 	{
 		//Improved by Chatgpt

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://0w6b41qrkpnt"]
+[gd_scene load_steps=15 format=4 uid="uid://0w6b41qrkpnt"]
 
 [ext_resource type="Texture2D" uid="uid://dvn28mcyeigfo" path="res://Assets/pixil-frame-0.png" id="1_f817v"]
 [ext_resource type="Script" uid="uid://dgpbi4xuycn45" path="res://Scripts/Chessboard.cs" id="2_ewtbj"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b47oa6e6gf0s2" path="res://Scenes/king.tscn" id="9_h7iwg"]
 [ext_resource type="PackedScene" uid="uid://mmreuf30njqo" path="res://Scenes/queen.tscn" id="10_oy7aq"]
 [ext_resource type="PackedScene" uid="uid://bdmpfay0tveub" path="res://Scenes/pawn.tscn" id="11_f7s2e"]
+[ext_resource type="PackedScene" uid="uid://cjpmydg4hyrad" path="res://Scenes/endscreen.tscn" id="12_46w5t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8xde"]
 texture = ExtResource("1_f817v")
@@ -400,5 +401,11 @@ offset_bottom = 800.0
 flat = true
 
 [node name="Places" type="Node2D" parent="Board"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MateScreen" parent="CanvasLayer" instance=ExtResource("12_46w5t")]
+process_mode = 3
+visible = false
 
 [connection signal="pressed" from="Board/Button" to="Board/Chess Board" method="Pressed"]
