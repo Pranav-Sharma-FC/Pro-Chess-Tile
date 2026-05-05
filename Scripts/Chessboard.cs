@@ -12,7 +12,8 @@ public partial class Chessboard : Node2D
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
-
+	private PackedScene coinScene = GD.Load<PackedScene>("res;//Scenes/coin.tscn");
+	private Node2D spawnables;
 	
 	[Signal]
 	public delegate void SpawnSwitchEventHandler(int pieceType);
@@ -21,8 +22,6 @@ public partial class Chessboard : Node2D
 	//[Export] private PackedScene pScene;
 	[Export] private PackedScene circleScene;
 	[Export] private Node2D circles;
-	private PackedScene coinScene = GD.Load<PackedScene>("res://Scenes/coin.tscn");
-	private Node2D spawnables;
 	[Export] private int width = 8;
 	[Export] private int height = 8;
 	[Export] private BoardArt boardArt;
@@ -44,6 +43,8 @@ public partial class Chessboard : Node2D
 	{
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
+		spawnables = GetNode<Node2D>("Spawnables");
+		SpawnCoin(Vector2.Zero);
 		foreach (Node2D child in GetChildren())
 		{
 			if (child is Tile tile)
@@ -233,6 +234,15 @@ public partial class Chessboard : Node2D
 			
 		}
 		GetTree().Paused = true;
+	}
+	
+	private void SpawnCoin(Vector2 position)
+	{
+		var coin = coinScene.Instantiate<Node2D>();
+		coin.Position = position;
+		coin.Scale = new Vector2(5,5);
+		coin.ZIndex = 999;
+		spawnables.AddChild(coin);
 	}
 
 	/*private Vector2 Cordinates()
