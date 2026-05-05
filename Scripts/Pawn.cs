@@ -39,7 +39,9 @@ public partial class Pawn : Piece
 
 	public override void ActivateSpecial()
 	{
-		
+		spawnableSpecial = 2;
+		AttackAll(false);
+		Health = 0;
 	}
 
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)

@@ -54,6 +54,14 @@ public partial class Tile : Node2D
 		}
 	}
 
+	public int getPieceMana()
+	{
+		if (selectedPiece is not null)
+			return selectedPiece.getMana();
+		else
+			return Int32.MaxValue;
+	}
+
 	public void block(Tile[,] tiles)
 	{
 		selectedPiece.PieceBlocking(getPosition(), tiles);

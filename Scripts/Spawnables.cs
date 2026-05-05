@@ -25,13 +25,12 @@ public partial class Spawnables : CharacterBody2D
 		tilly = til;
 		this.Rotation = tan + ((float)(Mathf.Pi) / 2f);
 		spec = special;
-		if (spec == 1)
+		if (spec == 1 || spec == 2)
 		{
 			MaxSpeed *= 2f; 
 			Acceleration *= 2f;
 			time /= 2;
 		}
-		
 		timeren.WaitTime = time;
 }
 
@@ -53,6 +52,9 @@ public partial class Spawnables : CharacterBody2D
 		Velocity = direction.Normalized() * _currentSpeed;
 
 		MoveAndSlide();
+		
+		if(tilly.getSelectedPiece() == Piece.PieceType.Nothing)
+			QueueFree();
 	}
 
 	public float getSpeed()

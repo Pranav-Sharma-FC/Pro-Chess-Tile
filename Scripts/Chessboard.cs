@@ -27,6 +27,9 @@ public partial class Chessboard : Node2D
 	private int pieceTypeM;
 	private King white, black;
 	private bool special = false;
+	private int _whiteMana, _blackMana;
+	private float _whiteTim, _blackTim;
+	private Timer _whiteTimer, _blackTimer;
 
 	private enum Turn
 	{
@@ -77,11 +80,24 @@ public partial class Chessboard : Node2D
 		// ile = GetTile(3, 0);
 	}
 
-	/*public override void _Process(double delta)
+	public override void _Process(double delta)
 	{
-		if(_selectedTile.getSelectedPiece() == Piece.PieceType.Nothing)
-			clearCircles();
-	}*/
+		if(_selectedTile != null)
+		{
+			if (_selectedTile.getSelectedPiece() == Piece.PieceType.Nothing)
+				clearCircles();
+		}
+		if (_whiteTimer.TimeLeft < _whiteTim)
+		{
+			_whiteTim -= 30;
+			_whiteMana++;
+		}
+		else if (_blackTimer.TimeLeft < _blackTim)
+		{
+			_blackTim -= 30;
+			_blackMana++;
+		}
+	}
 
 	private void OnTileClicked(Vector2I pos)
 	{
@@ -128,7 +144,7 @@ public partial class Chessboard : Node2D
 		}
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()) && !special)
 		{
-//here is where you need you signal, stop old spawnables, start new, check turn 
+			//here is where you need you signal, stop old spawnables, start new, check turn 
 			SetPieces(tile, _selectedTile.getPieceScene());
 			tile.SetPoints(_selectedTile.GivePiece());
 			_selectedTile.ClearPiece();
@@ -165,7 +181,7 @@ public partial class Chessboard : Node2D
 
 	private void dealWithSpecials(Vector2I pos, Piece.PieceType pieceType)
 	{
-		if (true) //Mana Dealing
+		if (((pieceType==Piece.PieceType.Black)&&(_blackMana > _selectedTile.getPieceMana()))||((pieceType==Piece.PieceType.White)&&(_whiteMana > _selectedTile.getPieceMana())) &&  (pieceType == _selectedTile.getSelectedPiece())) //Mana Dealing
 		{
 			_selectedTile.specialActivation();
 			SwitchTurns(pieceType);

@@ -19,6 +19,7 @@ public abstract partial class Piece : CharacterBody2D
 	protected Tile[,] gridPiece;
 	protected int spriteNum;
 	protected Node2D boardNode;
+	protected int manaNeed = 4;
 	
 	[Export] protected Timer timer;
 
@@ -35,7 +36,10 @@ public abstract partial class Piece : CharacterBody2D
 		Black
 	}
 //creates constant variables for different kinds of pieces 
-
+	public int getMana()
+	{
+		return manaNeed;
+	}
 
 	protected PieceType pieceType = PieceType.White;
 
@@ -158,7 +162,7 @@ public abstract partial class Piece : CharacterBody2D
 					{
 						if ((cur.getSelectedPiece() != pieceType) && !friend)
 						{
-							spawnThings(cur, next, curp, Damage/2);
+							spawnThings(cur, next, curp, 50);
 						}
 						else if ((cur.getSelectedPiece() == pieceType) && friend)
 						{
