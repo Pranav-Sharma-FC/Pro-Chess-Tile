@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Globalization;
 using UIProject.Scripts;
 
 public partial class Chessboard : Node2D
@@ -27,10 +28,12 @@ public partial class Chessboard : Node2D
 	private int pieceTypeM;
 	private King white, black;
 	private bool special = false;
+	
+	//Timer Variables
 	private int _whiteMana, _blackMana;
-	private float _whiteTim, _blackTim;
-	private Timer _whiteTimer, _blackTimer;
-
+	private double _whiteTim, _blackTim;
+	[Export] private Timer _whiteTimer, _blackTimer;
+	[Export] private Label _whiteLab, _blackLab;
 	private enum Turn
 	{
 		SelectWhite,
@@ -44,6 +47,10 @@ public partial class Chessboard : Node2D
 	//Ready Script improved on by GPT to make easier tiles, further enhanced by me
 	public override void _Ready()
 	{
+		_whiteTim = 590.0;
+		_blackTim = 590.0;
+		_blackTimer.Paused = true;
+		_whiteTimer.Paused = false;
 		boardArt.OnBoardArrived += OnTileClicked;
 		grid = new Tile[width, height];
 		foreach (Node2D child in GetChildren())
@@ -82,11 +89,6 @@ public partial class Chessboard : Node2D
 
 	public override void _Process(double delta)
 	{
-		if(_selectedTile != null)
-		{
-			if (_selectedTile.getSelectedPiece() == Piece.PieceType.Nothing)
-				clearCircles();
-		}
 		if (_whiteTimer.TimeLeft < _whiteTim)
 		{
 			_whiteTim -= 30;
@@ -97,6 +99,8 @@ public partial class Chessboard : Node2D
 			_blackTim -= 30;
 			_blackMana++;
 		}
+		_whiteLab.Text = _whiteTimer.TimeLeft.ToString(CultureInfo.InvariantCulture) + " Mana: "+ _whiteMana;
+		_blackLab.Text = _blackTimer.TimeLeft.ToString(CultureInfo.InvariantCulture)+ " Mana: " + _blackMana;
 	}
 
 	private void OnTileClicked(Vector2I pos)
@@ -139,7 +143,6 @@ public partial class Chessboard : Node2D
 		else if (special)
 		{
 			dealWithSpecials(pos, pieceType);
-			clearCircles();
 			special = false;
 		}
 		else if ((_selectedTile.getPosition() != tile.getPosition())&&(_selectedTile.canMove(tile.getPosition()))&&tile.hasPieceNot(_selectedTile.getSelectedPiece()) && !special)
@@ -169,12 +172,16 @@ public partial class Chessboard : Node2D
 		{
 			turn = Turn.SelectBlack;
 			pieceTypeM = (int)Piece.PieceType.White;
+			_whiteTimer.Paused = true;
+			_blackTimer.Paused = false;
 			EmitSignal(SignalName.SpawnSwitch,pieceTypeM);
 		}
 		else
 		{
 			turn = Turn.SelectWhite;
 			pieceTypeM = (int)Piece.PieceType.Black;
+			_whiteTimer.Paused = false;
+			_blackTimer.Paused = true;
 			EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
 		}
 	}
@@ -183,11 +190,13 @@ public partial class Chessboard : Node2D
 	{
 		if (((pieceType==Piece.PieceType.Black)&&(_blackMana > _selectedTile.getPieceMana()))||((pieceType==Piece.PieceType.White)&&(_whiteMana > _selectedTile.getPieceMana())) &&  (pieceType == _selectedTile.getSelectedPiece())) //Mana Dealing
 		{
+			GD.Print("Hooray");
+			clearCircles();
 			_selectedTile.specialActivation();
 			SwitchTurns(pieceType);
 		}
 	}
-
+//Implenet death clear circles
 	private void Fallen()
 	{
 		foreach (Node2D child in GetChildren())
@@ -197,6 +206,7 @@ public partial class Chessboard : Node2D
 				tiles.gridPiece(grid, isFallen:true); 
 			}
 		}
+		//if(_selectedTile.getPosition() == )
 		EmitSignal(SignalName.SpawnSwitch, pieceTypeM);
 		foreach (Node2D child in GetChildren())
 		{
@@ -254,6 +264,11 @@ public partial class Chessboard : Node2D
 					else
 						turn = Turn.PlaceBlack;
 				}
+			}
+			else if (special)
+			{
+				dealWithSpecials(pos, pieceType);
+				special = false;
 			}
 		}
 	}

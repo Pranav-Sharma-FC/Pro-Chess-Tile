@@ -37,11 +37,15 @@ tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAEAAQABAAAAAAACAAIAAQABAAA
 tile_set = SubResource("TileSet_f817v")
 script = ExtResource("2_j8xde")
 
-[node name="Chess Board2" type="Node2D" parent="Board" node_paths=PackedStringArray("circles", "boardArt")]
+[node name="Chess Board2" type="Node2D" parent="Board" node_paths=PackedStringArray("circles", "boardArt", "_whiteTimer", "_blackTimer", "_whiteLab", "_blackLab")]
 script = ExtResource("2_ewtbj")
 circleScene = ExtResource("5_wh2or")
 circles = NodePath("../Places")
 boardArt = NodePath("../Chess Board")
+_whiteTimer = NodePath("../White")
+_blackTimer = NodePath("../Black")
+_whiteLab = NodePath("../WhiteLabel")
+_blackLab = NodePath("../BlackLabel")
 
 [node name="Tile" type="Node2D" parent="Board/Chess Board2"]
 position = Vector2i(1, 1)
@@ -409,6 +413,33 @@ offset_right = 1329.0
 offset_bottom = 349.0
 text = "Special
 "
+
+[node name="White" type="Timer" parent="Board"]
+wait_time = 600.0
+autostart = true
+
+[node name="Black" type="Timer" parent="Board"]
+wait_time = 600.0
+autostart = true
+
+[node name="WhiteLabel" type="Label" parent="Board"]
+offset_left = 968.0
+offset_top = 440.0
+offset_right = 1368.0
+offset_bottom = 563.0
+theme_override_font_sizes/font_size = 50
+text = "1:00"
+autowrap_mode = 1
+
+[node name="BlackLabel" type="Label" parent="Board"]
+offset_left = 978.0
+offset_top = 639.0
+offset_right = 1378.0
+offset_bottom = 776.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "1:00"
+autowrap_mode = 1
 
 [connection signal="pressed" from="Board/Button" to="Board/Chess Board" method="Pressed"]
 [connection signal="pressed" from="Board/Button2" to="Board/Chess Board2" method="SpecialAccept"]

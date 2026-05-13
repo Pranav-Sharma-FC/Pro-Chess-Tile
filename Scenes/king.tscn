@@ -113,6 +113,7 @@ bg_color = Color(0.941176, 0, 0, 0.239216)
 script = ExtResource("1_36v0m")
 sprite = NodePath("AnimatedSprite2D2")
 bar = NodePath("ProgressBar")
+manaNeed = 4
 timer = NodePath("Timer")
 Damage = 10
 

@@ -113,6 +113,7 @@ bg_color = Color(0.941176, 0, 0, 0.239216)
 script = ExtResource("1_wwc4d")
 sprite = NodePath("AnimatedSprite2D")
 bar = NodePath("ProgressBar")
+manaNeed = 4
 timer = NodePath("Timer")
 Damage = 5
 

@@ -19,7 +19,7 @@ public abstract partial class Piece : CharacterBody2D
 	protected Tile[,] gridPiece;
 	protected int spriteNum;
 	protected Node2D boardNode;
-	protected int manaNeed = 4;
+	[Export] protected int manaNeed = 1;
 	
 	[Export] protected Timer timer;
 
