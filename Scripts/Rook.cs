@@ -27,12 +27,30 @@ public partial class Rook : Piece
 	public override void SetPoints(Godot.Collections.Dictionary<string, int> Resources)
 	{
 		Health = Resources["Health"];
+		bool isBlack = (pieceType == PieceType.Black);
+		if(Resources["IsSpecial"]==3){
+			Vector2I oldPos = new Vector2I(Resources["OldPositionX"]-1,Resources["OldPositionY"]-1);
+			Vector2I curPos = new Vector2I(CrrentPosition.X-1, CrrentPosition.Y-1);
+			int ymoved = curPos.Y - oldPos.Y;
+			int xmoved = curPos.X - oldPos.X;
+			Vector2I movementSlope = FindSlope(xmoved, ymoved);
+			while (curPos != oldPos)
+			{
+				Tile tile = gridPiece[oldPos.X, oldPos.Y];
+				tile.setMine(isBlack);
+				oldPos += movementSlope;
+			}
+		}
+
 	}
 
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
 		return new Dictionary<string, int>{
 			{"Health", Health},
+			{"IsSpecial", spawnableSpecial},
+			{"OldPositionX", CrrentPosition.X},
+			{"OldPositionY", CrrentPosition.Y}
 		};
 	}
 
@@ -40,9 +58,10 @@ public partial class Rook : Piece
 	{
 		base._Process(delta);
 	}
+
 	public override void ActivateSpecial()
 	{
-		
+		spawnableSpecial = 3;
 	}
 
 // Signal, connect signal to every single tile, 

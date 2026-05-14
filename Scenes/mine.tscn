@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://g4wb6s2n5b8l"]
+
+[ext_resource type="Texture2D" uid="uid://c1yij06mgwonp" path="res://Assets/Icons/icon.svg" id="1_qoe3o"]
+[ext_resource type="Texture2D" uid="uid://b7vwhkkimxmsl" path="res://Assets/Icons/Monkey.png" id="2_mygvu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mygvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qoe3o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o84ae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mygvu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Mine" type="AnimatedSprite2D"]
+self_modulate = Color(1, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_mygvu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_o84ae")

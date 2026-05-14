@@ -12,13 +12,24 @@ public partial class Tile : Node2D
 	public delegate void GameOverEventHandler(int pieceType);
 
 	[Export] private Vector2I position;
-	[Export] private Piece selectedPiece;
+	private Piece selectedPiece;
 	[Export] private PackedScene pieceScene;
 	private Tile[,] gridTile;
+
+	private AnimatedSprite2D selectedMine;
+	[Export] private PackedScene mineScene;
+	private bool hasMine;
+	private bool whiteMine;
 
 	public Vector2I getPosition()
 	{
 		return position;
+	}
+
+	public void setMine(bool isBlack)
+	{
+		whiteMine = isBlack;
+		hasMine = true;
 	}
 
 	public PackedScene getPieceScene()
@@ -50,7 +61,11 @@ public partial class Tile : Node2D
 			}
 			selectedPiece.setGri(gridTile, getPosition(), this);
 			AddChild(fry);
-			
+			if(hasMine && isBlack != whiteMine)
+			{
+				selectedPiece.damagePiece(75);
+				hasMine = false;
+			}
 		}
 	}
 
@@ -157,10 +172,13 @@ public partial class Tile : Node2D
 			return Piece.PieceType.Nothing;
 	}
 
-	public bool hasPiece()
+	public bool hasPiece(bool needsPawn = false)
 	{
 		if(selectedPiece is not null)
-			return true;
+			if(needsPawn)
+				return (selectedPiece is Pawn);
+			else
+				return true;
 		else
 			return false;
 	}

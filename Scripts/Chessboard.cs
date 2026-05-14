@@ -11,6 +11,7 @@ public partial class Chessboard : Node2D
 	//Update: Yo only a bit behind its just checking which shouldnt be too hard right                         right?
 	//Update: Pranav's code is incomprehensible
 	//Update: ^Skill Issue^ && Also Special Abilities hooray (more exceptions)
+
 	private Tile _selectedTile;
 	private bool _isSelected;
 	private Tile[,] grid;
@@ -142,6 +143,7 @@ public partial class Chessboard : Node2D
 		}
 		else if (special)
 		{
+			//GD.Print("Special Deal Place");
 			dealWithSpecials(pos, pieceType);
 			special = false;
 		}
@@ -188,15 +190,33 @@ public partial class Chessboard : Node2D
 
 	private void dealWithSpecials(Vector2I pos, Piece.PieceType pieceType)
 	{
-		if (((pieceType==Piece.PieceType.Black)&&(_blackMana > _selectedTile.getPieceMana()))||((pieceType==Piece.PieceType.White)&&(_whiteMana > _selectedTile.getPieceMana())) &&  (pieceType == _selectedTile.getSelectedPiece())) //Mana Dealing
+		if ((pieceType==Piece.PieceType.Black)&&(_blackMana >= _selectedTile.getPieceMana()))
+		{
+			bool help = specialsHelper(pieceType);
+			if(help)
+				_blackMana -= _selectedTile.getPieceMana();
+		}
+		else if ((pieceType==Piece.PieceType.White)&&(_whiteMana >= _selectedTile.getPieceMana())) //Mana Dealing
+		{
+			bool help = specialsHelper(pieceType);
+			if(help)
+				_whiteMana -= _selectedTile.getPieceMana();
+		}
+	}
+
+	private bool specialsHelper(Piece.PieceType pieceType)
+	{
+		if(pieceType == _selectedTile.getSelectedPiece())
 		{
 			GD.Print("Hooray");
 			clearCircles();
 			_selectedTile.specialActivation();
 			SwitchTurns(pieceType);
+			return true;
 		}
+		return false;
 	}
-//Implenet death clear circles
+	//Implenet death clear circles
 	private void Fallen()
 	{
 		foreach (Node2D child in GetChildren())
@@ -264,11 +284,6 @@ public partial class Chessboard : Node2D
 					else
 						turn = Turn.PlaceBlack;
 				}
-			}
-			else if (special)
-			{
-				dealWithSpecials(pos, pieceType);
-				special = false;
 			}
 		}
 	}

@@ -75,6 +75,7 @@ public partial class Bishop : Piece
 	}
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
+		spawnableSpecial = 0;
 		return new Dictionary<string, int>{
 			{"Health", Health}
 		};

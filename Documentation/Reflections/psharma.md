@@ -40,3 +40,13 @@ Figuring out how to incorporate pieceblocking code into spawnables
 The eventual trial and error process of the code
 ### Lessons
 Keep on pushin
+## Sprint 5
+In Sprint 5, we improved spawnables and added the starter code for piece abilities
+### Work Done
+Finished spawnables mainly, except for king knight and pawn, and set up code for next sprint for those three
+### Difficulties
+Working with other things to do and sometimes bad productivety days but thats alr
+### Surprises
+NoneNone
+### Lessons
+Sprint 4 continued

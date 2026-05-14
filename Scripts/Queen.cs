@@ -36,7 +36,7 @@ public partial class Queen : Piece
 	}
 	public override void ActivateSpecial()
 	{
-		
+		spawnableSpecial = 4;
 	}
 	public override void PieceBlocking(Vector2I CurrentPosition, Tile[,]  tiles)
 	{

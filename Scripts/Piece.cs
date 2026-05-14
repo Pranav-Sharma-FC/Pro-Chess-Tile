@@ -11,8 +11,6 @@ public abstract partial class Piece : CharacterBody2D
 	protected Array<MovementResource> Movements = new Array<MovementResource>();
 	private static readonly PackedScene spawning = GD.Load<PackedScene>("res://Scenes/spawnables.tscn");
 	protected Vector2I CrrentPosition;
-	
-	protected Vector2I TrueCurPosition;
 	[Export] protected AnimatedSprite2D sprite;
 	[Export] protected ProgressBar bar;
 	protected bool canSpawn = false;
