@@ -134,6 +134,7 @@ public partial class Pawn : Piece
 		return new Dictionary<string, int>{
 			{"Health", Health},
 			{"Passant", passan},
+			{"CanMana", canMana ? 1 : 0}
 		};
 	}
 

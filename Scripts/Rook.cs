@@ -10,6 +10,7 @@ public partial class Rook : Piece
 	//AI helped me remember Godot.Collections
 	public override void _Ready()
 	{
+		manaNeed = 400;
 		spriteNum = sprite.Frame;
 		MovementResource north = new MovementResource();
 		north.setValues(0, 1);
@@ -28,6 +29,8 @@ public partial class Rook : Piece
 	{
 		Health = Resources["Health"];
 		bool isBlack = (pieceType == PieceType.Black);
+		canMana = (Resources["CanMana"] == 1);
+		GD.Print(Resources["IsSpecial"]==3);
 		if(Resources["IsSpecial"]==3){
 			Vector2I oldPos = new Vector2I(Resources["OldPositionX"]-1,Resources["OldPositionY"]-1);
 			Vector2I curPos = new Vector2I(CrrentPosition.X-1, CrrentPosition.Y-1);
@@ -38,6 +41,7 @@ public partial class Rook : Piece
 			{
 				Tile tile = gridPiece[oldPos.X, oldPos.Y];
 				tile.setMine(isBlack);
+				GD.Print(tile.getPosition());
 				oldPos += movementSlope;
 			}
 		}
@@ -46,11 +50,13 @@ public partial class Rook : Piece
 
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
+		GD.Print(spawnableSpecial);
 		return new Dictionary<string, int>{
 			{"Health", Health},
 			{"IsSpecial", spawnableSpecial},
 			{"OldPositionX", CrrentPosition.X},
-			{"OldPositionY", CrrentPosition.Y}
+			{"OldPositionY", CrrentPosition.Y},
+			{"CanMana", canMana ? 1 : 0}
 		};
 	}
 
@@ -62,6 +68,7 @@ public partial class Rook : Piece
 	public override void ActivateSpecial()
 	{
 		spawnableSpecial = 3;
+		canMana = false;
 	}
 
 // Signal, connect signal to every single tile, 

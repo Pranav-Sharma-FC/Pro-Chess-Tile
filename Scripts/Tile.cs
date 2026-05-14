@@ -19,17 +19,27 @@ public partial class Tile : Node2D
 	private AnimatedSprite2D selectedMine;
 	[Export] private PackedScene mineScene;
 	private bool hasMine;
-	private bool whiteMine;
+	private bool blackMine;
 
 	public Vector2I getPosition()
 	{
 		return position;
 	}
 
+	public bool canGetMana()
+	{
+		if(selectedPiece is not null)
+			return selectedPiece.getCanMana();
+		else
+			return false;
+	}
 	public void setMine(bool isBlack)
 	{
-		whiteMine = isBlack;
+		blackMine = isBlack;
 		hasMine = true;
+		//Piece fry = pieceScene.Instantiate<Piece>();
+		selectedMine = mineScene.Instantiate<AnimatedSprite2D>();
+		AddChild(selectedMine);
 	}
 
 	public PackedScene getPieceScene()
@@ -61,10 +71,12 @@ public partial class Tile : Node2D
 			}
 			selectedPiece.setGri(gridTile, getPosition(), this);
 			AddChild(fry);
-			if(hasMine && isBlack != whiteMine)
+			if(hasMine && isBlack != blackMine)
 			{
-				selectedPiece.damagePiece(75);
+				GD.Print("Cool");
+				selectedPiece.damageAfterMadePiece();
 				hasMine = false;
+				selectedMine.QueueFree();
 			}
 		}
 	}

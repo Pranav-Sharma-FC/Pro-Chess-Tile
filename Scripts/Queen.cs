@@ -90,7 +90,8 @@ public partial class Queen : Piece
 	public override Godot.Collections.Dictionary<string, int> GivePiece()
 	{
 		return new Dictionary<string, int>{
-			{"Health", Health}
+			{"Health", Health},
+			{"CanMana", canMana ? 1 : 0}
 		};
 	}
 	

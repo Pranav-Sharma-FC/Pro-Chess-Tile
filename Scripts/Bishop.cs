@@ -77,7 +77,8 @@ public partial class Bishop : Piece
 	{
 		spawnableSpecial = 0;
 		return new Dictionary<string, int>{
-			{"Health", Health}
+			{"Health", Health},
+			{"CanMana", canMana ? 1 : 0}
 		};
 	}
 	

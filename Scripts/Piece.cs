@@ -18,6 +18,7 @@ public abstract partial class Piece : CharacterBody2D
 	protected int spriteNum;
 	protected Node2D boardNode;
 	[Export] protected int manaNeed = 1;
+	protected bool canMana = true;
 	
 	[Export] protected Timer timer;
 
@@ -26,6 +27,9 @@ public abstract partial class Piece : CharacterBody2D
 	[Export] protected int Health = 100;
 	[Export] protected int Damage;
 	protected int spawnableSpecial = 0;
+	
+	//
+	private bool _needsDamage;
 	
 	public enum PieceType
 	{
@@ -37,6 +41,11 @@ public abstract partial class Piece : CharacterBody2D
 	public int getMana()
 	{
 		return manaNeed;
+	}
+
+	public bool getCanMana()
+	{
+		return canMana;
 	}
 
 	protected PieceType pieceType = PieceType.White;
@@ -53,6 +62,11 @@ public abstract partial class Piece : CharacterBody2D
 	public PieceType returnType()
 	{
 		return pieceType;
+	}
+
+	public void damageAfterMadePiece()
+	{
+		_needsDamage = true;
 	}
 	
 	protected Vector2I FindSlope(int x, int y)
@@ -120,7 +134,11 @@ public abstract partial class Piece : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		bar.Value = Health;
-
+		if (_needsDamage)
+		{
+			_needsDamage = false;
+			Health -= 75;
+		}
 		if (canSpawn && timerDone)
 		{
 			//GD.Print(Health);

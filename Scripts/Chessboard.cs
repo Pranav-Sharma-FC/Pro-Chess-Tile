@@ -31,7 +31,8 @@ public partial class Chessboard : Node2D
 	private bool special = false;
 	
 	//Timer Variables
-	private int _whiteMana, _blackMana;
+	[Export] private Button _specialButton;
+	private int _whiteMana = 100, _blackMana = 100;
 	private double _whiteTim, _blackTim;
 	[Export] private Timer _whiteTimer, _blackTimer;
 	[Export] private Label _whiteLab, _blackLab;
@@ -72,7 +73,7 @@ public partial class Chessboard : Node2D
 				this.SpawnSwitch += tile.switchSpawnables;
 				tile.Death += Fallen;
 				
-				if(tile.getPosition().Y >= 3)
+				if(tile.getPosition().Y >= 4)
 				{
 					tile.setPiece(tile.getPieceScene(), true);
 				}
@@ -163,7 +164,7 @@ public partial class Chessboard : Node2D
 				}
 			}
 			SwitchTurns(pieceType);
-			
+			_specialButton.Disabled = true;
 		}
 		//Gd.Print(turn);
 	}
@@ -190,32 +191,22 @@ public partial class Chessboard : Node2D
 
 	private void dealWithSpecials(Vector2I pos, Piece.PieceType pieceType)
 	{
-		if ((pieceType==Piece.PieceType.Black)&&(_blackMana >= _selectedTile.getPieceMana()))
+		//GD.Print("rook");
+		//GD.Print(pieceType==Piece.PieceType.Black,_blackMana >= _selectedTile.getPieceMana());
+
+		clearCircles();
+		_selectedTile.specialActivation();
+		SwitchTurns(pieceType);
+		_specialButton.Disabled = true;
+		if((pieceType==Piece.PieceType.Black))
+			_blackMana -= _selectedTile.getPieceMana();
+		else if ((pieceType==Piece.PieceType.White)) //Mana Dealing
 		{
-			bool help = specialsHelper(pieceType);
-			if(help)
-				_blackMana -= _selectedTile.getPieceMana();
-		}
-		else if ((pieceType==Piece.PieceType.White)&&(_whiteMana >= _selectedTile.getPieceMana())) //Mana Dealing
-		{
-			bool help = specialsHelper(pieceType);
-			if(help)
-				_whiteMana -= _selectedTile.getPieceMana();
+			_whiteMana -= _selectedTile.getPieceMana();
 		}
 	}
 
-	private bool specialsHelper(Piece.PieceType pieceType)
-	{
-		if(pieceType == _selectedTile.getSelectedPiece())
-		{
-			GD.Print("Hooray");
-			clearCircles();
-			_selectedTile.specialActivation();
-			SwitchTurns(pieceType);
-			return true;
-		}
-		return false;
-	}
+	
 	//Implenet death clear circles
 	private void Fallen()
 	{
@@ -279,6 +270,12 @@ public partial class Chessboard : Node2D
 				}
 				else
 				{
+					bool canP = pieceType == _selectedTile.getSelectedPiece();
+					bool whiteMana = (pieceType == Piece.PieceType.White) &&
+									 (_whiteMana >= _selectedTile.getPieceMana());
+					bool blackMana = (pieceType == Piece.PieceType.Black) && 
+									 (_blackMana >= _selectedTile.getPieceMana());
+					_specialButton.Disabled = !_selectedTile.canGetMana() && (whiteMana || blackMana) && canP;
 					if(pieceType == Piece.PieceType.White)
 						turn = Turn.PlaceWhite;
 					else
